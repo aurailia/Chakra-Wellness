@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Embody Wealth · Chakra Wellness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#E86A9C;--pink-light:#f3a5c4;--pink-pale:#fdeaf2;--pink-deep:#c94a7d;
+  --teal:#2A9D8F;--teal-light:#52b5a9;--teal-pale:#e8f5f4;--teal-deep:#1d6b62;
+  --navy:#1A1A2E;--text:#2c2c3a;--muted:#7a7a8c;
+  --white:#ffffff;--off-white:#fdfcfb;
+  /* active chakra accent, updated per tab */
+  --chakra:#C0392B;--chakra-pale:#fbeae8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;}
+#sparkleCanvas{position:fixed;inset:0;pointer-events:none;z-index:0;width:100vw;height:100vh;}
+
+/* ── LAYOUT SHELL ── */
+.shell{position:relative;z-index:1;display:flex;min-height:100vh;max-width:1240px;margin:0 auto;}
+
+/* ── LEFT SIDE MENU ── */
+.sidebar{
+  width:270px;flex-shrink:0;
+  border-right:1px solid rgba(232,106,156,0.16);
+  padding:38px 0 40px;
+  position:sticky;top:0;align-self:flex-start;
+  height:100vh;overflow-y:auto;
+  background:linear-gradient(to bottom,rgba(232,106,156,0.05),rgba(42,157,143,0.03));
+}
+.brand{padding:0 30px 30px;border-bottom:1px solid rgba(232,106,156,0.14);margin-bottom:22px;}
+.brand-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:10px;font-weight:500;}
+.brand h1{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--navy);line-height:1.08;}
+.brand h1 em{font-style:italic;color:var(--pink);}
+.menu-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);padding:0 30px;margin-bottom:12px;display:block;font-weight:500;}
+.chakra-btn{
+  width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:13px 30px;display:flex;align-items:center;gap:14px;
+  font-family:'Jost',sans-serif;transition:all .22s;
+  border-left:3px solid transparent;position:relative;
+}
+.chakra-btn:hover{background:rgba(232,106,156,0.05);}
+.chakra-btn.active{background:rgba(232,106,156,0.08);border-left-color:var(--dot);}
+.chakra-dot{
+  width:15px;height:15px;border-radius:50%;flex-shrink:0;
+  background:var(--dot);box-shadow:0 0 0 3px rgba(255,255,255,0.7),0 0 10px -1px var(--dot);
+  transition:transform .22s;
+}
+.chakra-btn:hover .chakra-dot,.chakra-btn.active .chakra-dot{transform:scale(1.18);}
+.chakra-btn-text{display:flex;flex-direction:column;gap:2px;}
+.chakra-sanskrit{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--navy);line-height:1;font-weight:400;}
+.chakra-eng{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:400;}
+.chakra-btn.active .chakra-eng{color:var(--teal);}
+.sidebar-foot{padding:26px 30px 0;margin-top:22px;border-top:1px solid rgba(232,106,156,0.14);}
+.sidebar-foot p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--navy);line-height:1.5;margin-bottom:8px;}
+.sidebar-foot .sig{font-size:11px;color:var(--pink);letter-spacing:1px;}
+
+/* ── MAIN STAGE ── */
+.stage{flex:1;min-width:0;padding:56px 56px 100px;}
+.panel{display:none;animation:fadeIn .4s ease;}
+.panel.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── PANEL HEADER ── */
+.panel-hd{margin-bottom:44px;padding-bottom:34px;border-bottom:1px solid rgba(232,106,156,0.16);}
+.panel-hd-top{display:flex;align-items:center;gap:20px;margin-bottom:22px;}
+.panel-glyph{
+  width:70px;height:70px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--white);
+  background:var(--chakra);box-shadow:0 8px 26px -6px var(--chakra);
+}
+.panel-hd .eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:8px;font-weight:500;}
+.panel-hd h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4.5vw,50px);font-weight:300;color:var(--navy);line-height:1.05;}
+.panel-hd h2 em{font-style:italic;color:var(--chakra);}
+.panel-lead{font-size:15px;color:var(--muted);line-height:1.8;max-width:620px;}
+
+/* ── CHAKRA FACTS STRIP ── */
+.facts{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
+.fact{
+  padding:10px 18px;border-radius:24px;
+  background:var(--chakra-pale);border:1px solid var(--chakra);
+  display:flex;flex-direction:column;gap:1px;min-width:96px;
+}
+.fact-k{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--teal-deep);font-weight:500;}
+.fact-v{font-size:13px;color:var(--navy);font-weight:400;}
+
+/* ── SECTION BLOCKS ── */
+.block{margin-bottom:58px;}
+.block-hd{display:flex;align-items:center;gap:13px;margin-bottom:22px;}
+.block-num{
+  width:30px;height:30px;border-radius:50%;flex-shrink:0;
+  border:1px solid var(--pink);color:var(--pink);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;
+}
+.block-hd h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--navy);}
+.block-hd .block-sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:block;margin-top:2px;}
+.pink-rule{width:52px;height:1px;background:var(--pink);margin:0 0 20px 43px;}
+
+/* ── PROSE ── */
+.prose{font-size:14px;color:var(--text);line-height:1.8;max-width:640px;margin-left:43px;}
+.prose p{margin-bottom:14px;}
+.prose strong{color:var(--navy);font-weight:500;}
+
+/* ── SIGNS (blocked vs flowing) ── */
+.signs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:0 0 0 43px;max-width:640px;}
+.sign-card{padding:22px 24px;border-radius:8px;border:1px solid;}
+.sign-blocked{background:#fbf4f2;border-color:rgba(192,57,43,0.22);}
+.sign-flowing{background:var(--teal-pale);border-color:rgba(42,157,143,0.28);}
+.sign-card h4{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;margin-bottom:14px;}
+.sign-blocked h4{color:var(--pink-deep);}
+.sign-flowing h4{color:var(--teal-deep);}
+.sign-card ul{list-style:none;}
+.sign-card li{font-size:13.5px;line-height:1.55;padding:7px 0;display:flex;gap:9px;align-items:flex-start;color:var(--text);}
+.sign-mark{flex-shrink:0;font-size:12px;margin-top:2px;}
+.sign-blocked .sign-mark{color:var(--pink-deep);}
+.sign-flowing .sign-mark{color:var(--teal);}
+
+/* ── VISUALIZATION CARD + TTS PLAYER ── */
+.viz-card{border:1px solid rgba(232,106,156,0.2);border-radius:10px;overflow:hidden;background:var(--white);margin-left:43px;max-width:660px;transition:box-shadow .3s,border-color .3s;}
+.viz-card:hover{border-color:rgba(232,106,156,0.4);box-shadow:0 10px 34px rgba(232,106,156,0.09);}
+.viz-summary{padding:26px 28px 22px;}
+.viz-card-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:8px;display:block;}
+.viz-card-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--navy);margin-bottom:12px;font-weight:400;}
+.viz-card-body{font-size:14px;color:var(--muted);line-height:1.72;}
+.tts-player{
+  background:linear-gradient(135deg,rgba(42,157,143,0.06),rgba(232,106,156,0.07));
+  border-top:1px solid rgba(232,106,156,0.15);
+  padding:20px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.tts-play-btn{
+  width:44px;height:44px;border-radius:50%;background:var(--teal);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s;
+  box-shadow:0 4px 14px rgba(42,157,143,0.3);
+}
+.tts-play-btn:hover{background:var(--teal-light);transform:scale(1.08);}
+.tts-play-btn svg{width:16px;height:16px;fill:white;margin-left:2px;}
+.tts-play-btn.playing svg.icon-play{display:none;}
+.tts-play-btn.playing svg.icon-pause{display:block !important;}
+.tts-play-btn svg.icon-pause{display:none;margin-left:0;}
+.tts-info{flex:1;min-width:170px;}
+.tts-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:500;display:block;margin-bottom:3px;}
+.tts-title-text{font-size:13px;color:var(--navy);font-weight:400;}
+.tts-progress-wrap{flex:1;min-width:120px;}
+.tts-progress-track{height:3px;background:rgba(232,106,156,0.2);border-radius:2px;cursor:pointer;position:relative;margin-bottom:6px;}
+.tts-progress-bar{height:100%;background:linear-gradient(to right,var(--teal),var(--pink));border-radius:2px;width:0%;transition:width .5s linear;pointer-events:none;}
+.tts-time{font-size:11px;color:var(--muted);letter-spacing:1px;}
+.tts-speed-btn{padding:5px 11px;background:none;border:1px solid rgba(232,106,156,0.3);border-radius:20px;font-family:'Jost',sans-serif;font-size:11px;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;}
+.tts-speed-btn:hover{border-color:var(--teal);color:var(--teal);}
+
+/* ── EFT ── */
+.eft-intro{margin:0 0 26px 43px;max-width:640px;font-size:13.5px;color:var(--muted);line-height:1.72;}
+.eft-script-card{border:1px solid rgba(232,106,156,0.2);border-radius:8px;overflow:hidden;margin:0 0 14px 43px;background:var(--white);max-width:660px;}
+.eft-script-header{padding:18px 22px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;transition:background .2s;}
+.eft-script-header:hover{background:rgba(42,157,143,0.04);}
+.eft-script-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--pink);font-weight:500;display:block;margin-bottom:3px;}
+.eft-script-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--navy);}
+.eft-toggle{width:26px;height:26px;border-radius:50%;border:1px solid rgba(42,157,143,0.35);display:flex;align-items:center;justify-content:center;color:var(--teal);font-size:13px;flex-shrink:0;transition:all .3s;}
+.eft-script-card.open .eft-toggle{transform:rotate(45deg);background:var(--teal);color:white;border-color:var(--teal);}
+.eft-script-body{display:none;padding:0 22px 26px;border-top:1px solid rgba(42,157,143,0.12);}
+.eft-script-card.open .eft-script-body{display:block;}
+.eft-setup-phrase{margin:18px 0 14px;padding:14px 18px;background:var(--teal-pale);border-left:3px solid var(--teal);border-radius:0 4px 4px 0;}
+.eft-setup-phrase p{font-size:14px;color:var(--navy);line-height:1.7;font-style:italic;}
+.setup-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:8px;display:block;font-style:normal;}
+.eft-round{margin-top:18px;}
+.eft-round-title{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:12px;}
+.eft-point-script{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(232,106,156,0.1);font-size:14px;line-height:1.65;}
+.eft-point-script:last-child{border-bottom:none;}
+.eft-point-tag{font-size:10px;color:var(--teal);font-weight:600;flex-shrink:0;width:30px;padding-top:1px;letter-spacing:1px;}
+.eft-point-words{color:var(--text);font-style:italic;}
+.eft-close-phrase{margin-top:18px;padding:14px 18px;background:var(--pink-pale);border:1px solid rgba(232,106,156,0.3);border-radius:4px;font-size:14px;color:var(--pink-deep);line-height:1.7;font-style:italic;}
+
+/* ── PRACTICE (breath/body) ── */
+.practice{margin-left:43px;max-width:660px;}
+.practice-card{background:var(--off-white);border:1px solid rgba(232,106,156,0.2);border-radius:10px;padding:30px 28px;}
+.practice-card h4{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);margin-bottom:6px;}
+.practice-pattern{display:inline-block;margin-bottom:16px;padding:5px 14px;background:var(--teal-pale);border-radius:20px;font-size:12px;color:var(--teal);letter-spacing:1px;font-weight:500;}
+.practice-step{display:flex;gap:14px;margin-bottom:15px;padding-bottom:15px;border-bottom:1px solid rgba(232,106,156,0.12);}
+.practice-step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.practice-step-dot{width:24px;height:24px;border-radius:50%;background:var(--pink);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;margin-top:1px;}
+.practice-step-text{font-size:14px;color:var(--muted);line-height:1.7;}
+.practice-step-text strong{color:var(--navy);font-weight:500;}
+/* breath visual widget */
+.breath-visual{text-align:center;margin-top:26px;padding:40px 24px;background:linear-gradient(135deg,var(--teal-pale),var(--chakra-pale));border-radius:10px;border:1px solid rgba(232,106,156,0.18);}
+.breath-visual h5{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);margin-bottom:6px;font-weight:400;}
+.breath-visual>p{font-size:13px;color:var(--muted);margin-bottom:26px;}
+.breath-circle{width:118px;height:118px;border-radius:50%;background:radial-gradient(circle,rgba(42,157,143,0.3),rgba(42,157,143,0.06));border:2px solid var(--teal);display:inline-flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--navy);transition:transform .15s linear;margin-bottom:18px;}
+.breath-status{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--teal);margin-bottom:20px;font-weight:500;min-height:18px;}
+.breath-btn{padding:12px 30px;background:var(--teal);color:white;border:none;border-radius:2px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:500;transition:all .25s;}
+.breath-btn:hover{background:var(--teal-light);transform:translateY(-2px);}
+
+/* ── MANTRA ── */
+.mantra{
+  margin:0 0 0 43px;max-width:660px;text-align:center;
+  padding:44px 32px;border-radius:12px;
+  background:linear-gradient(135deg,var(--chakra-pale),var(--pink-pale));
+  border:1px solid var(--chakra);
+}
+.mantra .seed{font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--chakra);margin-bottom:6px;font-style:italic;}
+.mantra .seed-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--teal-deep);margin-bottom:22px;display:block;font-weight:500;}
+.mantra .affirm{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--navy);line-height:1.4;font-weight:400;font-style:italic;}
+
+/* ── PLACEHOLDER (unbuilt tabs) ── */
+.coming{margin-left:43px;max-width:600px;padding:34px 30px;border:1px dashed rgba(232,106,156,0.4);border-radius:10px;background:var(--pink-pale);}
+.coming h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--navy);margin-bottom:10px;}
+.coming p{font-size:14px;color:var(--muted);line-height:1.7;}
+
+/* ── MOBILE ── */
+@media(max-width:860px){
+  .shell{flex-direction:column;}
+  .sidebar{width:100%;height:auto;position:static;border-right:none;border-bottom:1px solid rgba(232,106,156,0.16);padding:26px 0 18px;}
+  .brand{text-align:center;}
+  .menu-label{text-align:center;}
+  .sidebar-nav{display:flex;overflow-x:auto;gap:4px;padding:0 16px;scrollbar-width:none;}
+  .sidebar-nav::-webkit-scrollbar{display:none;}
+  .chakra-btn{flex-direction:column;gap:8px;padding:14px 16px;border-left:none;border-bottom:3px solid transparent;text-align:center;white-space:nowrap;}
+  .chakra-btn.active{border-left-color:transparent;border-bottom-color:var(--dot);}
+  .chakra-btn-text{align-items:center;}
+  .sidebar-foot{display:none;}
+  .stage{padding:40px 22px 80px;}
+}
+@media(max-width:560px){
+  .signs{grid-template-columns:1fr;}
+  .panel-hd-top{gap:14px;}
+  .prose,.signs,.viz-card,.eft-intro,.eft-script-card,.practice,.mantra,.coming,.pink-rule{margin-left:0;}
+}
+</style>
+</head>
+<body>
+<canvas id="sparkleCanvas"></canvas>
+
+<div class="shell">
+
+  <!-- ══════════ LEFT SIDE MENU ══════════ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-eyebrow">Embody Wealth</span>
+      <h1>Chakra<br><em>Wellness</em></h1>
+    </div>
+    <span class="menu-label">The Seven Centers</span>
+    <nav class="sidebar-nav">
+      <button class="chakra-btn active" style="--dot:#C0392B" onclick="showChakra('root',this)">
+        <span class="chakra-dot"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Muladhara</span><span class="chakra-eng">Root · Security</span></span>
+      </button>
+      <button class="chakra-btn" style="--dot:#E67E22" onclick="showChakra('sacral',this)">
+        <span class="chakra-dot"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Svadhisthana</span><span class="chakra-eng">Sacral · Creativity</span></span>
+      </button>
+      <button class="chakra-btn" style="--dot:#F1C40F" onclick="showChakra('solar',this)">
+        <span class="chakra-dot"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Manipura</span><span class="chakra-eng">Solar · Power</span></span>
+      </button>
+      <button class="chakra-btn" style="--dot:#27AE60" onclick="showChakra('heart',this)">
+        <span class="chakra-dot"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Anahata</span><span class="chakra-eng">Heart · Worth</span></span>
+      </button>
+      <button class="chakra-btn" style="--dot:#3498DB" onclick="showChakra('throat',this)">
+        <span class="chakra-dot"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Vishuddha</span><span class="chakra-eng">Throat · Voice</span></span>
+      </button>
+      <button class="chakra-btn" style="--dot:#5B4B8A" onclick="showChakra('thirdeye',this)">
+        <span class="chakra-dot"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Ajna</span><span class="chakra-eng">Third Eye · Vision</span></span>
+      </button>
+      <button class="chakra-btn" style="--dot:#8E44AD" onclick="showChakra('crown',this)">
+        <span class="chakra-dot"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Sahasrara</span><span class="chakra-eng">Crown · Trust</span></span>
+      </button>
+    </nav>
+    <div class="sidebar-foot">
+      <p>I believe in you. To living our dreams.</p>
+      <span class="sig">— Aurailia &#10022;</span>
+    </div>
+  </aside>
+
+  <!-- ══════════ MAIN STAGE ══════════ -->
+  <main class="stage">
+
+    <!-- ░░░░░░░░░░ ROOT · MULADHARA ░░░░░░░░░░ -->
+    <section id="panel-root" class="panel active" style="--chakra:#C0392B;--chakra-pale:#fbeae8;">
+      <div class="panel-hd">
+        <div class="panel-hd-top">
+          <div class="panel-glyph">&#9880;</div>
+          <div>
+            <span class="eyebrow">Muladhara · Base of the spine</span>
+            <h2>The <em>Root</em></h2>
+          </div>
+        </div>
+        <p class="panel-lead">This is your floor. Safety, belonging, and the deep body-knowing that you have enough and you are enough. When money feels scary, when you're building from survival instead of desire, the work starts here. You can't grow a magnetic business on top of a nervous system that thinks it's about to lose everything.</p>
+        <div class="facts">
+          <div class="fact"><span class="fact-k">Element</span><span class="fact-v">Earth</span></div>
+          <div class="fact"><span class="fact-k">Color</span><span class="fact-v">Deep Red</span></div>
+          <div class="fact"><span class="fact-k">Body</span><span class="fact-v">Legs, feet, base</span></div>
+          <div class="fact"><span class="fact-k">Seed</span><span class="fact-v">LAM</span></div>
+          <div class="fact"><span class="fact-k">Wealth</span><span class="fact-v">Safety with money</span></div>
+        </div>
+      </div>
+
+      <!-- 1 · Understand -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">1</span>
+          <div><h3>What lives here</h3><span class="block-sub">Read this first</span></div>
+        </div>
+        <div class="prose">
+          <p>Your root is the part of you that answers one question all day long without you noticing: <strong>am I safe?</strong> When the answer is yes, you make clear decisions. You price your work without flinching. You let money come and go without gripping.</p>
+          <p>When the answer is no, everything upstream gets distorted. You undercharge because a sale today feels safer than the right client next month. You say yes to work that drains you because saying no feels like risk. The scattered offers, the inconsistent cashflow, a lot of it traces back to a root that never got to feel steady.</p>
+          <p>The good news is your body learns safety the same way it learned fear. Slowly, through repetition, through practice. That's what everything below is for.</p>
+        </div>
+        <div class="signs">
+          <div class="sign-card sign-blocked">
+            <h4>When it's blocked</h4>
+            <ul>
+              <li><span class="sign-mark">&#9679;</span>Money decisions come from panic, not choice</li>
+              <li><span class="sign-mark">&#9679;</span>You undercharge to feel safe</li>
+              <li><span class="sign-mark">&#9679;</span>Constant low hum of "there won't be enough"</li>
+              <li><span class="sign-mark">&#9679;</span>You hoard or you overspend, never steady</li>
+            </ul>
+          </div>
+          <div class="sign-card sign-flowing">
+            <h4>When it's flowing</h4>
+            <ul>
+              <li><span class="sign-mark">&#10022;</span>Money comes and goes without gripping</li>
+              <li><span class="sign-mark">&#10022;</span>You price from worth, not fear</li>
+              <li><span class="sign-mark">&#10022;</span>A settled "I've got me" underneath it all</li>
+              <li><span class="sign-mark">&#10022;</span>You can wait for the right yes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 · Visualization -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">2</span>
+          <div><h3>Guided visualization</h3><span class="block-sub">Press play, close your eyes</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="viz-card">
+          <div class="viz-summary">
+            <span class="viz-card-label">Grounding · 4 min</span>
+            <div class="viz-card-title">Roots Into the Earth</div>
+            <p class="viz-card-body">A slow drop out of your busy head and down into your body, until you can feel the ground holding you and the truth that right now, in this moment, you have enough. Best done seated with both feet flat on the floor.</p>
+          </div>
+          <div class="tts-player" id="player-root_viz">
+            <button class="tts-play-btn" onclick="toggleTTS('root_viz')" aria-label="Play">
+              <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+            </button>
+            <div class="tts-info">
+              <span class="tts-label">Guided Audio</span>
+              <span class="tts-title-text" id="status-root_viz">Press play &#183; close your eyes after a moment</span>
+            </div>
+            <div class="tts-progress-wrap">
+              <div class="tts-progress-track" onclick="seekTTS('root_viz',event)"><div class="tts-progress-bar" id="bar-root_viz"></div></div>
+              <span class="tts-time" id="time-root_viz">0:00</span>
+            </div>
+            <button class="tts-speed-btn" id="speed-root_viz" onclick="cycleSpeed('root_viz')">1&#215; speed</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 · EFT -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">3</span>
+          <div><h3>EFT tapping script</h3><span class="block-sub">Tap through the fear of not enough</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <p class="eft-intro">Tap lightly through each point with two fingers as you say the words out loud. Start on the karate-chop point (side of the hand) for the setup, then move through the sequence. Say it like you mean it, even the parts that feel untrue. That's the whole point.</p>
+        <div class="eft-script-card" id="eft-root">
+          <div class="eft-script-header" onclick="toggleEft('eft-root')">
+            <div><span class="eft-script-label">Root · Money Safety</span><span class="eft-script-title">Even though there might not be enough</span></div>
+            <span class="eft-toggle">+</span>
+          </div>
+          <div class="eft-script-body">
+            <div class="eft-setup-phrase">
+              <span class="setup-label">Setup &#183; Karate chop &#215;3</span>
+              <p>Even though part of me is scared there won't be enough, and my body has believed that for a long time, I choose to feel my feet on the ground right now.</p>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round one &#183; the fear</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">This old fear that there won't be enough</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">My body bracing for the money to run out</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">I've carried this so long I stopped noticing it</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">All this gripping, all this quiet panic</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">A part of me learned this to keep me safe</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">I'm allowed to thank it and set it down</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">This tightness in my chest around money</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I don't have to live here anymore</span></div>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round two &#183; the shift</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">Right now, in this moment, I have enough</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">My feet are on the ground and I'm still here</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">Money can come and go and I stay steady</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">I've made it through every hard month so far</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">I'm safe enough to build something real</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">The earth holds me whether I earn or rest</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">I choose to trust that I've got me</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I am safe. I have enough. I am enough.</span></div>
+            </div>
+            <div class="eft-close-phrase">Take a deep breath. Notice your body. That looser feeling in your chest is your root remembering it's held. Come back to this any time the old panic shows up.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 · Practice -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">4</span>
+          <div><h3>Body practice</h3><span class="block-sub">Grounding breath for the nervous system</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="practice">
+          <div class="practice-card">
+            <h4>Barefoot Grounding Breath</h4>
+            <span class="practice-pattern">Slow 6-count exhale</span>
+            <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Get your feet on something solid.</strong> Bare feet on the floor, or on grass or earth if you can. Feel the weight of your body drop down through your soles.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>Breathe in for 4.</strong> Through the nose, low into your belly, not your chest.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Exhale for 6.</strong> Long and slow through the mouth. The longer exhale is what tells your nervous system it's safe to settle.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Repeat for 6 rounds.</strong> With each exhale, imagine roots growing from your feet down into the earth, thick and unhurried.</span></div>
+          </div>
+          <div class="breath-visual">
+            <h5>Breathe with the circle</h5>
+            <p>Follow the ring. In as it grows, out as it settles.</p>
+            <div class="breath-circle" id="breathCircle">Ready</div>
+            <div class="breath-status" id="breathStatus"></div>
+            <br>
+            <button class="breath-btn" onclick="startBreath()">Begin Grounding Breath</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 · Mantra -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">5</span>
+          <div><h3>Daily mantra</h3><span class="block-sub">Say it in the mirror, mean it later</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="mantra">
+          <div class="seed">LAM</div>
+          <span class="seed-label">Root seed sound</span>
+          <p class="affirm">"I am safe. I have enough, and I am enough. The ground holds me while I build."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░░░░░░░░░ PLACEHOLDER PANELS (to build after your review) ░░░░░░░░░░ -->
+    <section id="panel-sacral" class="panel" style="--chakra:#E67E22;--chakra-pale:#fcefe2;">
+      <div class="coming"><h3>Sacral &#183; Svadhisthana</h3><p>This tab is next. Once you sign off on the Root layout, I'll build Sacral (creativity, pleasure, the joy of making offers) in the same five-part structure.</p></div>
+    </section>
+    <section id="panel-solar" class="panel" style="--chakra:#D4AC0D;--chakra-pale:#fbf6dd;">
+      <div class="coming"><h3>Solar Plexus &#183; Manipura</h3><p>Personal power, confidence, owning your prices. Built after your sign-off.</p></div>
+    </section>
+    <section id="panel-heart" class="panel" style="--chakra:#27AE60;--chakra-pale:#e6f6ec;">
+      <div class="coming"><h3>Heart &#183; Anahata</h3><p>Worthiness, receiving, letting money in without guilt. Built after your sign-off.</p></div>
+    </section>
+    <section id="panel-throat" class="panel" style="--chakra:#3498DB;--chakra-pale:#e7f2fb;">
+      <div class="coming"><h3>Throat &#183; Vishuddha</h3><p>Your voice, magnetic messaging, saying what you actually charge. Built after your sign-off.</p></div>
+    </section>
+    <section id="panel-thirdeye" class="panel" style="--chakra:#5B4B8A;--chakra-pale:#eeebf4;">
+      <div class="coming"><h3>Third Eye &#183; Ajna</h3><p>Vision, intuition, trusting what you see for your business. Built after your sign-off.</p></div>
+    </section>
+    <section id="panel-crown" class="panel" style="--chakra:#8E44AD;--chakra-pale:#f3e9f7;">
+      <div class="coming"><h3>Crown &#183; Sahasrara</h3><p>Trust, surrender, the frequency of receiving. Built after your sign-off.</p></div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ── SPARKLES (pink + teal) ── */
+const canvas=document.getElementById('sparkleCanvas');
+const ctx=canvas.getContext('2d');
+let W,H,sparks=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+function mkSpark(){return{x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.6+0.7,op:Math.random()*0.4+0.08,vy:-(Math.random()*0.22+0.05),vx:(Math.random()-.5)*0.15,phase:Math.random()*Math.PI*2,freq:Math.random()*0.016+0.005,pink:Math.random()>.42};}
+function initSparks(){sparks=[];const n=Math.floor(W*H/8500);for(let i=0;i<n;i++)sparks.push(mkSpark());}
+function drawDiamond(x,y,r,color,op){ctx.save();ctx.globalAlpha=op;ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(x,y-r);ctx.lineTo(x+r*.5,y);ctx.lineTo(x,y+r);ctx.lineTo(x-r*.5,y);ctx.closePath();ctx.fill();ctx.restore();}
+function loop(){ctx.clearRect(0,0,W,H);sparks.forEach(s=>{s.phase+=s.freq;s.y+=s.vy;s.x+=s.vx;const op=s.op*(0.5+0.5*Math.sin(s.phase));drawDiamond(s.x,s.y,s.r,s.pink?'#E86A9C':'#2A9D8F',op);if(s.y<-10){s.y=H+10;s.x=Math.random()*W;}});requestAnimationFrame(loop);}
+window.addEventListener('resize',()=>{resize();initSparks();});
+resize();initSparks();loop();
+
+/* ── CHAKRA TABS ── */
+function showChakra(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.chakra-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  btn.classList.add('active');
+  stopAll(null);
+  document.querySelector('.stage').scrollTop=0;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── EFT TOGGLE ── */
+function toggleEft(id){const el=document.getElementById(id);const was=el.classList.contains('open');document.querySelectorAll('.eft-script-card').forEach(v=>v.classList.remove('open'));if(!was)el.classList.add('open');}
+
+/* ── TTS ENGINE ── */
+const VIZ_SCRIPTS = {
+  root_viz: `Find a comfortable seat. Put both feet flat on the floor. Close your eyes. Take a slow breath in through your nose, and let it out through your mouth. Again. In. And out, slower this time. Bring your attention down out of your busy head, down through your chest, your belly, all the way to where your body meets the ground. Feel the weight of yourself. Feel the chair holding you, the floor holding the chair, the earth holding all of it. You don't have to hold yourself up right now. Something bigger is doing that. Now imagine, from the soles of your feet, roots beginning to grow. Slow, thick roots, the color of deep red earth. They move down through the floor, through the foundation, into the soil beneath. Deeper. Past the roots of trees, past stone, down into the warm dark center of the earth. And there, they anchor. Feel how solid that is. You are connected to something that has been here for billions of years and isn't going anywhere. Now breathe up through those roots. Draw the steadiness of the earth up into your feet, your legs, into your belly. With every breath, more steadiness. More ground. Say to yourself, silently: right now, in this moment, I have enough. Everything I need for today is already here. The fear that there won't be enough, that's an old story your body learned to keep you safe. You can thank it. And you can let your body feel what's actually true right now. You're breathing. You're held. You have enough. Stay here for a few breaths. Let your nervous system memorize this. This settledness is your natural floor. It's the ground you get to build everything else on. When you're ready, wiggle your toes. Feel your feet again. Take one more deep breath, and open your eyes, bringing this steadiness with you.`
+};
+
+const ttsState = {};
+function getState(id){if(!ttsState[id]){ttsState[id]={utterance:null,speed:1.0,playing:false,startTime:0,elapsed:0,duration:0,ticker:null};}return ttsState[id];}
+
+function stopAll(exceptId){
+  window.speechSynthesis.cancel();
+  Object.keys(ttsState).forEach(id=>{
+    if(id===exceptId)return;
+    const s=ttsState[id];s.playing=false;clearInterval(s.ticker);
+    const btn=document.querySelector(`#player-${id} .tts-play-btn`);
+    if(btn)btn.classList.remove('playing');
+    const st=document.getElementById(`status-${id}`);
+    if(st)st.textContent='Press play \u00b7 close your eyes after a moment';
+  });
+}
+
+const SPEEDS=[0.75,1.0,1.25,0.5];
+const SPEED_LABELS=['0.75\u00d7 speed','1\u00d7 speed','1.25\u00d7 speed','0.5\u00d7 speed'];
+function cycleSpeed(id){const s=getState(id);const idx=SPEEDS.indexOf(s.speed);const next=(idx+1)%SPEEDS.length;s.speed=SPEEDS[next];document.getElementById(`speed-${id}`).textContent=SPEED_LABELS[next];if(s.playing){stopTTS(id);startTTS(id);}}
+function toggleTTS(id){const s=getState(id);if(s.playing){stopTTS(id);}else{stopAll(id);startTTS(id);}}
+
+function startTTS(id){
+  const s=getState(id);const text=VIZ_SCRIPTS[id];if(!text)return;
+  const utter=new SpeechSynthesisUtterance(text);
+  utter.rate=s.speed;utter.pitch=0.92;utter.volume=1;
+  const voices=window.speechSynthesis.getVoices();
+  const preferred=voices.find(v=>/samantha|karen|victoria|moira|fiona|zira|hazel/i.test(v.name))
+    ||voices.find(v=>v.lang.startsWith('en')&&v.name.toLowerCase().includes('female'))
+    ||voices.find(v=>v.lang.startsWith('en'))||voices[0];
+  if(preferred)utter.voice=preferred;
+  const wordCount=text.split(/\s+/).length;
+  s.duration=(wordCount/120)*60/s.speed;s.startTime=Date.now();s.elapsed=0;s.playing=true;s.utterance=utter;
+  const btn=document.querySelector(`#player-${id} .tts-play-btn`);
+  const statusEl=document.getElementById(`status-${id}`);
+  const barEl=document.getElementById(`bar-${id}`);
+  const timeEl=document.getElementById(`time-${id}`);
+  btn.classList.add('playing');
+  statusEl.textContent='Playing \u00b7 close your eyes now \u2728';
+  s.ticker=setInterval(()=>{
+    const elapsed=(Date.now()-s.startTime)/1000;
+    const pct=Math.min((elapsed/s.duration)*100,100);
+    barEl.style.width=pct+'%';
+    const mins=Math.floor(elapsed/60);const secs=Math.floor(elapsed%60);
+    timeEl.textContent=`${mins}:${secs.toString().padStart(2,'0')}`;
+  },500);
+  utter.onend=()=>{s.playing=false;clearInterval(s.ticker);btn.classList.remove('playing');barEl.style.width='100%';statusEl.textContent='Complete \u2713 \u00b7 take a breath before opening your eyes';};
+  utter.onerror=()=>{s.playing=false;clearInterval(s.ticker);btn.classList.remove('playing');statusEl.textContent='Audio unavailable in this browser \u00b7 read the summary above';};
+  window.speechSynthesis.speak(utter);
+}
+function stopTTS(id){const s=getState(id);window.speechSynthesis.cancel();s.playing=false;clearInterval(s.ticker);const btn=document.querySelector(`#player-${id} .tts-play-btn`);if(btn)btn.classList.remove('playing');const st=document.getElementById(`status-${id}`);if(st)st.textContent='Paused \u00b7 press play to continue';}
+function seekTTS(id,e){const s=getState(id);const track=e.currentTarget;const pct=e.offsetX/track.offsetWidth;if(s.playing){stopAll(id);s.elapsed=pct*s.duration;startTTS(id);}}
+window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();
+
+/* ── GROUNDING BREATH (4 in / 6 out) ── */
+let breathRunning=false;
+function startBreath(){
+  const btnEl=document.querySelector('.breath-btn');
+  if(breathRunning){
+    breathRunning=false;btnEl.textContent='Begin Grounding Breath';
+    document.getElementById('breathStatus').textContent='';
+    const c=document.getElementById('breathCircle');c.textContent='Ready';c.style.transform='scale(1)';return;
+  }
+  breathRunning=true;btnEl.textContent='Stop';
+  const phases=[
+    {label:'INHALE',dur:4,scale:1.5,bg:'rgba(42,157,143,0.35)'},
+    {label:'EXHALE',dur:6,scale:1.0,bg:'rgba(232,106,156,0.14)'}
+  ];
+  let pi=0,rounds=0;
+  function runPhase(){
+    if(!breathRunning)return;
+    const ph=phases[pi];
+    const c=document.getElementById('breathCircle');
+    const s=document.getElementById('breathStatus');
+    s.textContent=ph.label;
+    c.style.background=`radial-gradient(circle,${ph.bg},rgba(42,157,143,0.04))`;
+    c.style.transition=`transform ${ph.dur*1000-80}ms ease`;
+    c.style.transform=`scale(${ph.scale})`;
+    let count=ph.dur;c.textContent=count;
+    const t=setInterval(()=>{
+      if(!breathRunning){clearInterval(t);return;}
+      count--;
+      if(count>0){c.textContent=count;}
+      else{
+        clearInterval(t);pi++;
+        if(pi>=phases.length){
+          pi=0;rounds++;
+          if(rounds>=6){
+            breathRunning=false;s.textContent='COMPLETE \u2713';
+            c.textContent='\u2713';c.style.transform='scale(1)';
+            btnEl.textContent='Begin Again';return;
+          }
+        }
+        runPhase();
+      }
+    },1000);
+  }
+  runPhase();
+}
+</script>
+</body>
+</html>
