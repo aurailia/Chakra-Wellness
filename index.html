@@ -274,7 +274,7 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 .activate-guide .practice-step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
 
 /* ── DAILY CARD ── */
-.card-stage{max-width:720px;margin:0 auto;}
+.card-stage{max-width:100%;margin:0 auto;}
 .card-spread{text-align:center;animation:fadeIn .4s ease;}
 .spread-cards{display:flex;justify-content:center;gap:18px;margin-bottom:26px;flex-wrap:nowrap;}
 .spread-card{
@@ -292,7 +292,7 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 .spread-card.no-img::after{content:"";position:absolute;inset:9px;border-radius:8px;border:1px solid rgba(255,255,255,0.35);}
 .spread-hint{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;color:var(--navy);letter-spacing:.3px;}
 /* drawn card */
-.card-drawn{animation:cardReveal .55s cubic-bezier(.22,1,.36,1);max-width:860px;margin:0 auto;}
+.card-drawn{animation:cardReveal .55s cubic-bezier(.22,1,.36,1);max-width:100%;margin:0 auto;}
 @keyframes cardReveal{0%{opacity:0;transform:translateY(14px) scale(.97);}100%{opacity:1;transform:none;}}
 .card-face{
   border-radius:18px;overflow:hidden;border:1px solid rgba(232,106,156,0.22);
