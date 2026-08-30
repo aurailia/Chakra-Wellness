@@ -575,15 +575,15 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
         <div id="cardSpread" class="card-spread">
           <div class="spread-cards">
             <div class="spread-card" onclick="pullCard(0)">
-              <img class="spread-cover" src="cards/cover-1.png" alt="" onerror="this.style.display='none';this.parentElement.classList.add('no-img');">
+              <img class="spread-cover" src="images/cover-1.png" alt="" onerror="this.style.display='none';this.parentElement.classList.add('no-img');">
               <span class="spread-fallback">&#10022;</span>
             </div>
             <div class="spread-card" onclick="pullCard(1)">
-              <img class="spread-cover" src="cards/cover-2.png" alt="" onerror="this.style.display='none';this.parentElement.classList.add('no-img');">
+              <img class="spread-cover" src="images/cover-2.png" alt="" onerror="this.style.display='none';this.parentElement.classList.add('no-img');">
               <span class="spread-fallback">&#10022;</span>
             </div>
             <div class="spread-card" onclick="pullCard(2)">
-              <img class="spread-cover" src="cards/cover-3.png" alt="" onerror="this.style.display='none';this.parentElement.classList.add('no-img');">
+              <img class="spread-cover" src="images/cover-3.png" alt="" onerror="this.style.display='none';this.parentElement.classList.add('no-img');">
               <span class="spread-fallback">&#10022;</span>
             </div>
           </div>
@@ -2627,7 +2627,7 @@ function renderCard(idx,already){
   // full portrait card image (your ChatGPT design). Graceful fallback if not uploaded yet.
   const imgWrap=document.createElement('div');imgWrap.className='card-portrait';
   const img=document.createElement('img');img.className='card-portrait-img';img.alt=card.title;
-  img.src='cards/'+card.slug+'.png';
+  img.src='images/'+card.slug+'.png';
   img.onerror=function(){this.style.display='none';imgWrap.classList.add('no-img');};
   const fb=document.createElement('div');fb.className='card-portrait-fallback';
   const fbTitle=document.createElement('div');fbTitle.className='card-portrait-fallback-title';fbTitle.textContent=card.title;
