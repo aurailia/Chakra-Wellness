@@ -276,9 +276,9 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 /* ── DAILY CARD ── */
 .card-stage{max-width:100%;margin:0 auto;}
 .card-spread{text-align:center;animation:fadeIn .4s ease;}
-.spread-cards{display:flex;justify-content:center;gap:18px;margin-bottom:26px;flex-wrap:nowrap;}
+.spread-cards{display:flex;justify-content:center;gap:26px;margin-bottom:32px;flex-wrap:nowrap;}
 .spread-card{
-  flex:1;max-width:180px;aspect-ratio:3/5;border-radius:14px;cursor:pointer;overflow:hidden;position:relative;
+  flex:1;max-width:240px;aspect-ratio:3/5;border-radius:16px;cursor:pointer;overflow:hidden;position:relative;
   background:linear-gradient(150deg,#8E44AD,#5B4B8A 45%,#2A9D8F);
   border:2px solid rgba(255,255,255,0.5);
   box-shadow:0 14px 34px -14px rgba(142,68,173,0.55);
@@ -465,8 +465,8 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
   .activate-stage{padding:34px 16px 32px;}
   .activate-guide .practice-step-text{font-size:15px;}
   .mantra{padding:38px 20px;}
-  .spread-cards{gap:10px;}
-  .spread-card{max-width:110px;}
+  .spread-cards{gap:12px;}
+  .spread-card{max-width:130px;}
   .card-title{font-size:24px;}
   .card-face{flex-direction:column;}
   .card-portrait{flex:none;width:200px;align-self:center;margin:22px auto 0;border-radius:12px;overflow:hidden;}
@@ -1673,7 +1673,7 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
             <h2>The <em>Crown</em></h2>
           </div>
         </div>
-        <p class="panel-lead">This is your connection. Trust, surrender, and the felt sense that something bigger is holding you and your work. When you're white-knuckling every outcome, when you've forgotten how to let things unfold instead of forcing them, this is the center that's closed off. The most magnetic version of your business runs on trust, not grip. This is where you learn to let go and let it come.</p>
+        <p class="panel-lead">This is your connection. Trust, surrender, and the felt sense that something bigger is holding you and your work. When you're gripping every outcome, when you've forgotten how to let things unfold instead of forcing them, this is the center that's closed off. The most magnetic version of your business runs on trust, not grip. This is where you learn to let go and let it come.</p>
         <div class="facts">
           <div class="fact"><span class="fact-k">Element</span><span class="fact-v">Consciousness</span></div>
           <div class="fact"><span class="fact-k">Color</span><span class="fact-v">Violet / White</span></div>
@@ -1692,13 +1692,13 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
         <div class="prose">
           <p>Your crown is where you plug back into something larger than your to-do list. It's the trust that things are working out even when you can't yet see how. When it's open, you hold your goals with an open hand. You do your part and let the rest come. There's an ease to you that people can feel, and it's the most magnetic thing about you.</p>
           <p>When it's closed, you carry the whole weight yourself. You grip every outcome, force every result, and treat rest like a threat. You believe that if you just push hard enough, worry long enough, control tightly enough, you can make it all happen. And it leaves you exhausted, because you were never meant to do it alone or force what's meant to flow.</p>
-          <p>Surrender isn't giving up. It's doing your part fully, then trusting enough to stop strangling the outcome. This center is where the striving finally gets to rest.</p>
+          <p>Surrender isn't giving up. It's doing your part fully, then trusting enough to stop gripping the outcome so hard. This center is where the striving finally gets to rest.</p>
         </div>
         <div class="signs">
           <div class="sign-card sign-blocked">
             <h4>When it's blocked</h4>
             <ul>
-              <li><span class="sign-mark">&#9679;</span>You white-knuckle every outcome</li>
+              <li><span class="sign-mark">&#9679;</span>You grip every outcome tightly</li>
               <li><span class="sign-mark">&#9679;</span>You force instead of letting things flow</li>
               <li><span class="sign-mark">&#9679;</span>Rest feels like a threat</li>
               <li><span class="sign-mark">&#9679;</span>You feel like you're doing it all alone</li>
@@ -1732,7 +1732,7 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
           <div class="eft-script-body">
             <div class="eft-setup-phrase">
               <span class="setup-label">Setup &#183; Karate chop &#215;3</span>
-              <p>Even though I white-knuckle every outcome and believe it all falls apart if I let go, I choose to trust that I'm held and to loosen my grip a little.</p>
+              <p>Even though I hold on so tight to every outcome and believe it all falls apart if I let go, I choose to trust that I'm held and to loosen my grip a little.</p>
             </div>
             <div class="eft-round">
               <div class="eft-round-title">Round one &#183; the block</div>
@@ -1883,7 +1883,7 @@ const QUESTION_POOL={
     "Lately I've been bracing for something to go wrong, even when things are fine.",
     "My body's been running on low-key panic, like my shoulders forgot how to drop.",
     "I keep checking my bank balance like it's going to bite me.",
-    "I've been white-knuckling my way through the week instead of feeling steady.",
+    "I've been holding on tight and pushing through the week instead of feeling steady.",
     "Part of me is convinced the ground could drop out at any second."
   ],
   sacral:[
@@ -1922,7 +1922,7 @@ const QUESTION_POOL={
     "I keep asking other people what to do when I already know."
   ],
   crown:[
-    "I've been white-knuckling the outcome instead of trusting it'll work out.",
+    "I've been gripping the outcome instead of trusting it'll work out.",
     "I feel like I'm doing all of this alone lately, no bigger hand on my back.",
     "I've been so in my head there's no room for anything to flow in.",
     "Faith has felt pretty far away this week.",
@@ -2552,7 +2552,7 @@ const CARD_COLORS={
 /* 4 cards per chakra: title, message, deeper meaning, action, why-pulled */
 const CARD_DECK=[
   // ROOT — safety, security, home, having enough, peace in the body
-  {c:'root',slug:'root-1',title:'You Are Held',message:"The ground beneath you is not going anywhere. So much of your worry is your body bracing for a fall that isn't coming. Right now, in this moment, you are safe and you are held. Notice that your next breath arrives on its own, that the floor is still under you, that you have made it through every hard day so far. You don't have to hold yourself up by sheer will today.",meaning:"The root is your foundation, the part of you that quietly asks 'am I safe?' all day long. When it wobbles, everything above it feels shaky too, your decisions, your money, your ability to rest. This card is a reminder that safety is your natural state underneath the noise, and you can return to it any time by dropping out of your head and back into your body.",action:"Stand barefoot for one minute and feel the floor take your whole weight. Let your shoulders drop as you do.",why:"This came to you today because some part of you has been braced, waiting for something to go wrong. It's asking you to soften, to trust that the ground is still there, and to let your body feel how supported you already are."},
+  {c:'root',slug:'root-1',title:'You Are Held',message:"The ground beneath you is not going anywhere. So much of your worry is your body bracing for a fall that isn't coming. Right now, in this moment, you are safe and you are held. Notice that your next breath arrives on its own, that the floor is still under you, that you have made it through every hard day so far. You don't have to hold yourself up all on your own today.",meaning:"The root is your foundation, the part of you that quietly asks 'am I safe?' all day long. When it wobbles, everything above it feels shaky too, your decisions, your money, your ability to rest. This card is a reminder that safety is your natural state underneath the noise, and you can return to it any time by dropping out of your head and back into your body.",action:"Stand barefoot for one minute and feel the floor take your whole weight. Let your shoulders drop as you do.",why:"This came to you today because some part of you has been braced, waiting for something to go wrong. It's asking you to soften, to trust that the ground is still there, and to let your body feel how supported you already are."},
   {c:'root',slug:'root-2',title:'Enough, Right Now',message:"Not enough is an old story, not today's truth. Look around you. In this exact moment you already have what you need, air in your lungs, a roof, this breath. Scarcity is your mind time-travelling into a future that hasn't happened. Come back to now, where there is always, somehow, enough.",meaning:"The fear of lack lives in the future and the past, almost never in the present. Enoughness only lives in the now. When the root chakra is strong, you can let money and resources come and go without gripping, because your sense of enough comes from inside you, not from the number in the account.",action:"Name three things you already have today that you once wished for.",why:"You pulled this because you've been measuring what's missing instead of what's here. Today is an invitation to notice the abundance already surrounding you, quietly, all along."},
   {c:'root',slug:'root-3',title:'Steady With Money',message:"Money can come and it can go, and you get to stay steady through both. Your worth was never the number in the account, and your peace doesn't have to rise and fall with it. Steadiness isn't something the market or the month gives you. It's something you choose, from the inside out, again and again.",meaning:"When your sense of safety is tied to your bank balance, every dip becomes a threat to your nervous system and every decision gets made from fear. Rooting your security in yourself instead of the number is what finally lets money move through your life with ease rather than panic.",action:"Look at your finances once, calmly, then close it and go do something that genuinely feels good.",why:"This card found you because money has been holding some of your peace hostage lately. It's time to take that peace back, and to remember that you are steady whether the number is up or down."},
   {c:'root',slug:'root-4',title:'You Belong Here',message:"You don't have to earn your place. You belong simply because you're here, breathing, taking up your one square of the earth. Let yourself stand in the space you're in without apologizing for it, without auditioning to stay, without shrinking to be more acceptable.",meaning:"The root governs belonging, the felt sense that you have a right to exist and be here. When it's wounded, we move through life like outsiders always trying to prove we deserve to stay. Healing it means knowing, in your body, that your place is not conditional on being good enough.",action:"Put a hand on your chest and say, out loud, 'I belong here.' Notice how it lands.",why:"You drew this because a part of you has felt on the outside lately, like you have to earn your spot. Today it's reminding you that you were always meant to be here, exactly as you are."},
@@ -2582,7 +2582,7 @@ const CARD_DECK=[
   {c:'thirdeye',slug:'thirdeye-3',title:'Clarity Is Coming',message:"The fog you've been moving through isn't permanent, and it isn't a sign that you're lost or doing it wrong. Get quiet, make a little space, and it lifts on its own. You can see farther than you're currently letting yourself believe. The path is there, under the noise.",meaning:"Confusion is very often just noise drowning out a knowing that's already present. The third eye clears when you stop frantically searching and instead make room for stillness. In that quiet, the path you couldn't see suddenly comes back into focus, as if it was always there.",action:"Sit in silence for three minutes today and let one clear thing rise to the surface on its own.",why:"This card found you in the middle of the fog, in that disorienting in-between where nothing feels clear. It's promising that the clarity is much closer than it feels, and that it comes through stillness, not more searching."},
   {c:'thirdeye',slug:'thirdeye-4',title:'See It Already Done',message:"You can picture where you're going far more clearly than you let yourself admit. Vision always comes before the how, and you don't need to know every step to let yourself see the destination. Close your eyes and see the dream as already real, already yours. Feel it done.",meaning:"The third eye holds your capacity to imagine and envision what doesn't yet exist. Seeing a desire as already complete isn't wishful thinking or denial, it's how you align yourself, your choices, and your energy with actually bringing it into being. What you can vividly see, you can move toward.",action:"Close your eyes and picture one dream as already real, and hold that feeling for a full minute.",why:"You drew this because you've been stuck in the how, tangled in the logistics and the steps, unable to move. Today, let yourself see the what instead, the finished thing, and let that vision pull you forward."},
   // CROWN — trust, surrender, peace, connection to something bigger
-  {c:'crown',slug:'crown-1',title:'Loosen Your Grip',message:"You've been white-knuckling an outcome that actually wants to unfold on its own, if you'd let it. Do your part fully, then open your hands and let go of the rest. Trust is far more magnetic than force, and the grip you think is keeping it together is mostly just exhausting you.",meaning:"The crown is your connection to something larger than your own effort. When we grip and force, we're insisting we have to control every outcome alone through sheer will. Surrender is trusting that we don't, and that life will meet us halfway once we stop strangling it.",action:"Pick one thing you're gripping too tightly and consciously release your hold on it today.",why:"This came to you because you've been holding on too tight, trying to force what wants to flow. Today, let it breathe. Do your part, then trust enough to loosen your hands and let it come to you."},
+  {c:'crown',slug:'crown-1',title:'Loosen Your Grip',message:"You've been holding on so tightly to an outcome that actually wants to unfold on its own, if you'd let it. Do your part fully, then open your hands and let go of the rest. Trust is far more magnetic than force, and the grip you think is keeping it together is mostly just exhausting you.",meaning:"The crown is your connection to something larger than your own effort. When we grip and force, we're insisting we have to control every outcome alone. Surrender is trusting that we don't, and that life will meet us halfway once we stop holding on so hard.",action:"Pick one thing you're gripping too tightly and consciously release your hold on it today.",why:"This came to you because you've been holding on too tight, trying to force what wants to flow. Today, let it breathe. Do your part, then trust enough to loosen your hands and let it come to you."},
   {c:'crown',slug:'crown-2',title:'You Are Supported',message:"You've been carrying it all as if it's yours alone to hold, every outcome, every worry, the whole weight on your shoulders. It isn't. Something bigger is holding you too, whether you can feel it right now or not. Let yourself lean back into that support and set the weight down.",meaning:"The crown chakra reminds us that we're part of something vast and benevolent, that we were never meant to do this life entirely alone. Feeling held by that larger something, whatever name you give it, takes the crushing weight off your shoulders and lets you finally exhale.",action:"On one long exhale today, say 'I am held,' and let yourself actually believe it, even for a moment.",why:"You pulled this because you've been feeling alone in carrying it all, like it depends entirely on you not dropping anything. Today you're reminded that you're supported, and that you can lean back into that support and rest."},
   {c:'crown',slug:'crown-3',title:'Peace Is Available',message:"Peace isn't waiting for you on the other side of your to-do list, once everything is finally handled. Everything is never finally handled. Peace is available right now, underneath the noise and the doing, the moment you stop and drop into the quiet that's always been there.",meaning:"We keep postponing peace until the conditions are perfect, but that day never arrives. The crown teaches that peace isn't a destination you earn through enough effort, it's a place inside you, reachable in this moment, no matter what's still unfinished around you.",action:"Pause today, breathe slowly, and find the quiet that's always there underneath the busyness.",why:"This card found you because you've been chasing calm as if it's somewhere out ahead of you, earned after the next thing is done. Today, choose it instead, and discover it was available the whole time."},
   {c:'crown',slug:'crown-4',title:'Let It Come',message:"You keep forcing what's meant to flow, pushing the river, trying to make it happen faster through effort and worry. The most magnetic version of you holds her dreams with an open hand. Do the work, take the aligned step, then release your grip on the timeline and let life come to meet you.",meaning:"The crown is where all the striving finally gets to rest. When you truly trust, you stop pushing the river and start letting it carry you. What's genuinely yours arrives more easily than you think, often the moment you stop forcing and start allowing it in.",action:"Take one aligned action toward a goal today, then release the timeline for it entirely.",why:"You drew this because you've been forcing, gripping the how and the when, wearing yourself out trying to control the outcome. Today is a reminder to do your part and then let it come to you, in its own time."}
