@@ -17,11 +17,32 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;}
+body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;font-size:17px;}
+
+/* ── BACKGROUND IMAGE ── */
+/* Drop your image into the repo as background.jpg (same folder as index.html). */
+/* It shows at full strength in the side margins; the content sits on a soft white panel over it. */
+/* To use a different name or a PNG, change the url() below. */
+#bgImage{
+  position:fixed;inset:0;z-index:-2;
+  background-image:url('background.jpg');
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+/* very light wash so the image reads but isn't harsh; sides stay vivid */
+#bgVeil{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:rgba(255,255,255,0.12);
+}
 #sparkleCanvas{position:fixed;inset:0;pointer-events:none;z-index:0;width:100vw;height:100vh;}
 
 /* ── LAYOUT SHELL ── */
-.shell{position:relative;z-index:1;display:flex;min-height:100vh;max-width:1240px;margin:0 auto;}
+/* the content panel sits on a soft white backing so the sides show the image */
+.shell{
+  position:relative;z-index:1;display:flex;min-height:100vh;max-width:1240px;margin:0 auto;
+  background:rgba(255,255,255,0.9);
+  box-shadow:0 0 60px rgba(0,0,0,0.12);
+}
 
 /* ── LEFT SIDE MENU ── */
 .sidebar{
@@ -30,11 +51,12 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
   padding:38px 0 40px;
   position:sticky;top:0;align-self:flex-start;
   height:100vh;overflow-y:auto;
-  background:linear-gradient(to bottom,rgba(232,106,156,0.05),rgba(42,157,143,0.03));
+  background:linear-gradient(to bottom,rgba(255,255,255,0.72),rgba(255,255,255,0.66));
+  backdrop-filter:blur(6px);
 }
 .brand{padding:0 30px 30px;border-bottom:1px solid rgba(232,106,156,0.14);margin-bottom:22px;}
 .brand-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:10px;font-weight:500;}
-.brand h1{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--navy);line-height:1.08;}
+.brand h1{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:300;color:var(--navy);line-height:1.1;white-space:nowrap;}
 .brand h1 em{font-style:italic;color:var(--pink);}
 .menu-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);padding:0 30px;margin-bottom:12px;display:block;font-weight:500;}
 .chakra-btn{
@@ -60,7 +82,7 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 .sidebar-foot .sig{font-size:11px;color:var(--pink);letter-spacing:1px;}
 
 /* ── MAIN STAGE ── */
-.stage{flex:1;min-width:0;padding:56px 56px 100px;}
+.stage{flex:1;min-width:0;padding:56px 56px 100px;background:transparent;}
 .panel{display:none;animation:fadeIn .4s ease;}
 .panel.active{display:block;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
@@ -77,7 +99,7 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 .panel-hd .eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:8px;font-weight:500;}
 .panel-hd h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4.5vw,50px);font-weight:300;color:var(--navy);line-height:1.05;}
 .panel-hd h2 em{font-style:italic;color:var(--chakra);}
-.panel-lead{font-size:15px;color:var(--muted);line-height:1.8;max-width:620px;}
+.panel-lead{font-size:17px;color:var(--muted);line-height:1.8;max-width:620px;}
 
 /* ── CHAKRA FACTS STRIP ── */
 .facts{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
@@ -87,7 +109,7 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
   display:flex;flex-direction:column;gap:1px;min-width:96px;
 }
 .fact-k{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--teal-deep);font-weight:500;}
-.fact-v{font-size:13px;color:var(--navy);font-weight:400;}
+.fact-v{font-size:14.5px;color:var(--navy);font-weight:400;}
 
 /* ── SECTION BLOCKS ── */
 .block{margin-bottom:58px;}
@@ -103,7 +125,7 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 .pink-rule{width:52px;height:1px;background:var(--pink);margin:0 0 20px 43px;}
 
 /* ── PROSE ── */
-.prose{font-size:14px;color:var(--text);line-height:1.8;max-width:640px;margin-left:43px;}
+.prose{font-size:16px;color:var(--text);line-height:1.8;max-width:640px;margin-left:43px;}
 .prose p{margin-bottom:14px;}
 .prose strong{color:var(--navy);font-weight:500;}
 
@@ -116,7 +138,7 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 .sign-blocked h4{color:var(--pink-deep);}
 .sign-flowing h4{color:var(--teal-deep);}
 .sign-card ul{list-style:none;}
-.sign-card li{font-size:13.5px;line-height:1.55;padding:7px 0;display:flex;gap:9px;align-items:flex-start;color:var(--text);}
+.sign-card li{font-size:15px;line-height:1.55;padding:7px 0;display:flex;gap:9px;align-items:flex-start;color:var(--text);}
 .sign-mark{flex-shrink:0;font-size:12px;margin-top:2px;}
 .sign-blocked .sign-mark{color:var(--pink-deep);}
 .sign-flowing .sign-mark{color:var(--teal);}
@@ -126,8 +148,8 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 .viz-card:hover{border-color:rgba(232,106,156,0.4);box-shadow:0 10px 34px rgba(232,106,156,0.09);}
 .viz-summary{padding:26px 28px 22px;}
 .viz-card-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:8px;display:block;}
-.viz-card-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--navy);margin-bottom:12px;font-weight:400;}
-.viz-card-body{font-size:14px;color:var(--muted);line-height:1.72;}
+.viz-card-title{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--navy);margin-bottom:12px;font-weight:400;}
+.viz-card-body{font-size:16px;color:var(--muted);line-height:1.72;}
 .tts-player{
   background:linear-gradient(135deg,rgba(42,157,143,0.06),rgba(232,106,156,0.07));
   border-top:1px solid rgba(232,106,156,0.15);
@@ -145,7 +167,7 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 .tts-play-btn svg.icon-pause{display:none;margin-left:0;}
 .tts-info{flex:1;min-width:170px;}
 .tts-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:500;display:block;margin-bottom:3px;}
-.tts-title-text{font-size:13px;color:var(--navy);font-weight:400;}
+.tts-title-text{font-size:14.5px;color:var(--navy);font-weight:400;}
 .tts-progress-wrap{flex:1;min-width:120px;}
 .tts-progress-track{height:3px;background:rgba(232,106,156,0.2);border-radius:2px;cursor:pointer;position:relative;margin-bottom:6px;}
 .tts-progress-bar{height:100%;background:linear-gradient(to right,var(--teal),var(--pink));border-radius:2px;width:0%;transition:width .5s linear;pointer-events:none;}
@@ -154,36 +176,36 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 .tts-speed-btn:hover{border-color:var(--teal);color:var(--teal);}
 
 /* ── EFT ── */
-.eft-intro{margin:0 0 26px 43px;max-width:640px;font-size:13.5px;color:var(--muted);line-height:1.72;}
+.eft-intro{margin:0 0 26px 43px;max-width:640px;font-size:15.5px;color:var(--muted);line-height:1.72;}
 .eft-script-card{border:1px solid rgba(232,106,156,0.2);border-radius:8px;overflow:hidden;margin:0 0 14px 43px;background:var(--white);max-width:660px;}
 .eft-script-header{padding:18px 22px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;transition:background .2s;}
 .eft-script-header:hover{background:rgba(42,157,143,0.04);}
 .eft-script-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--pink);font-weight:500;display:block;margin-bottom:3px;}
-.eft-script-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--navy);}
+.eft-script-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);}
 .eft-toggle{width:26px;height:26px;border-radius:50%;border:1px solid rgba(42,157,143,0.35);display:flex;align-items:center;justify-content:center;color:var(--teal);font-size:13px;flex-shrink:0;transition:all .3s;}
 .eft-script-card.open .eft-toggle{transform:rotate(45deg);background:var(--teal);color:white;border-color:var(--teal);}
 .eft-script-body{display:none;padding:0 22px 26px;border-top:1px solid rgba(42,157,143,0.12);}
 .eft-script-card.open .eft-script-body{display:block;}
 .eft-setup-phrase{margin:18px 0 14px;padding:14px 18px;background:var(--teal-pale);border-left:3px solid var(--teal);border-radius:0 4px 4px 0;}
-.eft-setup-phrase p{font-size:14px;color:var(--navy);line-height:1.7;font-style:italic;}
+.eft-setup-phrase p{font-size:16px;color:var(--navy);line-height:1.7;font-style:italic;}
 .setup-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:8px;display:block;font-style:normal;}
 .eft-round{margin-top:18px;}
 .eft-round-title{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:12px;}
-.eft-point-script{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(232,106,156,0.1);font-size:14px;line-height:1.65;}
+.eft-point-script{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(232,106,156,0.1);font-size:16px;line-height:1.65;}
 .eft-point-script:last-child{border-bottom:none;}
 .eft-point-tag{font-size:10px;color:var(--teal);font-weight:600;flex-shrink:0;width:30px;padding-top:1px;letter-spacing:1px;}
 .eft-point-words{color:var(--text);font-style:italic;}
-.eft-close-phrase{margin-top:18px;padding:14px 18px;background:var(--pink-pale);border:1px solid rgba(232,106,156,0.3);border-radius:4px;font-size:14px;color:var(--pink-deep);line-height:1.7;font-style:italic;}
+.eft-close-phrase{margin-top:18px;padding:14px 18px;background:var(--pink-pale);border:1px solid rgba(232,106,156,0.3);border-radius:4px;font-size:16px;color:var(--pink-deep);line-height:1.7;font-style:italic;}
 
 /* ── PRACTICE (breath/body) ── */
 .practice{margin-left:43px;max-width:660px;}
 .practice-card{background:var(--off-white);border:1px solid rgba(232,106,156,0.2);border-radius:10px;padding:30px 28px;}
-.practice-card h4{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);margin-bottom:6px;}
+.practice-card h4{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--navy);margin-bottom:6px;}
 .practice-pattern{display:inline-block;margin-bottom:16px;padding:5px 14px;background:var(--teal-pale);border-radius:20px;font-size:12px;color:var(--teal);letter-spacing:1px;font-weight:500;}
 .practice-step{display:flex;gap:14px;margin-bottom:15px;padding-bottom:15px;border-bottom:1px solid rgba(232,106,156,0.12);}
 .practice-step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
 .practice-step-dot{width:24px;height:24px;border-radius:50%;background:var(--pink);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;margin-top:1px;}
-.practice-step-text{font-size:14px;color:var(--muted);line-height:1.7;}
+.practice-step-text{font-size:16px;color:var(--muted);line-height:1.7;}
 .practice-step-text strong{color:var(--navy);font-weight:500;}
 /* breath visual widget */
 .breath-visual{text-align:center;margin-top:26px;padding:40px 24px;background:linear-gradient(135deg,var(--teal-pale),var(--chakra-pale));border-radius:10px;border:1px solid rgba(232,106,156,0.18);}
@@ -205,33 +227,250 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 .mantra .seed-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--teal-deep);margin-bottom:22px;display:block;font-weight:500;}
 .mantra .affirm{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--navy);line-height:1.4;font-weight:400;font-style:italic;}
 
+/* ── CHAKRA ACTIVATION (spinning light) ── */
+.activate{margin:0 0 0 43px;max-width:660px;}
+.activate-stage{
+  text-align:center;padding:44px 28px 40px;border-radius:14px;
+  background:radial-gradient(circle at 50% 40%,var(--chakra-pale),var(--white) 75%);
+  border:1px solid rgba(232,106,156,0.18);
+}
+.spin-wrap{position:relative;width:180px;height:180px;margin:0 auto 26px;display:flex;align-items:center;justify-content:center;}
+/* glow halo */
+.spin-glow{position:absolute;inset:-14px;border-radius:50%;background:radial-gradient(circle,var(--chakra),transparent 68%);opacity:.28;filter:blur(6px);animation:spinPulse 3.6s ease-in-out infinite;}
+/* the spinning disc */
+.spin-disc{
+  position:absolute;inset:0;border-radius:50%;
+  background:
+    conic-gradient(from 0deg,
+      rgba(255,255,255,0.55) 0deg,
+      rgba(255,255,255,0) 70deg,
+      rgba(0,0,0,0.28) 180deg,
+      rgba(255,255,255,0) 290deg,
+      rgba(255,255,255,0.55) 360deg),
+    var(--chakra);
+  box-shadow:inset 0 0 30px rgba(0,0,0,0.18),0 6px 22px -6px var(--chakra);
+}
+.spin-disc.spinning{animation:spinRotate 7s linear infinite;}
+/* petals ring */
+.spin-ring{position:absolute;inset:8px;border-radius:50%;border:2px dashed rgba(255,255,255,0.55);}
+.spin-ring.spinning{animation:spinRotate 14s linear infinite;}
+/* center seed sound */
+.spin-core{
+  position:relative;z-index:2;width:78px;height:78px;border-radius:50%;
+  background:rgba(255,255,255,0.9);backdrop-filter:blur(2px);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:30px;font-style:italic;color:var(--chakra);
+  box-shadow:0 2px 12px rgba(0,0,0,0.12);
+}
+.spin-core.breathing{animation:spinBreath 8s ease-in-out infinite;}
+@keyframes spinRotate{to{transform:rotate(360deg);}}
+@keyframes spinPulse{0%,100%{opacity:.22;transform:scale(1);}50%{opacity:.42;transform:scale(1.06);}}
+@keyframes spinBreath{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+.activate-chant{min-height:24px;margin-bottom:8px;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--teal);font-weight:500;}
+.activate-count{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--muted);margin-bottom:20px;min-height:22px;}
+.activate-btn{padding:12px 32px;background:var(--chakra);color:white;border:none;border-radius:2px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:500;transition:all .25s;}
+.activate-btn:hover{filter:brightness(1.08);transform:translateY(-2px);}
+.activate-guide{margin-top:26px;text-align:left;}
+.activate-guide .practice-step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+
+/* ── DAILY CARD ── */
+.card-stage{max-width:720px;margin:0 auto;}
+.card-spread{text-align:center;animation:fadeIn .4s ease;}
+.spread-cards{display:flex;justify-content:center;gap:18px;margin-bottom:26px;flex-wrap:nowrap;}
+.spread-card{
+  flex:1;max-width:180px;aspect-ratio:3/5;border-radius:14px;cursor:pointer;overflow:hidden;position:relative;
+  background:linear-gradient(150deg,#8E44AD,#5B4B8A 45%,#2A9D8F);
+  border:2px solid rgba(255,255,255,0.5);
+  box-shadow:0 14px 34px -14px rgba(142,68,173,0.55);
+  transition:transform .28s,box-shadow .28s;
+  display:flex;align-items:center;justify-content:center;
+}
+.spread-card:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:0 22px 46px -12px rgba(142,68,173,0.7);}
+.spread-cover{width:100%;height:100%;object-fit:cover;display:block;}
+.spread-fallback{display:none;font-size:34px;color:rgba(255,255,255,0.9);}
+.spread-card.no-img .spread-fallback{display:block;}
+.spread-card.no-img::after{content:"";position:absolute;inset:9px;border-radius:8px;border:1px solid rgba(255,255,255,0.35);}
+.spread-hint{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;color:var(--navy);letter-spacing:.3px;}
+/* drawn card */
+.card-drawn{animation:cardReveal .55s cubic-bezier(.22,1,.36,1);max-width:720px;margin:0 auto;}
+@keyframes cardReveal{0%{opacity:0;transform:translateY(14px) scale(.97);}100%{opacity:1;transform:none;}}
+.card-face{
+  border-radius:18px;overflow:hidden;border:1px solid rgba(232,106,156,0.22);
+  background:var(--white);box-shadow:0 18px 44px -16px rgba(0,0,0,0.22);
+  display:flex;align-items:stretch;
+}
+/* portrait card image on the LEFT (your ChatGPT design), 3:5 */
+.card-portrait{position:relative;flex:0 0 240px;aspect-ratio:3/5;background:linear-gradient(150deg,var(--cardc),var(--cardc2));align-self:flex-start;}
+.card-portrait-img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;}
+.card-portrait-fallback{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;color:white;}
+.card-portrait.no-img .card-portrait-fallback{z-index:2;}
+.card-portrait-fallback::after{content:"";position:absolute;inset:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.35);}
+.card-portrait-fallback-title{font-family:'Cormorant Garamond',serif;font-size:27px;font-style:italic;line-height:1.2;margin-bottom:10px;}
+.card-portrait-fallback-name{font-size:10px;letter-spacing:3px;text-transform:uppercase;opacity:.85;}
+/* reading on the RIGHT */
+.card-face-body{flex:1;min-width:0;padding:30px 30px 32px;}
+.card-chose{text-align:left;margin-bottom:20px;}
+.card-chose-top{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:600;display:block;margin-bottom:7px;}
+.card-chose-name{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--navy);font-weight:400;line-height:1.1;}
+.card-chose-sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+.card-message{font-size:15.5px;color:var(--text);line-height:1.72;text-align:left;margin-bottom:22px;}
+.card-section{margin-bottom:18px;padding-top:18px;border-top:1px solid rgba(232,106,156,0.14);}
+.card-section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--pink-deep);font-weight:600;display:block;margin-bottom:8px;text-align:left;}
+.card-section-text{font-size:15.5px;color:var(--text);line-height:1.75;text-align:left;}
+.card-action{
+  padding:18px 20px;border-radius:10px;background:var(--cardpale);border:1px solid var(--cardc);margin-top:20px;
+}
+.card-action-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--teal-deep);font-weight:600;display:block;margin-bottom:7px;text-align:left;}
+.card-action-text{font-size:15px;color:var(--navy);line-height:1.62;text-align:left;}
+.card-foot{margin-top:22px;text-align:left;}
+.card-open-chakra{color:var(--teal);font-weight:500;cursor:pointer;font-size:14px;}
+.card-open-chakra:hover{text-decoration:underline;}
+.card-again{margin-top:14px;font-size:12.5px;color:var(--muted);letter-spacing:.5px;}
+.card-again-btn{
+  display:block;margin-top:18px;padding:12px 30px;
+  background:var(--pink);color:white;border:none;border-radius:2px;
+  font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:500;transition:all .25s;
+}
+.card-again-btn:hover{background:var(--pink-deep);transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(232,106,156,0.6);}
+
 /* ── PLACEHOLDER (unbuilt tabs) ── */
 .coming{margin-left:43px;max-width:600px;padding:34px 30px;border:1px dashed rgba(232,106,156,0.4);border-radius:10px;background:var(--pink-pale);}
 .coming h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--navy);margin-bottom:10px;}
-.coming p{font-size:14px;color:var(--muted);line-height:1.7;}
+.coming p{font-size:16px;color:var(--muted);line-height:1.7;}
+
+/* ── DAILY PULSE ── */
+.daily-card{border:1px solid rgba(232,106,156,0.28);border-radius:14px;padding:28px 30px;margin-bottom:44px;background:linear-gradient(135deg,rgba(232,106,156,0.06),rgba(42,157,143,0.05));position:relative;overflow:hidden;}
+.daily-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:20px;}
+.daily-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:600;display:block;margin-bottom:5px;}
+.daily-title{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--navy);font-weight:400;}
+.streak{display:flex;flex-direction:column;align-items:center;padding:10px 16px;background:var(--white);border:1px solid rgba(232,106,156,0.3);border-radius:12px;flex-shrink:0;box-shadow:0 4px 14px -6px rgba(232,106,156,0.35);}
+.streak-flame{color:var(--pink);font-size:16px;line-height:1;}
+.streak-count{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--pink-deep);font-weight:600;line-height:1;margin:2px 0;}
+.streak-word{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:500;}
+.daily-q{margin-bottom:22px;}
+.daily-sub{font-size:15px;color:var(--muted);line-height:1.65;margin-bottom:20px;}
+.daily-q:last-of-type{margin-bottom:8px;}
+.daily-q-text{font-size:17px;color:var(--navy);line-height:1.5;margin-bottom:16px;font-weight:400;}
+.daily-q-chakra{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:9px;}
+.daily-q-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;box-shadow:0 0 7px -1px currentColor;}
+.daily-actions{margin-top:6px;}
+.daily-submit{padding:12px 34px;background:var(--pink);color:white;border:none;border-radius:2px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:500;transition:all .25s;}
+.daily-submit:hover:not(:disabled){background:var(--pink-deep);transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(232,106,156,0.6);}
+.daily-submit:disabled{background:rgba(232,106,156,0.3);cursor:not-allowed;}
+.daily-done{text-align:center;padding:10px 0 4px;}
+.daily-done .dd-mark{font-size:30px;color:var(--teal);display:block;margin-bottom:10px;}
+.daily-done .dd-line{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--navy);font-style:italic;line-height:1.4;margin-bottom:6px;}
+.daily-done .dd-sub{font-size:15px;color:var(--muted);line-height:1.6;}
+.daily-redo{background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:13.5px;color:var(--teal);letter-spacing:.3px;padding:6px 0;transition:color .2s;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(42,157,143,0.35);}
+.daily-redo:hover{color:var(--teal-deep);text-decoration-color:var(--teal);}
+/* weekly head */
+.weekly-head{margin-bottom:6px;}
+.weekly-eyebrow{font-family:'Cormorant Garamond',serif;font-size:34px;letter-spacing:0;text-transform:none;color:var(--navy);font-weight:400;display:block;margin-bottom:12px;line-height:1.1;}
+.weekly-intro{font-size:16px;color:var(--muted);line-height:1.75;max-width:620px;}
+
+/* ── CHAKRA CHECK QUIZ ── */
+.quiz-progress{position:sticky;top:0;background:rgba(255,255,255,0.9);backdrop-filter:blur(6px);padding:16px 0 14px;margin-bottom:14px;z-index:5;border-bottom:1px solid rgba(232,106,156,0.14);}
+.quiz-progress-track{height:5px;background:rgba(232,106,156,0.15);border-radius:3px;overflow:hidden;margin-bottom:8px;}
+.quiz-progress-bar{height:100%;width:0%;background:linear-gradient(to right,var(--teal),var(--pink));border-radius:3px;transition:width .35s ease;}
+.quiz-progress-text{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:500;}
+.q-item{padding:24px 0;border-bottom:1px solid rgba(232,106,156,0.12);}
+.q-text{font-size:17px;color:var(--navy);line-height:1.55;margin-bottom:20px;font-weight:400;}
+.q-num{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--pink);font-size:16px;margin-right:9px;}
+/* slider */
+.q-slide-wrap{padding:2px 4px;}
+.q-slide{
+  -webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:6px;outline:none;cursor:pointer;
+  background:linear-gradient(to right,rgba(232,106,156,0.18),rgba(42,157,143,0.22));
+}
+.q-slide.touched{background:linear-gradient(to right,var(--pink),var(--teal));}
+.q-slide::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;cursor:pointer;
+  background:var(--white);border:3px solid var(--pink);
+  box-shadow:0 3px 10px rgba(232,106,156,0.4);transition:transform .12s,border-color .12s;
+}
+.q-slide.touched::-webkit-slider-thumb{border-color:var(--teal);}
+.q-slide::-webkit-slider-thumb:hover{transform:scale(1.15);}
+.q-slide::-moz-range-thumb{width:26px;height:26px;border-radius:50%;cursor:pointer;background:var(--white);border:3px solid var(--pink);box-shadow:0 3px 10px rgba(232,106,156,0.4);}
+.q-slide.touched::-moz-range-thumb{border-color:var(--teal);}
+.q-slide-labels{display:flex;justify-content:space-between;margin-top:11px;}
+.q-slide-end{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:500;}
+.q-slide-feel{text-align:center;margin-top:12px;min-height:22px;}
+.q-slide-feel span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:var(--muted);transition:color .2s;}
+.q-slide-feel.set span{color:var(--pink-deep);}
+.quiz-actions{margin-top:34px;text-align:center;}
+.quiz-submit{padding:15px 44px;background:var(--teal);color:white;border:none;border-radius:2px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-weight:500;transition:all .25s;}
+.quiz-submit:hover:not(:disabled){background:var(--teal-light);transform:translateY(-2px);box-shadow:0 10px 26px -8px rgba(42,157,143,0.6);}
+.quiz-submit:disabled{background:rgba(42,157,143,0.3);cursor:not-allowed;}
+.quiz-hint{font-size:12px;color:var(--muted);margin-top:14px;letter-spacing:1px;}
+/* results */
+.results-hd{margin-bottom:34px;padding-bottom:26px;border-bottom:1px solid rgba(232,106,156,0.16);}
+.results-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--navy);margin:8px 0 6px;}
+.results-date{font-size:13.5px;color:var(--muted);letter-spacing:1px;}
+.res-bar-row{margin-bottom:22px;cursor:pointer;transition:transform .18s;}
+.res-bar-row:hover{transform:translateX(3px);}
+.res-bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+.res-bar-name{display:flex;align-items:center;gap:11px;}
+.res-bar-dot{width:13px;height:13px;border-radius:50%;flex-shrink:0;box-shadow:0 0 8px -1px currentColor;}
+.res-bar-sanskrit{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);}
+.res-bar-eng{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-left:2px;}
+.res-bar-pct{font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;}
+.res-bar-track{height:12px;background:rgba(0,0,0,0.05);border-radius:8px;overflow:hidden;}
+.res-bar-fill{height:100%;border-radius:8px;width:0;transition:width 1s cubic-bezier(.22,1,.36,1);}
+.res-bar-read{font-size:14.5px;color:var(--muted);line-height:1.6;margin-top:7px;padding-left:24px;}
+.res-bar-cta{color:var(--teal);font-weight:500;cursor:pointer;}
+.res-bar-cta:hover{text-decoration:underline;}
+.results-focus{margin-top:40px;padding:30px 28px;border-radius:12px;background:linear-gradient(135deg,var(--pink-pale),var(--teal-pale));border:1px solid rgba(232,106,156,0.2);}
+.results-focus h4{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--navy);margin-bottom:12px;}
+.results-focus p{font-size:16px;color:var(--text);line-height:1.75;margin-bottom:10px;}
+.results-focus .focus-chakra{font-weight:500;color:var(--pink-deep);}
+.results-actions{margin-top:32px;text-align:center;}
+.quiz-retake{padding:13px 34px;background:none;border:1px solid var(--pink);color:var(--pink-deep);border-radius:2px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:500;transition:all .25s;}
+.quiz-retake:hover{background:var(--pink);color:white;}
+.prev-note{margin-top:16px;font-size:12.5px;color:var(--muted);letter-spacing:.5px;text-align:center;}
+
+/* ── MOBILE NAV DROPDOWN (hidden on desktop) ── */
+.mobile-nav{display:none;padding:0 22px;}
+.mobile-nav select{
+  width:100%;padding:14px 16px;border-radius:10px;cursor:pointer;
+  border:1px solid rgba(232,106,156,0.35);
+  background:var(--white);color:var(--navy);
+  font-family:'Jost',sans-serif;font-size:15px;font-weight:400;
+  -webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23E86A9C' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat:no-repeat;background-position:right 16px center;
+}
 
 /* ── MOBILE ── */
 @media(max-width:860px){
   .shell{flex-direction:column;}
-  .sidebar{width:100%;height:auto;position:static;border-right:none;border-bottom:1px solid rgba(232,106,156,0.16);padding:26px 0 18px;}
+  .sidebar{width:100%;height:auto;position:static;border-right:none;border-bottom:1px solid rgba(232,106,156,0.16);padding:26px 0 20px;}
   .brand{text-align:center;}
-  .menu-label{text-align:center;}
-  .sidebar-nav{display:flex;overflow-x:auto;gap:4px;padding:0 16px;scrollbar-width:none;}
-  .sidebar-nav::-webkit-scrollbar{display:none;}
-  .chakra-btn{flex-direction:column;gap:8px;padding:14px 16px;border-left:none;border-bottom:3px solid transparent;text-align:center;white-space:nowrap;}
-  .chakra-btn.active{border-left-color:transparent;border-bottom-color:var(--dot);}
-  .chakra-btn-text{align-items:center;}
+  .menu-label{display:none;}
+  .sidebar-nav{display:none;}
+  .mobile-nav{display:block;}
   .sidebar-foot{display:none;}
-  .stage{padding:40px 22px 80px;}
+  .stage{padding:40px 18px 80px;}
 }
 @media(max-width:560px){
   .signs{grid-template-columns:1fr;}
   .panel-hd-top{gap:14px;}
-  .prose,.signs,.viz-card,.eft-intro,.eft-script-card,.practice,.mantra,.coming,.pink-rule{margin-left:0;}
+  .stage{padding:34px 12px 70px;}
+  .prose,.signs,.viz-card,.eft-intro,.eft-script-card,.practice,.mantra,.coming,.pink-rule,.activate,.block-hd,.daily-sub{margin-left:0;}
+  .activate-stage{padding:34px 16px 32px;}
+  .activate-guide .practice-step-text{font-size:15px;}
+  .mantra{padding:38px 20px;}
+  .spread-cards{gap:10px;}
+  .spread-card{max-width:110px;}
+  .card-title{font-size:24px;}
+  .card-face{flex-direction:column;}
+  .card-portrait{flex:none;width:200px;align-self:center;margin:22px auto 0;border-radius:12px;overflow:hidden;}
+  .card-face-body{padding:24px 22px 28px;}
 }
 </style>
 </head>
 <body>
+<div id="bgImage"></div>
+<div id="bgVeil"></div>
 <canvas id="sparkleCanvas"></canvas>
 
 <div class="shell">
@@ -240,11 +479,46 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
   <aside class="sidebar">
     <div class="brand">
       <span class="brand-eyebrow">Embody Wealth</span>
-      <h1>Chakra<br><em>Wellness</em></h1>
+      <h1>Chakra <em>Wellness</em></h1>
     </div>
+
+    <!-- mobile dropdown nav -->
+    <div class="mobile-nav">
+      <select id="mobileNavSelect" onchange="mobileNav(this.value)" aria-label="Choose a section">
+        <optgroup label="Start Here">
+          <option value="card">Daily Card</option>
+          <option value="assess">Chakra Check</option>
+          <option value="results" id="mobileResultsOpt" disabled>Your Results</option>
+        </optgroup>
+        <optgroup label="The Seven Centers">
+          <option value="root">Root · Muladhara</option>
+          <option value="sacral">Sacral · Svadhisthana</option>
+          <option value="solar">Solar Plexus · Manipura</option>
+          <option value="heart">Heart · Anahata</option>
+          <option value="throat">Throat · Vishuddha</option>
+          <option value="thirdeye">Third Eye · Ajna</option>
+          <option value="crown">Crown · Sahasrara</option>
+        </optgroup>
+      </select>
+    </div>
+    <span class="menu-label">Start Here</span>
+    <nav class="sidebar-nav" style="margin-bottom:22px;">
+      <button class="chakra-btn active" onclick="showChakra('card',this)">
+        <span class="chakra-dot" style="background:linear-gradient(135deg,#8E44AD,#E86A9C);box-shadow:0 0 0 3px rgba(255,255,255,0.7),0 0 10px -1px rgba(142,68,173,0.7);"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Daily Card</span><span class="chakra-eng">Pull for today</span></span>
+      </button>
+      <button class="chakra-btn assess-btn" onclick="showChakra('assess',this)">
+        <span class="chakra-dot" style="background:linear-gradient(135deg,#E86A9C,#2A9D8F);box-shadow:0 0 0 3px rgba(255,255,255,0.7),0 0 10px -1px rgba(232,106,156,0.7);"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Chakra Check</span><span class="chakra-eng">See where you're at</span></span>
+      </button>
+      <button class="chakra-btn results-btn" id="resultsMenuBtn" style="display:none;" onclick="showChakra('results',this)">
+        <span class="chakra-dot" style="background:linear-gradient(135deg,#2A9D8F,#E86A9C);box-shadow:0 0 0 3px rgba(255,255,255,0.7),0 0 10px -1px rgba(42,157,143,0.7);"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Your Results</span><span class="chakra-eng">Your chakra map</span></span>
+      </button>
+    </nav>
     <span class="menu-label">The Seven Centers</span>
     <nav class="sidebar-nav">
-      <button class="chakra-btn active" style="--dot:#C0392B" onclick="showChakra('root',this)">
+      <button class="chakra-btn" style="--dot:#C0392B" onclick="showChakra('root',this)">
         <span class="chakra-dot"></span>
         <span class="chakra-btn-text"><span class="chakra-sanskrit">Muladhara</span><span class="chakra-eng">Root · Security</span></span>
       </button>
@@ -282,8 +556,118 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
   <!-- ══════════ MAIN STAGE ══════════ -->
   <main class="stage">
 
+    <!-- ░░░░░░░░░░ DAILY CARD ░░░░░░░░░░ -->
+    <section id="panel-card" class="panel active">
+      <div class="panel-hd">
+        <div class="panel-hd-top">
+          <div class="panel-glyph" style="background:linear-gradient(135deg,#8E44AD,#E86A9C);box-shadow:0 8px 26px -6px rgba(142,68,173,0.5);">&#129719;</div>
+          <div>
+            <span class="eyebrow">Your Daily Pull</span>
+            <h2>Today's <em>Chakra Card</em></h2>
+          </div>
+        </div>
+        <p class="panel-lead">One card a day, drawn for you. Take a breath, set the intention to receive what you need, and pull. Let whatever comes be exactly what today is asking of you.</p>
+      </div>
+
+      <!-- card deck / drawn card -->
+      <div class="card-stage">
+        <!-- three-card spread (before pick) -->
+        <div id="cardSpread" class="card-spread">
+          <div class="spread-cards">
+            <div class="spread-card" onclick="pullCard(0)">
+              <img class="spread-cover" src="cards/cover-1.png" alt="" onerror="this.style.display='none';this.parentElement.classList.add('no-img');">
+              <span class="spread-fallback">&#10022;</span>
+            </div>
+            <div class="spread-card" onclick="pullCard(1)">
+              <img class="spread-cover" src="cards/cover-2.png" alt="" onerror="this.style.display='none';this.parentElement.classList.add('no-img');">
+              <span class="spread-fallback">&#10022;</span>
+            </div>
+            <div class="spread-card" onclick="pullCard(2)">
+              <img class="spread-cover" src="cards/cover-3.png" alt="" onerror="this.style.display='none';this.parentElement.classList.add('no-img');">
+              <span class="spread-fallback">&#10022;</span>
+            </div>
+          </div>
+          <p class="spread-hint">Breathe, then choose the card that calls to you.</p>
+        </div>
+        <!-- drawn card (after pick) -->
+        <div id="cardDrawn" class="card-drawn" style="display:none;"></div>
+      </div>
+    </section>
+
+    <!-- ░░░░░░░░░░ CHAKRA CHECK · ASSESSMENT ░░░░░░░░░░ -->
+    <section id="panel-assess" class="panel">
+      <div class="panel-hd">
+        <div class="panel-hd-top">
+          <div class="panel-glyph" style="background:linear-gradient(135deg,#E86A9C,#2A9D8F);box-shadow:0 8px 26px -6px rgba(232,106,156,0.5);">&#10022;</div>
+          <div>
+            <span class="eyebrow">The Chakra Check</span>
+            <h2>Check in with <em>yourself</em></h2>
+          </div>
+        </div>
+        <p class="panel-lead">Two ways to tune in. A quick daily pulse to keep a finger on how you're doing, and a deeper weekly check that maps all seven of your centers. Little and often is what actually shifts things, so start with today's pulse.</p>
+      </div>
+
+      <!-- ═══ DAILY PULSE ═══ -->
+      <div class="daily-card" id="dailyCard">
+        <div class="daily-top">
+          <div>
+            <span class="daily-label">Today's Pulse</span>
+            <h3 class="daily-title" id="dailyTitle">A quick tune-in</h3>
+          </div>
+          <div class="streak" id="streakBadge" style="display:none;">
+            <span class="streak-flame">&#10022;</span>
+            <span class="streak-count" id="streakCount">0</span>
+            <span class="streak-word">day streak</span>
+          </div>
+        </div>
+        <div id="dailyQuestions"></div>
+        <div class="daily-actions" id="dailyActions">
+          <button class="daily-submit" id="dailySubmit" onclick="saveDaily()" disabled>Log Today</button>
+        </div>
+        <div class="daily-done" id="dailyDone" style="display:none;"></div>
+      </div>
+
+      <!-- ═══ WEEKLY DEEP CHECK ═══ -->
+      <div class="weekly-head">
+        <span class="weekly-eyebrow">The Weekly Deep Check</span>
+        <p class="weekly-intro" id="weeklyIntro">Seven honest statements, one for each center. Drag each slider to how much it sounds like you lately. The ones that make you go "oof, that's me" are showing you where your energy wants attention. Do this one about once a week.</p>
+      </div>
+
+      <!-- QUIZ -->
+      <div id="quizWrap">
+        <div id="quizProgress" class="quiz-progress">
+          <div class="quiz-progress-track"><div class="quiz-progress-bar" id="quizBar"></div></div>
+          <span class="quiz-progress-text" id="quizCount">0 of 7 answered</span>
+        </div>
+        <div id="quizQuestions"></div>
+        <div class="quiz-actions">
+          <button class="quiz-submit" id="quizSubmit" onclick="scoreQuiz()" disabled>See My Results</button>
+          <p class="quiz-hint" id="quizHint">Move all 7 sliders to see your results.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░░░░░░░░░ YOUR RESULTS ░░░░░░░░░░ -->
+    <section id="panel-results" class="panel">
+      <div class="panel-hd">
+        <div class="panel-hd-top">
+          <div class="panel-glyph" style="background:linear-gradient(135deg,#2A9D8F,#E86A9C);box-shadow:0 8px 26px -6px rgba(42,157,143,0.5);">&#9789;</div>
+          <div>
+            <span class="eyebrow">Your Chakra Map</span>
+            <h2>Here's where your <em>energy sits</em></h2>
+          </div>
+        </div>
+        <p class="results-date" id="resultsDate"></p>
+      </div>
+      <div id="resultsBars"></div>
+      <div class="results-focus" id="resultsFocus"></div>
+      <div class="results-actions">
+        <button class="quiz-retake" onclick="retakeQuiz()">Take The Weekly Check Again</button>
+      </div>
+    </section>
+
     <!-- ░░░░░░░░░░ ROOT · MULADHARA ░░░░░░░░░░ -->
-    <section id="panel-root" class="panel active" style="--chakra:#C0392B;--chakra-pale:#fbeae8;">
+    <section id="panel-root" class="panel" style="--chakra:#C0392B;--chakra-pale:#fbeae8;">
       <div class="panel-hd">
         <div class="panel-hd-top">
           <div class="panel-glyph">&#9880;</div>
@@ -335,41 +719,10 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
         </div>
       </div>
 
-      <!-- 2 · Visualization -->
+      <!-- 2 · EFT -->
       <div class="block">
         <div class="block-hd">
           <span class="block-num">2</span>
-          <div><h3>Guided visualization</h3><span class="block-sub">Press play, close your eyes</span></div>
-        </div>
-        <div class="pink-rule"></div>
-        <div class="viz-card">
-          <div class="viz-summary">
-            <span class="viz-card-label">Grounding · 4 min</span>
-            <div class="viz-card-title">Roots Into the Earth</div>
-            <p class="viz-card-body">A slow drop out of your busy head and down into your body, until you can feel the ground holding you and the truth that right now, in this moment, you have enough. Best done seated with both feet flat on the floor.</p>
-          </div>
-          <div class="tts-player" id="player-root_viz">
-            <button class="tts-play-btn" onclick="toggleTTS('root_viz')" aria-label="Play">
-              <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
-            </button>
-            <div class="tts-info">
-              <span class="tts-label">Guided Audio</span>
-              <span class="tts-title-text" id="status-root_viz">Press play &#183; close your eyes after a moment</span>
-            </div>
-            <div class="tts-progress-wrap">
-              <div class="tts-progress-track" onclick="seekTTS('root_viz',event)"><div class="tts-progress-bar" id="bar-root_viz"></div></div>
-              <span class="tts-time" id="time-root_viz">0:00</span>
-            </div>
-            <button class="tts-speed-btn" id="speed-root_viz" onclick="cycleSpeed('root_viz')">1&#215; speed</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3 · EFT -->
-      <div class="block">
-        <div class="block-hd">
-          <span class="block-num">3</span>
           <div><h3>EFT tapping script</h3><span class="block-sub">Tap through the fear of not enough</span></div>
         </div>
         <div class="pink-rule"></div>
@@ -411,10 +764,10 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
         </div>
       </div>
 
-      <!-- 4 · Practice -->
+      <!-- 3 · Practice -->
       <div class="block">
         <div class="block-hd">
-          <span class="block-num">4</span>
+          <span class="block-num">3</span>
           <div><h3>Body practice</h3><span class="block-sub">Grounding breath for the nervous system</span></div>
         </div>
         <div class="pink-rule"></div>
@@ -438,10 +791,10 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
         </div>
       </div>
 
-      <!-- 5 · Mantra -->
+      <!-- 4 · Mantra -->
       <div class="block">
         <div class="block-hd">
-          <span class="block-num">5</span>
+          <span class="block-num">4</span>
           <div><h3>Daily mantra</h3><span class="block-sub">Say it in the mirror, mean it later</span></div>
         </div>
         <div class="pink-rule"></div>
@@ -451,26 +804,1014 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
           <p class="affirm">"I am safe. I have enough, and I am enough. The ground holds me while I build."</p>
         </div>
       </div>
+
+      <!-- 5 · Activation -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">5</span>
+          <div><h3>Chakra activation</h3><span class="block-sub">Daily spinning-light practice</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="activate">
+          <div class="activate-stage">
+            <div class="spin-wrap" id="wrap-root">
+              <div class="spin-glow"></div>
+              <div class="spin-disc" id="disc-root"></div>
+              <div class="spin-ring" id="ring-root"></div>
+              <div class="spin-core" id="core-root">LAM</div>
+            </div>
+            <div class="activate-chant" id="chant-root"></div>
+            <div class="activate-count" id="count-root">Sit tall, eyes soft or closed. Press begin.</div>
+            <button class="activate-btn" id="actbtn-root" onclick="startActivation('root','LAM','the base of your spine')">Begin Activation</button>
+            <div class="activate-guide">
+              <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Bring your attention to the base of your spine.</strong> Picture a wheel of deep red light sitting right there, where you'd sit on a chair.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>See it spinning.</strong> Slow and steady, clockwise, glowing brighter with each turn. Let it match the disc above if that helps you focus.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Breathe in for 4, then chant a long Laaaammmm as you exhale.</strong> Low and slow, feel it hum at the base of your spine. Let the sound feed the light.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Watch it grow.</strong> With each round the red gets deeper and warmer, spinning freely, clearing anything stuck. Do this daily and the center stays open.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ░░░░░░░░░░ PLACEHOLDER PANELS (to build after your review) ░░░░░░░░░░ -->
     <section id="panel-sacral" class="panel" style="--chakra:#E67E22;--chakra-pale:#fcefe2;">
-      <div class="coming"><h3>Sacral &#183; Svadhisthana</h3><p>This tab is next. Once you sign off on the Root layout, I'll build Sacral (creativity, pleasure, the joy of making offers) in the same five-part structure.</p></div>
+      <div class="panel-hd">
+        <div class="panel-hd-top">
+          <div class="panel-glyph">&#127754;</div>
+          <div>
+            <span class="eyebrow">Svadhisthana · Below the navel</span>
+            <h2>The <em>Sacral</em></h2>
+          </div>
+        </div>
+        <p class="panel-lead">This is your water. Pleasure, creativity, desire, and the part of you that makes things because it wants to. When your work has gone flat and every offer feels like a chore, when you can't remember the last time creating felt good, this is the center asking for you. Money follows desire. A business built from joy has a pull that a business built from obligation never will.</p>
+        <div class="facts">
+          <div class="fact"><span class="fact-k">Element</span><span class="fact-v">Water</span></div>
+          <div class="fact"><span class="fact-k">Color</span><span class="fact-v">Orange</span></div>
+          <div class="fact"><span class="fact-k">Body</span><span class="fact-v">Hips, low belly, womb</span></div>
+          <div class="fact"><span class="fact-k">Seed</span><span class="fact-v">VAM</span></div>
+          <div class="fact"><span class="fact-k">Wealth</span><span class="fact-v">Creating from desire</span></div>
+        </div>
+      </div>
+
+      <!-- 1 · Understand -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">1</span>
+          <div><h3>What lives here</h3><span class="block-sub">Read this first</span></div>
+        </div>
+        <div class="prose">
+          <p>Your sacral is where desire lives. It's the part of you that lights up at a new idea, that wants to make something just because it would feel good to make it. When it's flowing, creating is play. Offers come to you in the shower. You follow what feels alive and the work has a warmth people can feel.</p>
+          <p>When it's blocked, everything turns grey. You create from should instead of want. You copy what's working for everyone else because you've lost the thread of what actually excites you. You feel guilty resting, guilty spending, guilty enjoying any of it. And the work starts to feel like a machine you have to keep feeding.</p>
+          <p>Pleasure isn't the reward you get after the work. For this center, pleasure is the fuel. Let yourself want things again and the creativity comes back with it.</p>
+        </div>
+        <div class="signs">
+          <div class="sign-card sign-blocked">
+            <h4>When it's blocked</h4>
+            <ul>
+              <li><span class="sign-mark">&#9679;</span>Creating feels like a chore, never play</li>
+              <li><span class="sign-mark">&#9679;</span>You've forgotten what actually lights you up</li>
+              <li><span class="sign-mark">&#9679;</span>Guilt around rest, pleasure, or spending</li>
+              <li><span class="sign-mark">&#9679;</span>You copy others because your own spark went quiet</li>
+            </ul>
+          </div>
+          <div class="sign-card sign-flowing">
+            <h4>When it's flowing</h4>
+            <ul>
+              <li><span class="sign-mark">&#10022;</span>Ideas come easily and making them feels good</li>
+              <li><span class="sign-mark">&#10022;</span>You create from desire, not obligation</li>
+              <li><span class="sign-mark">&#10022;</span>You let yourself enjoy money and rest</li>
+              <li><span class="sign-mark">&#10022;</span>Your work has a warmth people are drawn to</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 · EFT -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">2</span>
+          <div><h3>EFT tapping script</h3><span class="block-sub">Tap through the guilt around wanting</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <p class="eft-intro">Tap lightly through each point with two fingers as you say the words out loud. Start on the karate-chop point (side of the hand) for the setup, then move through the sequence. Say it like you mean it, even the parts that feel untrue. That's the whole point.</p>
+        <div class="eft-script-card" id="eft-sacral">
+          <div class="eft-script-header" onclick="toggleEft('eft-sacral')">
+            <div><span class="eft-script-label">Sacral · Permission to Want</span><span class="eft-script-title">Even though wanting more feels selfish</span></div>
+            <span class="eft-toggle">+</span>
+          </div>
+          <div class="eft-script-body">
+            <div class="eft-setup-phrase">
+              <span class="setup-label">Setup &#183; Karate chop &#215;3</span>
+              <p>Even though I learned somewhere that wanting more makes me selfish, and I've been creating from should for so long I forgot what I actually want, I choose to let a little desire back in.</p>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round one &#183; the block</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">This guilt whenever I want something for me</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">Creating from should instead of desire</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">I've made my work into a machine I have to feed</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">I can't even remember what lights me up</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">Somewhere I decided pleasure had to be earned</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">All this guilt around rest and enjoying money</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">This flatness where my spark used to be</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I'm allowed to want things again</span></div>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round two &#183; the shift</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">My desire is allowed to lead me</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">Creating gets to feel good again</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">Pleasure is the fuel, not the reward</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">I can rest without earning it first</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">I let money feel good in my hands</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">What I want is worth following</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">My spark is still here, just waiting</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I create from joy. I'm allowed to want.</span></div>
+            </div>
+            <div class="eft-close-phrase">Take a deep breath. Let your hips and belly soften. Notice anything that wants to move or stretch, and let it. That little flicker of wanting is your creativity coming back online.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 · Practice -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">3</span>
+          <div><h3>Body practice</h3><span class="block-sub">Loosen the hips, let desire move</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="practice">
+          <div class="practice-card">
+            <h4>The Flow &amp; Want List</h4>
+            <span class="practice-pattern">Movement + a 2-minute list</span>
+            <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Put on one song you love.</strong> Something with a bit of sway to it. This center wakes up through the body, not the mind.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>Move your hips.</strong> Slow circles, side to side, however it wants to go. No one's watching. Let the stiffness of the day loosen out of your low belly.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Grab paper and set a two-minute timer.</strong> Write everything you want. Big, small, silly, expensive, unreasonable. Don't edit. The point is to prove to yourself that you still want things.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Circle one.</strong> Pick the want that made you smile most, and do one tiny thing toward it today. Desire grows when you act on it.</span></div>
+          </div>
+          <div class="breath-visual">
+            <h5>A permission slip</h5>
+            <p style="margin-bottom:20px;">Read this out loud, slowly. Let it land.</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--navy);line-height:1.5;max-width:420px;margin:0 auto;">"I don't have to earn my rest or justify my pleasure. Wanting more doesn't make me greedy. It makes me alive. My desire is a compass, and I'm allowed to follow it."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 · Mantra -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">4</span>
+          <div><h3>Daily mantra</h3><span class="block-sub">Say it in the mirror, mean it later</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="mantra">
+          <div class="seed">VAM</div>
+          <span class="seed-label">Sacral seed sound</span>
+          <p class="affirm">"I create from desire, not obligation. Pleasure is my fuel, and I'm allowed to want more."</p>
+        </div>
+      </div>
+
+      <!-- 5 · Activation -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">5</span>
+          <div><h3>Chakra activation</h3><span class="block-sub">Daily spinning-light practice</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="activate">
+          <div class="activate-stage">
+            <div class="spin-wrap" id="wrap-sacral">
+              <div class="spin-glow"></div>
+              <div class="spin-disc" id="disc-sacral"></div>
+              <div class="spin-ring" id="ring-sacral"></div>
+              <div class="spin-core" id="core-sacral">VAM</div>
+            </div>
+            <div class="activate-chant" id="chant-sacral"></div>
+            <div class="activate-count" id="count-sacral">Sit tall, eyes soft or closed. Press begin.</div>
+            <button class="activate-btn" id="actbtn-sacral" onclick="startActivation('sacral','VAM','just below your navel')">Begin Activation</button>
+            <div class="activate-guide">
+              <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Bring your attention just below your navel.</strong> Picture a wheel of warm orange light there, low in your belly, the color of a sunset.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>See it spinning.</strong> Soft and fluid, like water swirling, glowing warmer with each turn.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Breathe in for 4, then chant a long Vaaaammmm as you exhale.</strong> Let it ripple through your hips and low belly. Feel the warmth spread.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Watch it open.</strong> With each round the orange glows brighter, loosening any tightness, waking your creativity and desire back up. Do this daily to keep it flowing.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <section id="panel-solar" class="panel" style="--chakra:#D4AC0D;--chakra-pale:#fbf6dd;">
-      <div class="coming"><h3>Solar Plexus &#183; Manipura</h3><p>Personal power, confidence, owning your prices. Built after your sign-off.</p></div>
+      <div class="panel-hd">
+        <div class="panel-hd-top">
+          <div class="panel-glyph">&#9788;</div>
+          <div>
+            <span class="eyebrow">Manipura · Above the navel</span>
+            <h2>The <em>Solar Plexus</em></h2>
+          </div>
+        </div>
+        <p class="panel-lead">This is your fire. Confidence, will, and the quiet certainty that you're the one running your life. When you second-guess every decision, when you can't say your price without your voice going up at the end like a question, this is the center that needs stoking. A business runs on your ability to decide and stand behind it. That's this center's whole job.</p>
+        <div class="facts">
+          <div class="fact"><span class="fact-k">Element</span><span class="fact-v">Fire</span></div>
+          <div class="fact"><span class="fact-k">Color</span><span class="fact-v">Golden Yellow</span></div>
+          <div class="fact"><span class="fact-k">Body</span><span class="fact-v">Stomach, gut, core</span></div>
+          <div class="fact"><span class="fact-k">Seed</span><span class="fact-v">RAM</span></div>
+          <div class="fact"><span class="fact-k">Wealth</span><span class="fact-v">Owning your prices</span></div>
+        </div>
+      </div>
+
+      <!-- 1 · Understand -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">1</span>
+          <div><h3>What lives here</h3><span class="block-sub">Read this first</span></div>
+        </div>
+        <div class="prose">
+          <p>Your solar plexus is your inner fire, the part of you that says <strong>I've got this</strong> and means it. When it's lit, you make a call and move. You say your price and let it sit there without rushing to soften it. You back yourself even when someone pushes back.</p>
+          <p>When it's low, you leak power everywhere. You wait for permission that's never going to come. You discount before anyone even asks. You say yes when your whole body means no, then spend the week resenting it. Every one of those is a little withdrawal from a fire that's already running low.</p>
+          <p>Confidence isn't something you're born with or without. It's built the same way a fire is, one small log at a time. Every time you keep a promise to yourself, every decision you make and stand behind, you're feeding it.</p>
+        </div>
+        <div class="signs">
+          <div class="sign-card sign-blocked">
+            <h4>When it's blocked</h4>
+            <ul>
+              <li><span class="sign-mark">&#9679;</span>You second-guess decisions for days</li>
+              <li><span class="sign-mark">&#9679;</span>You discount before anyone asks</li>
+              <li><span class="sign-mark">&#9679;</span>You wait for permission to move</li>
+              <li><span class="sign-mark">&#9679;</span>You say yes when you mean no</li>
+            </ul>
+          </div>
+          <div class="sign-card sign-flowing">
+            <h4>When it's flowing</h4>
+            <ul>
+              <li><span class="sign-mark">&#10022;</span>You decide and move without spiralling</li>
+              <li><span class="sign-mark">&#10022;</span>You say your price and let it stand</li>
+              <li><span class="sign-mark">&#10022;</span>You back yourself when pushed</li>
+              <li><span class="sign-mark">&#10022;</span>Your no is a full sentence</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 · EFT -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">2</span>
+          <div><h3>EFT tapping script</h3><span class="block-sub">Tap through the self-doubt</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <p class="eft-intro">Tap lightly through each point with two fingers as you say the words out loud. Start on the karate-chop point (side of the hand) for the setup, then move through the sequence. Say it like you mean it, even the parts that feel untrue. That's the whole point.</p>
+        <div class="eft-script-card" id="eft-solar">
+          <div class="eft-script-header" onclick="toggleEft('eft-solar')">
+            <div><span class="eft-script-label">Solar Plexus · Own Your Power</span><span class="eft-script-title">Even though I don't trust my own decisions</span></div>
+            <span class="eft-toggle">+</span>
+          </div>
+          <div class="eft-script-body">
+            <div class="eft-setup-phrase">
+              <span class="setup-label">Setup &#183; Karate chop &#215;3</span>
+              <p>Even though I second-guess myself constantly and wait for someone else to say it's okay, I choose to trust that I know what's right for me.</p>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round one &#183; the doubt</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">This habit of doubting my own calls</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">Waiting for permission that never comes</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">Shrinking my price before anyone even asks</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">Saying yes when my whole body means no</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">All this second-guessing that wears me down</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">I learned to make myself small to stay safe</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">This fire in me has been running low</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I'm allowed to take up space</span></div>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round two &#183; the shift</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">I trust myself to make the call</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">I don't need permission to move</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">I say my price and let it stand</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">My no is a full sentence</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">I back myself even when someone pushes</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">Every promise I keep to myself feeds the fire</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">I am the one running my life</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I've got this. I trust myself.</span></div>
+            </div>
+            <div class="eft-close-phrase">Take a deep breath into your belly. Feel the warmth just above your navel. That's your fire catching again. Every decision you make and stand behind from here keeps it burning.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 · Practice -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">3</span>
+          <div><h3>Body practice</h3><span class="block-sub">Stoke the fire, take up space</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="practice">
+          <div class="practice-card">
+            <h4>The Power Pose &amp; One Bold Call</h4>
+            <span class="practice-pattern">2 minutes + one decision</span>
+            <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Stand up and take up space.</strong> Feet apart, hands on hips or stretched overhead. Chin level. Hold it for two full minutes. It feels silly and it works, your body leads and the confidence follows.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>Put a hand on your belly.</strong> Just above the navel. Breathe into it so your hand rises. Picture a warm golden light there, getting brighter with each breath.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Name one decision you've been avoiding.</strong> The email you haven't sent, the price you haven't raised, the no you haven't given. Say it out loud.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Make the call today.</strong> Not tomorrow. One decision, made and stood behind, is a log on the fire. Do it while the warmth is still there.</span></div>
+          </div>
+          <div class="breath-visual">
+            <h5>A line to stand on</h5>
+            <p style="margin-bottom:20px;">Say it out loud, chin level, like you mean it.</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--navy);line-height:1.5;max-width:420px;margin:0 auto;">"I don't need anyone's permission to back myself. I make the call, I say the price, I stand behind it. My fire is mine to feed."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 · Mantra -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">4</span>
+          <div><h3>Daily mantra</h3><span class="block-sub">Say it in the mirror, mean it later</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="mantra">
+          <div class="seed">RAM</div>
+          <span class="seed-label">Solar plexus seed sound</span>
+          <p class="affirm">"I trust myself to decide. I say my price and let it stand. I'm the one running my life."</p>
+        </div>
+      </div>
+
+      <!-- 5 · Activation -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">5</span>
+          <div><h3>Chakra activation</h3><span class="block-sub">Daily spinning-light practice</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="activate">
+          <div class="activate-stage">
+            <div class="spin-wrap" id="wrap-solar">
+              <div class="spin-glow"></div>
+              <div class="spin-disc" id="disc-solar"></div>
+              <div class="spin-ring" id="ring-solar"></div>
+              <div class="spin-core" id="core-solar">RAM</div>
+            </div>
+            <div class="activate-chant" id="chant-solar"></div>
+            <div class="activate-count" id="count-solar">Sit tall, eyes soft or closed. Press begin.</div>
+            <button class="activate-btn" id="actbtn-solar" onclick="startActivation('solar','RAM','just above your navel')">Begin Activation</button>
+            <div class="activate-guide">
+              <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Bring your attention just above your navel.</strong> Picture a wheel of bright golden-yellow light there, like a small sun in your core.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>See it spinning.</strong> Fast and bright, radiating heat, glowing stronger with each turn like a fire catching.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Breathe in for 4, then chant a long Raaaammmm as you exhale.</strong> Feel it vibrate in your belly, strong and steady. Let the sound stoke the fire.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Watch it blaze.</strong> With each round the gold burns brighter and steadier, building your confidence and will. Do this daily and your fire stays lit.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <section id="panel-heart" class="panel" style="--chakra:#27AE60;--chakra-pale:#e6f6ec;">
-      <div class="coming"><h3>Heart &#183; Anahata</h3><p>Worthiness, receiving, letting money in without guilt. Built after your sign-off.</p></div>
+      <div class="panel-hd">
+        <div class="panel-hd-top">
+          <div class="panel-glyph">&#10084;</div>
+          <div>
+            <span class="eyebrow">Anahata · Center of the chest</span>
+            <h2>The <em>Heart</em></h2>
+          </div>
+        </div>
+        <p class="panel-lead">This is your air. Love, worth, and the ability to actually let things in. When you give and give but deflect the second someone tries to give back, when charging what you're worth feels like asking for too much, this is the center that's guarding the door. Money is just energy, and this is where you decide whether you're allowed to receive it.</p>
+        <div class="facts">
+          <div class="fact"><span class="fact-k">Element</span><span class="fact-v">Air</span></div>
+          <div class="fact"><span class="fact-k">Color</span><span class="fact-v">Green</span></div>
+          <div class="fact"><span class="fact-k">Body</span><span class="fact-v">Chest, heart, lungs</span></div>
+          <div class="fact"><span class="fact-k">Seed</span><span class="fact-v">YAM</span></div>
+          <div class="fact"><span class="fact-k">Wealth</span><span class="fact-v">Letting money in</span></div>
+        </div>
+      </div>
+
+      <!-- 1 · Understand -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">1</span>
+          <div><h3>What lives here</h3><span class="block-sub">Read this first</span></div>
+        </div>
+        <div class="prose">
+          <p>Your heart is where receiving lives. Not just love, though that too. It's whether you can take a compliment without swatting it away. Whether you can charge your worth and let the payment land without guilt. Whether you can let people help you instead of carrying it all yourself.</p>
+          <p>When it's guarded, you become the giver who never lets anyone give back. You pour from a cup that's already empty and call it generosity. You drop your price the moment someone hesitates, because deep down a part of you isn't sure your work is worth it. Being needed feels safe. Being cared for feels exposed.</p>
+          <p>Here's what shifts it. You can't give from empty forever, and you were never meant to. Learning to receive isn't selfish. It's what keeps the whole thing flowing, so you have something real to give.</p>
+        </div>
+        <div class="signs">
+          <div class="sign-card sign-blocked">
+            <h4>When it's blocked</h4>
+            <ul>
+              <li><span class="sign-mark">&#9679;</span>You deflect help, praise, and payment</li>
+              <li><span class="sign-mark">&#9679;</span>You give from an empty cup</li>
+              <li><span class="sign-mark">&#9679;</span>Charging your worth feels like too much</li>
+              <li><span class="sign-mark">&#9679;</span>You're hard on yourself in a way you'd never be with a friend</li>
+            </ul>
+          </div>
+          <div class="sign-card sign-flowing">
+            <h4>When it's flowing</h4>
+            <ul>
+              <li><span class="sign-mark">&#10022;</span>You take a compliment with a simple thank you</li>
+              <li><span class="sign-mark">&#10022;</span>You let money and support land without guilt</li>
+              <li><span class="sign-mark">&#10022;</span>You believe your work is worth the price</li>
+              <li><span class="sign-mark">&#10022;</span>You're as kind to yourself as to everyone else</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 · EFT -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">2</span>
+          <div><h3>EFT tapping script</h3><span class="block-sub">Tap through the block to receiving</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <p class="eft-intro">Tap lightly through each point with two fingers as you say the words out loud. Start on the karate-chop point (side of the hand) for the setup, then move through the sequence. Say it like you mean it, even the parts that feel untrue. That's the whole point.</p>
+        <div class="eft-script-card" id="eft-heart">
+          <div class="eft-script-header" onclick="toggleEft('eft-heart')">
+            <div><span class="eft-script-label">Heart · Let It In</span><span class="eft-script-title">Even though it's hard to receive</span></div>
+            <span class="eft-toggle">+</span>
+          </div>
+          <div class="eft-script-body">
+            <div class="eft-setup-phrase">
+              <span class="setup-label">Setup &#183; Karate chop &#215;3</span>
+              <p>Even though I'm the one who gives and never lets anyone give back, and receiving makes me want to squirm, I choose to open the door a little.</p>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round one &#183; the block</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">This reflex to deflect whenever someone gives</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">Pouring from a cup that's already empty</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">Dropping my price the second someone pauses</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">Some part of me not sure my work is worth it</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">Being needed feels safe, being cared for feels scary</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">How hard I am on myself</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">All the help I've turned away</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I'm allowed to receive too</span></div>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round two &#183; the shift</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">I let support land without pushing it away</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">I fill my own cup first, and that's allowed</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">My work is worth what I charge for it</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">I can take a compliment and just say thank you</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">Receiving keeps the whole thing flowing</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">I'm as gentle with myself as I am with others</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">Money is welcome here</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I am worthy. I let it in.</span></div>
+            </div>
+            <div class="eft-close-phrase">Take a deep breath into your chest. Feel it expand. That little softening behind your ribs is the door opening. Let one good thing in today, a compliment, a payment, a kindness, and just say thank you.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 · Practice -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">3</span>
+          <div><h3>Body practice</h3><span class="block-sub">Open the chest, practise receiving</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="practice">
+          <div class="practice-card">
+            <h4>Hands on Heart &amp; The Receiving List</h4>
+            <span class="practice-pattern">Breath + a short list</span>
+            <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Put both hands on your chest.</strong> One over the other, over your heart. Feel the warmth of your own hands. This alone tells your body it's safe to soften.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>Breathe into your hands.</strong> Slow breaths that lift your chest into your palms. Picture soft green light spreading out from under your hands with each breath.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Say one kind thing to yourself.</strong> Out loud. The thing you'd say to a friend having your exact week. Notice if it feels awkward, and say it anyway.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>List three things you let in today.</strong> A payment, a compliment, an offer of help, a rest you actually took. Naming what you received trains you to keep letting it in.</span></div>
+          </div>
+          <div class="breath-visual">
+            <h5>A line to soften on</h5>
+            <p style="margin-bottom:20px;">Hands on your heart, say it slowly.</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--navy);line-height:1.5;max-width:420px;margin:0 auto;">"I don't have to earn my worth by giving until I'm empty. I'm allowed to receive. Letting it in is how I keep the flow going."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 · Mantra -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">4</span>
+          <div><h3>Daily mantra</h3><span class="block-sub">Say it in the mirror, mean it later</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="mantra">
+          <div class="seed">YAM</div>
+          <span class="seed-label">Heart seed sound</span>
+          <p class="affirm">"My work is worth it, and so am I. I let love, money, and support land without guilt."</p>
+        </div>
+      </div>
+
+      <!-- 5 · Activation -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">5</span>
+          <div><h3>Chakra activation</h3><span class="block-sub">Daily spinning-light practice</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="activate">
+          <div class="activate-stage">
+            <div class="spin-wrap" id="wrap-heart">
+              <div class="spin-glow"></div>
+              <div class="spin-disc" id="disc-heart"></div>
+              <div class="spin-ring" id="ring-heart"></div>
+              <div class="spin-core" id="core-heart">YAM</div>
+            </div>
+            <div class="activate-chant" id="chant-heart"></div>
+            <div class="activate-count" id="count-heart">Sit tall, eyes soft or closed. Press begin.</div>
+            <button class="activate-btn" id="actbtn-heart" onclick="startActivation('heart','YAM','the center of your chest')">Begin Activation</button>
+            <div class="activate-guide">
+              <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Bring your attention to the center of your chest.</strong> Picture a wheel of soft green light there, right behind your breastbone.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>See it spinning.</strong> Gentle and open, like a breeze moving through it, glowing softer and wider with each turn.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Breathe in for 4, then chant a long Yaaaammmm as you exhale.</strong> Feel your chest expand and soften. Let the sound open the door.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Watch it open.</strong> With each round the green spreads warm and easy, softening the guard and letting love and worth flow both ways. Do this daily to keep receiving.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <section id="panel-throat" class="panel" style="--chakra:#3498DB;--chakra-pale:#e7f2fb;">
-      <div class="coming"><h3>Throat &#183; Vishuddha</h3><p>Your voice, magnetic messaging, saying what you actually charge. Built after your sign-off.</p></div>
+      <div class="panel-hd">
+        <div class="panel-hd-top">
+          <div class="panel-glyph">&#128172;</div>
+          <div>
+            <span class="eyebrow">Vishuddha · The throat</span>
+            <h2>The <em>Throat</em></h2>
+          </div>
+        </div>
+        <p class="panel-lead">This is your voice. Truth, expression, and the courage to say the real thing instead of the safe thing. When you water down your message so nobody can disagree with it, when you say your price and then immediately talk it down, this is the center that's gone quiet. Your voice is how people find you. A muffled message is a muffled business.</p>
+        <div class="facts">
+          <div class="fact"><span class="fact-k">Element</span><span class="fact-v">Ether</span></div>
+          <div class="fact"><span class="fact-k">Color</span><span class="fact-v">Bright Blue</span></div>
+          <div class="fact"><span class="fact-k">Body</span><span class="fact-v">Throat, jaw, neck</span></div>
+          <div class="fact"><span class="fact-k">Seed</span><span class="fact-v">HAM</span></div>
+          <div class="fact"><span class="fact-k">Wealth</span><span class="fact-v">Owning your message</span></div>
+        </div>
+      </div>
+
+      <!-- 1 · Understand -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">1</span>
+          <div><h3>What lives here</h3><span class="block-sub">Read this first</span></div>
+        </div>
+        <div class="prose">
+          <p>Your throat is where your truth becomes sound. It's whether you say the thing you actually mean or the thing that keeps everyone comfortable. When it's open, your message has edges. People know exactly what you stand for, and the right ones lean in.</p>
+          <p>When it's tight, you blur yourself on purpose. You soften your opinion until it means nothing. You say your price and then rush to justify it, or quietly knock it down before anyone can flinch. You write posts that sound like everyone else because standing out feels dangerous. And then you wonder why nobody's really hearing you.</p>
+          <p>Being liked by everyone and being magnetic to your people are two different things. This center is where you stop trading the second for the first. Your voice was never meant to be background noise.</p>
+        </div>
+        <div class="signs">
+          <div class="sign-card sign-blocked">
+            <h4>When it's blocked</h4>
+            <ul>
+              <li><span class="sign-mark">&#9679;</span>You say what people want to hear</li>
+              <li><span class="sign-mark">&#9679;</span>You soften your price the second you say it</li>
+              <li><span class="sign-mark">&#9679;</span>Your message sounds like everyone else's</li>
+              <li><span class="sign-mark">&#9679;</span>You replay what you wish you'd said</li>
+            </ul>
+          </div>
+          <div class="sign-card sign-flowing">
+            <h4>When it's flowing</h4>
+            <ul>
+              <li><span class="sign-mark">&#10022;</span>You say the real thing, not the safe thing</li>
+              <li><span class="sign-mark">&#10022;</span>You state your price and let it sit</li>
+              <li><span class="sign-mark">&#10022;</span>Your message sounds unmistakably like you</li>
+              <li><span class="sign-mark">&#10022;</span>The right people lean in when you speak</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 · EFT -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">2</span>
+          <div><h3>EFT tapping script</h3><span class="block-sub">Tap through the fear of being seen</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <p class="eft-intro">Tap lightly through each point with two fingers as you say the words out loud. Start on the karate-chop point (side of the hand) for the setup, then move through the sequence. Say it like you mean it, even the parts that feel untrue. That's the whole point.</p>
+        <div class="eft-script-card" id="eft-throat">
+          <div class="eft-script-header" onclick="toggleEft('eft-throat')">
+            <div><span class="eft-script-label">Throat · Speak Your Truth</span><span class="eft-script-title">Even though it's safer to stay quiet</span></div>
+            <span class="eft-toggle">+</span>
+          </div>
+          <div class="eft-script-body">
+            <div class="eft-setup-phrase">
+              <span class="setup-label">Setup &#183; Karate chop &#215;3</span>
+              <p>Even though I water myself down so nobody can push back, and saying the real thing feels risky, I choose to let my true voice come through.</p>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round one &#183; the block</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">This habit of saying what keeps everyone comfortable</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">Softening my price the moment it leaves my mouth</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">Blurring my message so no one can disagree</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">All the things I swallow and replay later</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">This tightness in my throat when I go to speak</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">Somewhere I learned it was safer to stay small</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">The fear of being too much or too loud</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">My voice is allowed to take up space</span></div>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round two &#183; the shift</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">I say the real thing, not the safe thing</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">I state my price and let it sit there</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">My message is allowed to have edges</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">I'd rather be magnetic than agreeable</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">My throat is open and my words flow easily</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">The right people are drawn to my truth</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">I sound exactly like myself</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I speak my truth. My voice matters.</span></div>
+            </div>
+            <div class="eft-close-phrase">Take a deep breath. Let your jaw and throat soften. Hum quietly if it feels good. That loosening in your throat is your voice remembering it's allowed to be heard. Say one true thing out loud today.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 · Practice -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">3</span>
+          <div><h3>Body practice</h3><span class="block-sub">Open the throat, find your voice</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="practice">
+          <div class="practice-card">
+            <h4>Hum, Loosen &amp; Say One True Thing</h4>
+            <span class="practice-pattern">Sound + one honest sentence</span>
+            <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Loosen your jaw and neck.</strong> Roll your shoulders, drop your jaw, move your head side to side. This center holds a lot of tension you stopped noticing.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>Hum for a few breaths.</strong> Any note. Feel it buzz in your throat and lips. Humming is the quickest way to wake this center up and it settles your nervous system too.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Say the thing you've been softening.</strong> The real price, the honest opinion, the no. Say it out loud to the mirror, exactly as you mean it, no justifying afterward.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Send one true message today.</strong> A post, an email, a text where you say what you actually think. One unsoftened sentence out into the world.</span></div>
+          </div>
+          <div class="breath-visual">
+            <h5>A line to speak</h5>
+            <p style="margin-bottom:20px;">Say it out loud, let your throat open.</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--navy);line-height:1.5;max-width:420px;margin:0 auto;">"I don't have to shrink my voice to be liked. I say the real thing. My message is allowed to have edges, and the right people lean in."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 · Mantra -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">4</span>
+          <div><h3>Daily mantra</h3><span class="block-sub">Say it in the mirror, mean it later</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="mantra">
+          <div class="seed">HAM</div>
+          <span class="seed-label">Throat seed sound</span>
+          <p class="affirm">"I say the real thing, not the safe thing. My voice matters, and the right people lean in."</p>
+        </div>
+      </div>
+
+      <!-- 5 · Activation -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">5</span>
+          <div><h3>Chakra activation</h3><span class="block-sub">Daily spinning-light practice</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="activate">
+          <div class="activate-stage">
+            <div class="spin-wrap" id="wrap-throat">
+              <div class="spin-glow"></div>
+              <div class="spin-disc" id="disc-throat"></div>
+              <div class="spin-ring" id="ring-throat"></div>
+              <div class="spin-core" id="core-throat">HAM</div>
+            </div>
+            <div class="activate-chant" id="chant-throat"></div>
+            <div class="activate-count" id="count-throat">Sit tall, eyes soft or closed. Press begin.</div>
+            <button class="activate-btn" id="actbtn-throat" onclick="startActivation('throat','HAM','your throat')">Begin Activation</button>
+            <div class="activate-guide">
+              <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Bring your attention to your throat.</strong> Picture a wheel of bright blue light there, right at the base of your neck.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>See it spinning.</strong> Clear and open, like sound rippling out, glowing brighter with each turn.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Breathe in for 4, then chant a long Haaaammmm as you exhale.</strong> Feel it vibrate right through your throat. Let the sound open the space.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Watch it clear.</strong> With each round the blue glows brighter and freer, loosening your throat and freeing your voice. Do this daily to keep it open.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <section id="panel-thirdeye" class="panel" style="--chakra:#5B4B8A;--chakra-pale:#eeebf4;">
-      <div class="coming"><h3>Third Eye &#183; Ajna</h3><p>Vision, intuition, trusting what you see for your business. Built after your sign-off.</p></div>
+      <div class="panel-hd">
+        <div class="panel-hd-top">
+          <div class="panel-glyph">&#128065;</div>
+          <div>
+            <span class="eyebrow">Ajna · Center of the forehead</span>
+            <h2>The <em>Third Eye</em></h2>
+          </div>
+        </div>
+        <p class="panel-lead">This is your inner sight. Intuition, vision, and the quiet knowing that tells you which way to go before the logic catches up. When you feel a clear nudge and then talk yourself out of it, when you keep asking everyone else what to do while your own answer sits right there, this is the center that's been drowned out. Your intuition is the best strategist you have. This is where you start trusting it again.</p>
+        <div class="facts">
+          <div class="fact"><span class="fact-k">Element</span><span class="fact-v">Light</span></div>
+          <div class="fact"><span class="fact-k">Color</span><span class="fact-v">Indigo</span></div>
+          <div class="fact"><span class="fact-k">Body</span><span class="fact-v">Brow, eyes, forehead</span></div>
+          <div class="fact"><span class="fact-k">Seed</span><span class="fact-v">OM</span></div>
+          <div class="fact"><span class="fact-k">Wealth</span><span class="fact-v">Trusting your gut</span></div>
+        </div>
+      </div>
+
+      <!-- 1 · Understand -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">1</span>
+          <div><h3>What lives here</h3><span class="block-sub">Read this first</span></div>
+        </div>
+        <div class="prose">
+          <p>Your third eye is where you see beyond the obvious. It's the hunch that turns out right, the idea that arrives fully formed, the sense that a decision is off before you can explain why. When it's open, you trust what you see. You make moves other people can't quite justify, and they work.</p>
+          <p>When it's clouded, you go numb to your own knowing. You collect opinions instead of decisions. You research and research because trusting your gut feels reckless. The nudge comes, clear as day, and you override it with logic and then watch it turn out exactly the way your gut said it would. All that noise, and the answer was in you the whole time.</p>
+          <p>Intuition isn't the opposite of strategy. It's the fastest strategy you have, once you stop talking over it. This center clears the fog so you can hear yourself again.</p>
+        </div>
+        <div class="signs">
+          <div class="sign-card sign-blocked">
+            <h4>When it's blocked</h4>
+            <ul>
+              <li><span class="sign-mark">&#9679;</span>You feel the nudge and override it</li>
+              <li><span class="sign-mark">&#9679;</span>You collect opinions instead of deciding</li>
+              <li><span class="sign-mark">&#9679;</span>Everything feels foggy and unclear</li>
+              <li><span class="sign-mark">&#9679;</span>You research endlessly to avoid trusting yourself</li>
+            </ul>
+          </div>
+          <div class="sign-card sign-flowing">
+            <h4>When it's flowing</h4>
+            <ul>
+              <li><span class="sign-mark">&#10022;</span>You trust the hunch and act on it</li>
+              <li><span class="sign-mark">&#10022;</span>You can see where you're headed clearly</li>
+              <li><span class="sign-mark">&#10022;</span>Ideas arrive fully formed</li>
+              <li><span class="sign-mark">&#10022;</span>You know the answer before the logic catches up</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 · EFT -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">2</span>
+          <div><h3>EFT tapping script</h3><span class="block-sub">Tap through the doubt in your knowing</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <p class="eft-intro">Tap lightly through each point with two fingers as you say the words out loud. Start on the karate-chop point (side of the hand) for the setup, then move through the sequence. Say it like you mean it, even the parts that feel untrue. That's the whole point.</p>
+        <div class="eft-script-card" id="eft-thirdeye">
+          <div class="eft-script-header" onclick="toggleEft('eft-thirdeye')">
+            <div><span class="eft-script-label">Third Eye · Trust Your Knowing</span><span class="eft-script-title">Even though I don't trust my intuition</span></div>
+            <span class="eft-toggle">+</span>
+          </div>
+          <div class="eft-script-body">
+            <div class="eft-setup-phrase">
+              <span class="setup-label">Setup &#183; Karate chop &#215;3</span>
+              <p>Even though I feel the nudge and talk myself out of it every time, and trusting my gut feels reckless, I choose to start listening to what I already know.</p>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round one &#183; the block</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">This habit of overriding my own knowing</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">Collecting everyone's opinions instead of deciding</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">Researching endlessly so I don't have to trust myself</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">The nudge comes and I explain it away</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">All this fog I've been living in</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">Somewhere I learned my gut couldn't be trusted</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">All the times I was right and didn't listen</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I'm allowed to trust what I see</span></div>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round two &#183; the shift</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">My intuition is worth listening to</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">I trust the nudge and act on it</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">My gut is the fastest strategy I have</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">The fog is clearing and I can see</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">I already know the answer</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">I can see where I'm headed clearly</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">My inner knowing leads me well</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I trust myself. I see clearly.</span></div>
+            </div>
+            <div class="eft-close-phrase">Take a deep breath. Let the space between your brows soften. Notice the first quiet thing that comes to you and let it be true. That clear feeling behind your forehead is your inner sight coming back online.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 · Practice -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">3</span>
+          <div><h3>Body practice</h3><span class="block-sub">Clear the fog, hear yourself</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="practice">
+          <div class="practice-card">
+            <h4>Soften the Brow &amp; Ask the Question</h4>
+            <span class="practice-pattern">Stillness + one honest answer</span>
+            <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Close your eyes and soften the space between your brows.</strong> Let your forehead unclench. Most of us hold thinking-tension right there without knowing it.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>Take a few slow breaths into that space.</strong> Picture a soft indigo light glowing at the center of your forehead, clearing the fog with each breath.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Ask the decision you've been circling.</strong> Silently, then wait. Don't reach for the answer, let it come. The first quiet response, before the second-guessing starts, is usually the true one.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Write down what came.</strong> Even if it surprises you. You're training yourself to notice your knowing and trust it enough to act.</span></div>
+          </div>
+          <div class="breath-visual">
+            <h5>A line to settle on</h5>
+            <p style="margin-bottom:20px;">Eyes closed, say it slowly.</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--navy);line-height:1.5;max-width:420px;margin:0 auto;">"I don't need one more opinion. I already know. I trust the quiet answer that comes before the doubt, and I let it lead me."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 · Mantra -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">4</span>
+          <div><h3>Daily mantra</h3><span class="block-sub">Say it in the mirror, mean it later</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="mantra">
+          <div class="seed">OM</div>
+          <span class="seed-label">Third eye seed sound</span>
+          <p class="affirm">"I trust what I see. My intuition leads me well, and I act on the answer I already know."</p>
+        </div>
+      </div>
+
+      <!-- 5 · Activation -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">5</span>
+          <div><h3>Chakra activation</h3><span class="block-sub">Daily spinning-light practice</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="activate">
+          <div class="activate-stage">
+            <div class="spin-wrap" id="wrap-thirdeye">
+              <div class="spin-glow"></div>
+              <div class="spin-disc" id="disc-thirdeye"></div>
+              <div class="spin-ring" id="ring-thirdeye"></div>
+              <div class="spin-core" id="core-thirdeye">OM</div>
+            </div>
+            <div class="activate-chant" id="chant-thirdeye"></div>
+            <div class="activate-count" id="count-thirdeye">Sit tall, eyes soft or closed. Press begin.</div>
+            <button class="activate-btn" id="actbtn-thirdeye" onclick="startActivation('thirdeye','OM','the center of your forehead')">Begin Activation</button>
+            <div class="activate-guide">
+              <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Bring your attention to the center of your forehead.</strong> Picture a wheel of deep indigo light there, just above and between your brows.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>See it spinning.</strong> Deep and clear, like a still pool coming into focus, glowing brighter with each turn.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Breathe in for 4, then chant a long Ooooommmm as you exhale.</strong> Feel it resonate behind your forehead. Let the sound clear the fog.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Watch it clear.</strong> With each round the indigo deepens and steadies, sharpening your inner sight and your trust in it. Do this daily to keep seeing clearly.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <section id="panel-crown" class="panel" style="--chakra:#8E44AD;--chakra-pale:#f3e9f7;">
-      <div class="coming"><h3>Crown &#183; Sahasrara</h3><p>Trust, surrender, the frequency of receiving. Built after your sign-off.</p></div>
+      <div class="panel-hd">
+        <div class="panel-hd-top">
+          <div class="panel-glyph">&#128081;</div>
+          <div>
+            <span class="eyebrow">Sahasrara · Crown of the head</span>
+            <h2>The <em>Crown</em></h2>
+          </div>
+        </div>
+        <p class="panel-lead">This is your connection. Trust, surrender, and the felt sense that something bigger is holding you and your work. When you're white-knuckling every outcome, when you've forgotten how to let things unfold instead of forcing them, this is the center that's closed off. The most magnetic version of your business runs on trust, not grip. This is where you learn to let go and let it come.</p>
+        <div class="facts">
+          <div class="fact"><span class="fact-k">Element</span><span class="fact-v">Consciousness</span></div>
+          <div class="fact"><span class="fact-k">Color</span><span class="fact-v">Violet / White</span></div>
+          <div class="fact"><span class="fact-k">Body</span><span class="fact-v">Top of the head</span></div>
+          <div class="fact"><span class="fact-k">Seed</span><span class="fact-v">AH</span></div>
+          <div class="fact"><span class="fact-k">Wealth</span><span class="fact-v">Trust over grip</span></div>
+        </div>
+      </div>
+
+      <!-- 1 · Understand -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">1</span>
+          <div><h3>What lives here</h3><span class="block-sub">Read this first</span></div>
+        </div>
+        <div class="prose">
+          <p>Your crown is where you plug back into something larger than your to-do list. It's the trust that things are working out even when you can't yet see how. When it's open, you hold your goals with an open hand. You do your part and let the rest come. There's an ease to you that people can feel, and it's the most magnetic thing about you.</p>
+          <p>When it's closed, you carry the whole weight yourself. You grip every outcome, force every result, and treat rest like a threat. You believe that if you just push hard enough, worry long enough, control tightly enough, you can make it all happen. And it leaves you exhausted, because you were never meant to do it alone or force what's meant to flow.</p>
+          <p>Surrender isn't giving up. It's doing your part fully, then trusting enough to stop strangling the outcome. This center is where the striving finally gets to rest.</p>
+        </div>
+        <div class="signs">
+          <div class="sign-card sign-blocked">
+            <h4>When it's blocked</h4>
+            <ul>
+              <li><span class="sign-mark">&#9679;</span>You white-knuckle every outcome</li>
+              <li><span class="sign-mark">&#9679;</span>You force instead of letting things flow</li>
+              <li><span class="sign-mark">&#9679;</span>Rest feels like a threat</li>
+              <li><span class="sign-mark">&#9679;</span>You feel like you're doing it all alone</li>
+            </ul>
+          </div>
+          <div class="sign-card sign-flowing">
+            <h4>When it's flowing</h4>
+            <ul>
+              <li><span class="sign-mark">&#10022;</span>You hold your goals with an open hand</li>
+              <li><span class="sign-mark">&#10022;</span>You do your part and trust the rest</li>
+              <li><span class="sign-mark">&#10022;</span>There's an ease people can feel</li>
+              <li><span class="sign-mark">&#10022;</span>You feel held by something bigger</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 · EFT -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">2</span>
+          <div><h3>EFT tapping script</h3><span class="block-sub">Tap through the need to control</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <p class="eft-intro">Tap lightly through each point with two fingers as you say the words out loud. Start on the karate-chop point (side of the hand) for the setup, then move through the sequence. Say it like you mean it, even the parts that feel untrue. That's the whole point.</p>
+        <div class="eft-script-card" id="eft-crown">
+          <div class="eft-script-header" onclick="toggleEft('eft-crown')">
+            <div><span class="eft-script-label">Crown · Trust and Surrender</span><span class="eft-script-title">Even though I have to hold it all together</span></div>
+            <span class="eft-toggle">+</span>
+          </div>
+          <div class="eft-script-body">
+            <div class="eft-setup-phrase">
+              <span class="setup-label">Setup &#183; Karate chop &#215;3</span>
+              <p>Even though I white-knuckle every outcome and believe it all falls apart if I let go, I choose to trust that I'm held and to loosen my grip a little.</p>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round one &#183; the block</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">This grip I keep on every single outcome</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">Forcing things that were meant to flow</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">Carrying the whole weight by myself</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">Treating rest like something dangerous</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">Believing worry is what keeps it all going</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">So tired from trying to control everything</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">This fear that if I let go it falls apart</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I'm allowed to set the weight down</span></div>
+            </div>
+            <div class="eft-round">
+              <div class="eft-round-title">Round two &#183; the shift</div>
+              <div class="eft-point-script"><span class="eft-point-tag">EB</span><span class="eft-point-words">I do my part and trust the rest</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">SE</span><span class="eft-point-words">I hold my goals with an open hand</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UE</span><span class="eft-point-words">It's working out even when I can't see how</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UN</span><span class="eft-point-words">I let things come instead of forcing them</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CH</span><span class="eft-point-words">I'm held by something bigger than me</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">CB</span><span class="eft-point-words">Rest is allowed, and so is ease</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">UA</span><span class="eft-point-words">Trust is more magnetic than grip</span></div>
+              <div class="eft-point-script"><span class="eft-point-tag">TH</span><span class="eft-point-words">I let go. I am held.</span></div>
+            </div>
+            <div class="eft-close-phrase">Take a slow breath and let your whole body soften from the top of your head down. Feel how much lighter it is to be held instead of holding. Notice one thing you can stop gripping today, and let it go.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 · Practice -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">3</span>
+          <div><h3>Body practice</h3><span class="block-sub">Open the crown, let go</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="practice">
+          <div class="practice-card">
+            <h4>Palms Up &amp; The Letting-Go Breath</h4>
+            <span class="practice-pattern">Open posture + a release</span>
+            <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Sit with your palms open and facing up.</strong> On your knees, loose and soft. This one small posture tells your body you're receiving, not gripping.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>Imagine the top of your head opening.</strong> A soft violet-white light pouring in from above with each breath, like you're being filled and held from the top down.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Name the thing you're gripping.</strong> The outcome you keep forcing, the result you're trying to control. On a long exhale, silently say "I trust this is working out," and feel your hands soften.</span></div>
+            <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Let one thing go today.</strong> Loosen your grip on one outcome. Do your part, then genuinely leave the rest. Notice you're still held.</span></div>
+          </div>
+          <div class="breath-visual">
+            <h5>A line to surrender on</h5>
+            <p style="margin-bottom:20px;">Palms up, say it slowly.</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--navy);line-height:1.5;max-width:420px;margin:0 auto;">"I don't have to force it or carry it alone. I do my part and trust the rest. I'm held by something bigger, and I let it come."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 · Mantra -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">4</span>
+          <div><h3>Daily mantra</h3><span class="block-sub">Say it in the mirror, mean it later</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="mantra">
+          <div class="seed">AH</div>
+          <span class="seed-label">Crown seed sound</span>
+          <p class="affirm">"I do my part and trust the rest. I'm held by something bigger, and I let it come."</p>
+        </div>
+      </div>
+
+      <!-- 5 · Activation -->
+      <div class="block">
+        <div class="block-hd">
+          <span class="block-num">5</span>
+          <div><h3>Chakra activation</h3><span class="block-sub">Daily spinning-light practice</span></div>
+        </div>
+        <div class="pink-rule"></div>
+        <div class="activate">
+          <div class="activate-stage">
+            <div class="spin-wrap" id="wrap-crown">
+              <div class="spin-glow"></div>
+              <div class="spin-disc" id="disc-crown"></div>
+              <div class="spin-ring" id="ring-crown"></div>
+              <div class="spin-core" id="core-crown">AH</div>
+            </div>
+            <div class="activate-chant" id="chant-crown"></div>
+            <div class="activate-count" id="count-crown">Sit tall, eyes soft or closed. Press begin.</div>
+            <button class="activate-btn" id="actbtn-crown" onclick="startActivation('crown','AH','the top of your head')">Begin Activation</button>
+            <div class="activate-guide">
+              <div class="practice-step"><span class="practice-step-dot">1</span><span class="practice-step-text"><strong>Bring your attention to the top of your head.</strong> Picture a wheel of violet-white light there, opening upward like a thousand petals.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">2</span><span class="practice-step-text"><strong>See it spinning.</strong> Soft and radiant, opening to the light above, glowing brighter with each turn.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">3</span><span class="practice-step-text"><strong>Breathe in for 4, then chant a long Aaaaahhhh as you exhale.</strong> Let it open the crown of your head. Feel yourself connect to something larger.</span></div>
+              <div class="practice-step"><span class="practice-step-dot">4</span><span class="practice-step-text"><strong>Watch it open.</strong> With each round the light pours in fuller and softer, dissolving the grip and letting you feel held. Do this daily to stay connected.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
   </main>
@@ -493,19 +1834,520 @@ resize();initSparks();loop();
 function showChakra(name,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.chakra-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('panel-'+name).classList.add('active');
-  btn.classList.add('active');
+  const panel=document.getElementById('panel-'+name);
+  if(panel)panel.classList.add('active');
+  // sync the matching sidebar button (btn passed, or find by name)
+  if(btn&&btn.classList){btn.classList.add('active');}
+  else{const match=document.querySelector('.chakra-btn[onclick*="\''+name+'\'"]');if(match)match.classList.add('active');}
+  // sync mobile dropdown
+  const sel=document.getElementById('mobileNavSelect');if(sel)sel.value=name;
   stopAll(null);
   document.querySelector('.stage').scrollTop=0;
   window.scrollTo({top:0,behavior:'smooth'});
 }
+function mobileNav(name){showChakra(name);}
 
 /* ── EFT TOGGLE ── */
 function toggleEft(id){const el=document.getElementById(id);const was=el.classList.contains('open');document.querySelectorAll('.eft-script-card').forEach(v=>v.classList.remove('open'));if(!was)el.classList.add('open');}
 
+/* ── CHAKRA CHECK QUIZ ── */
+const CHAKRA_META={
+  root:{sanskrit:'Muladhara',eng:'Root',dot:'#C0392B'},
+  sacral:{sanskrit:'Svadhisthana',eng:'Sacral',dot:'#E67E22'},
+  solar:{sanskrit:'Manipura',eng:'Solar Plexus',dot:'#D4AC0D'},
+  heart:{sanskrit:'Anahata',eng:'Heart',dot:'#27AE60'},
+  throat:{sanskrit:'Vishuddha',eng:'Throat',dot:'#3498DB'},
+  thirdeye:{sanskrit:'Ajna',eng:'Third Eye',dot:'#5B4B8A'},
+  crown:{sanskrit:'Sahasrara',eng:'Crown',dot:'#8E44AD'}
+};
+const CHAKRA_ORDER=['root','sacral','solar','heart','throat','thirdeye','crown'];
+/* Pool of fun, day-to-day statements per chakra. Each week we pick one per */
+/* chakra at random, then shuffle the order so they don't march in sequence. */
+/* Dragging RIGHT = "yes this is me" = more blocked. Scoring inverts this. */
+const QUESTION_POOL={
+  root:[
+    "Lately I've been bracing for something to go wrong, even when things are fine.",
+    "My body's been running on low-key panic, like my shoulders forgot how to drop.",
+    "I keep checking my bank balance like it's going to bite me.",
+    "I've been white-knuckling my way through the week instead of feeling steady.",
+    "Part of me is convinced the ground could drop out at any second."
+  ],
+  sacral:[
+    "I feel a bit grey lately, like someone turned the color down on things I used to love.",
+    "Fun has quietly become one more item on the to-do list.",
+    "I can't remember the last time I did something just because it felt good.",
+    "I've been running on should instead of want, and it shows.",
+    "Rest makes me twitchy, like I haven't earned the right to sit down."
+  ],
+  solar: [
+    "I've been second-guessing myself so much I barely trust my own calls.",
+    "I keep waiting for someone to tell me it's okay before I move.",
+    "I said yes when I meant no, again, and I'm annoyed about it.",
+    "My confidence has been doing that flickery thing where it won't stay lit.",
+    "I've been shrinking in rooms where I used to take up space."
+  ],
+  heart:[
+    "I've been hard on myself lately, harsh in a way I'd never be with a friend.",
+    "Someone tried to help me and I deflected it like a reflex.",
+    "I've been giving from an empty cup and calling it generosity.",
+    "Compliments have been bouncing straight off me this week.",
+    "I keep putting everyone else's needs ahead of my own and feeling it."
+  ],
+  throat:[
+    "I've been swallowing what I actually want to say and replaying it later.",
+    "I softened my opinion so much this week it basically disappeared.",
+    "I said what they wanted to hear instead of what was true for me.",
+    "There's something I need to say and I keep finding reasons not to.",
+    "I've been shrinking my voice to keep the peace."
+  ],
+  thirdeye:[
+    "I've felt foggy lately, like I can't quite see the next step.",
+    "I got a clear nudge and then talked myself right out of it.",
+    "I've been drowning out my gut with everyone else's opinions.",
+    "My head's been so noisy I can't hear what I actually think.",
+    "I keep asking other people what to do when I already know."
+  ],
+  crown:[
+    "I've been white-knuckling the outcome instead of trusting it'll work out.",
+    "I feel like I'm doing all of this alone lately, no bigger hand on my back.",
+    "I've been so in my head there's no room for anything to flow in.",
+    "Faith has felt pretty far away this week.",
+    "I keep trying to force things that clearly want to unfold on their own."
+  ]
+};
+const FEEL_WORDS=['Not really me','A little','Yeah, often','That\u2019s me'];
+function feelWord(val){
+  if(val<0.75)return FEEL_WORDS[0];
+  if(val<1.5)return FEEL_WORDS[1];
+  if(val<2.25)return FEEL_WORDS[2];
+  return FEEL_WORDS[3];
+}
+const STORE_KEY='ew_chakra_check_v2';
+/* build a fresh randomized set: one question per chakra, shuffled order */
+function buildQuestions(){
+  const picked=CHAKRA_ORDER.map(c=>{
+    const pool=QUESTION_POOL[c];
+    return {c:c,t:pool[Math.floor(Math.random()*pool.length)]};
+  });
+  // Fisher-Yates shuffle so they're not in chakra order
+  for(let i=picked.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const tmp=picked[i];picked[i]=picked[j];picked[j]=tmp;}
+  return picked;
+}
+let QUESTIONS=buildQuestions();
+let answers=new Array(QUESTIONS.length).fill(null);
+
+function renderQuiz(){
+  const wrap=document.getElementById('quizQuestions');
+  wrap.innerHTML='';
+  QUESTIONS.forEach((q,i)=>{
+    const item=document.createElement('div');item.className='q-item';
+    const txt=document.createElement('div');txt.className='q-text';
+    const num=document.createElement('span');num.className='q-num';num.textContent=(i+1)+'.';
+    txt.appendChild(num);txt.appendChild(document.createTextNode(q.t));
+
+    const sw=document.createElement('div');sw.className='q-slide-wrap';
+    const slider=document.createElement('input');
+    slider.type='range';slider.className='q-slide';
+    slider.min='0';slider.max='3';slider.step='0.01';slider.value='1.5';
+    slider.setAttribute('data-q',i);
+    slider.setAttribute('aria-label',q.t);
+
+    const labels=document.createElement('div');labels.className='q-slide-labels';
+    const lEnd=document.createElement('span');lEnd.className='q-slide-end';lEnd.textContent='Not me';
+    const rEnd=document.createElement('span');rEnd.className='q-slide-end';rEnd.textContent='Oof, that\u2019s me';
+    labels.appendChild(lEnd);labels.appendChild(rEnd);
+
+    const feel=document.createElement('div');feel.className='q-slide-feel';
+    const feelSpan=document.createElement('span');feelSpan.textContent='Drag to how much this is you';
+    feel.appendChild(feelSpan);
+
+    slider.oninput=function(){onSlide(i,slider,feel,feelSpan);};
+
+    sw.appendChild(slider);
+    item.appendChild(txt);item.appendChild(sw);item.appendChild(labels);item.appendChild(feel);
+    wrap.appendChild(item);
+  });
+}
+function onSlide(qi,slider,feel,feelSpan){
+  const val=parseFloat(slider.value);
+  answers[qi]=val;
+  slider.classList.add('touched');
+  feel.classList.add('set');
+  feelSpan.textContent=feelWord(val);
+  const done=answers.filter(a=>a!==null).length;
+  document.getElementById('quizBar').style.width=(done/QUESTIONS.length*100)+'%';
+  document.getElementById('quizCount').textContent=done+' of '+QUESTIONS.length+' answered';
+  const submit=document.getElementById('quizSubmit');
+  if(done===QUESTIONS.length){submit.disabled=false;document.getElementById('quizHint').textContent='All done. See where your energy is sitting.';}
+  else{submit.disabled=true;document.getElementById('quizHint').textContent='Move all '+QUESTIONS.length+' sliders to see your results.';}
+}
+function computeScores(){
+  const totals={},counts={};
+  CHAKRA_ORDER.forEach(c=>{totals[c]=0;counts[c]=0;});
+  QUESTIONS.forEach((q,i)=>{totals[q.c]+=answers[i];counts[q.c]++;});
+  const pct={};
+  /* answers measure the BLOCK (0..3). Openness = inverse. */
+  CHAKRA_ORDER.forEach(c=>{pct[c]=Math.round((1-(totals[c]/(counts[c]*3)))*100);});
+  return pct;
+}
+function readFor(p){
+  if(p>=75)return"Flowing. This center is one of your strengths right now.";
+  if(p>=50)return"Steady, with room to open further. Worth a little attention.";
+  if(p>=25)return"Asking for care. This is where some of the wobble is coming from.";
+  return"Calling for you loudly. Start here and the rest gets easier.";
+}
+/* per-bar read that reacts to level and week-over-week movement */
+function readForMovement(p,diff){
+  const up=(diff!==null&&diff>0);
+  const down=(diff!==null&&diff<0);
+  // top state: high and rising
+  if(p>=85&&up){
+    return {text:'Look at you. '+p+'% and up '+diff+' from last week. This one\u2019s really open. Follow whatever center is calling you now, or run the deep check again to see the whole picture shift.',cta:'Open'};
+  }
+  // strong and holding or climbing
+  if(p>=80&&!down){
+    if(up)return {text:'Great job. '+p+'%, and up '+diff+' since last week. Whatever you\u2019re doing here, keep going.',cta:'Open'};
+    return {text:'Great job. Holding strong at '+p+'%. This center is a real strength for you right now.',cta:'Open'};
+  }
+  // dropped since last week -> send them in to work
+  if(down){
+    return {text:'This one slipped '+Math.abs(diff)+' since last week. No drama, it just wants some attention. Go do a little work here this week.',cta:'Work on'};
+  }
+  // rose but not yet strong -> encourage
+  if(up){
+    return {text:'Moving up, '+diff+' since last week. You\u2019re headed the right way. Keep tending this one.',cta:'Open'};
+  }
+  // first time or flat -> baseline read
+  return {text:readFor(p),cta:'Open'};
+}
+function scoreQuiz(){
+  const pct=computeScores();
+  const prev=loadSaved();
+  const record={date:Date.now(),scores:pct};
+  saveRecord(record);
+  showResults(pct,prev);
+  // reveal + go to the results tab
+  const menuBtn=document.getElementById('resultsMenuBtn');
+  menuBtn.style.display='flex';
+  const mOpt=document.getElementById('mobileResultsOpt');if(mOpt)mOpt.disabled=false;
+  showChakra('results',menuBtn);
+}
+function showResults(pct,prev){
+  const d=new Date();
+  document.getElementById('resultsDate').textContent='Checked in on '+d.toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'});
+  const barsWrap=document.getElementById('resultsBars');barsWrap.innerHTML='';
+  CHAKRA_ORDER.forEach(c=>{
+    const m=CHAKRA_META[c];const p=pct[c];
+    const row=document.createElement('div');row.className='res-bar-row';
+    row.onclick=function(){const b=document.querySelector('.chakra-btn[onclick*="\''+c+'\'"]');if(b)b.click();};
+    const top=document.createElement('div');top.className='res-bar-top';
+    const nameWrap=document.createElement('div');nameWrap.className='res-bar-name';
+    const dot=document.createElement('span');dot.className='res-bar-dot';dot.style.background=m.dot;dot.style.color=m.dot;
+    const sk=document.createElement('span');sk.className='res-bar-sanskrit';sk.textContent=m.sanskrit;
+    const en=document.createElement('span');en.className='res-bar-eng';en.textContent=m.eng;
+    nameWrap.appendChild(dot);nameWrap.appendChild(sk);nameWrap.appendChild(en);
+    const pctEl=document.createElement('span');pctEl.className='res-bar-pct';pctEl.style.color=m.dot;
+    let pctText=p+'%';
+    if(prev&&prev.scores&&typeof prev.scores[c]==='number'){
+      const diff=p-prev.scores[c];
+      if(diff>0)pctText=p+'% \u2191'+diff;
+      else if(diff<0)pctText=p+'% \u2193'+Math.abs(diff);
+    }
+    pctEl.textContent=pctText;
+    top.appendChild(nameWrap);top.appendChild(pctEl);
+    const track=document.createElement('div');track.className='res-bar-track';
+    const fill=document.createElement('div');fill.className='res-bar-fill';fill.style.background=m.dot;
+    track.appendChild(fill);
+    // movement-aware read
+    let diff=null;
+    if(prev&&prev.scores&&typeof prev.scores[c]==='number')diff=p-prev.scores[c];
+    const rd=readForMovement(p,diff);
+    const read=document.createElement('div');read.className='res-bar-read';
+    read.appendChild(document.createTextNode(rd.text+' '));
+    const cta=document.createElement('span');cta.className='res-bar-cta';cta.textContent=rd.cta+' '+m.eng+' \u2192';
+    read.appendChild(cta);
+    row.appendChild(top);row.appendChild(track);row.appendChild(read);
+    barsWrap.appendChild(row);
+    setTimeout(()=>{fill.style.width=p+'%';},80);
+  });
+  // adaptive focus block
+  let lowest=CHAKRA_ORDER[0];
+  CHAKRA_ORDER.forEach(c=>{if(pct[c]<pct[lowest])lowest=c;});
+  const fm=CHAKRA_META[lowest];
+  const focus=document.getElementById('resultsFocus');focus.innerHTML='';
+  const h=document.createElement('h4');
+  const p1=document.createElement('p');
+  const p2=document.createElement('p');p2.style.marginBottom='0';
+  const allStrong=CHAKRA_ORDER.every(c=>pct[c]>=80);
+
+  if(allStrong){
+    // everything humming -> celebrate, send them where they're called
+    h.textContent='You\u2019re humming';
+    p1.appendChild(document.createTextNode('Every one of your centers is at 80% or above. That\u2019s real, and it\u2019s worth pausing on. There\u2019s no weak link to chase this week. Follow the center that\u2019s quietly calling you, or come back and run the deep check again in a few days to watch it keep shifting.'));
+    const retake=document.createElement('span');retake.className='res-bar-cta';retake.style.fontSize='14px';retake.textContent='Run the deep check again \u2192';
+    retake.onclick=function(){retakeQuiz();};
+    p2.appendChild(retake);
+  }else{
+    // point them to the lowest center
+    h.textContent='Where to start';
+    p1.appendChild(document.createTextNode('Your '));
+    const fc=document.createElement('span');fc.className='focus-chakra';fc.textContent=fm.eng+' ('+fm.sanskrit+')';
+    p1.appendChild(fc);
+    p1.appendChild(document.createTextNode(' came in lowest at '+pct[lowest]+'%. That\u2019s not a problem, it\u2019s a doorway. Spend your energy here first and you\u2019ll feel the rest of your centers settle too. Open that tab and work through the visualization, the tapping, and the practice this week.'));
+    const openBtn=document.createElement('span');openBtn.className='res-bar-cta';openBtn.style.fontSize='14px';openBtn.textContent='Take me to '+fm.eng+' \u2192';
+    openBtn.onclick=function(){const b=document.querySelector('.chakra-btn[onclick*="\''+lowest+'\'"]');if(b)b.click();};
+    p2.appendChild(openBtn);
+  }
+  focus.appendChild(h);focus.appendChild(p1);focus.appendChild(p2);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function retakeQuiz(){
+  QUESTIONS=buildQuestions();
+  answers=new Array(QUESTIONS.length).fill(null);
+  document.getElementById('quizBar').style.width='0%';
+  document.getElementById('quizCount').textContent='0 of '+QUESTIONS.length+' answered';
+  document.getElementById('quizSubmit').disabled=true;
+  document.getElementById('quizHint').textContent='Move all '+QUESTIONS.length+' sliders to see your results.';
+  renderQuiz();
+  const assessBtn=document.querySelector('.assess-btn');
+  showChakra('assess',assessBtn);
+}
+function saveRecord(record){
+  try{
+    const raw=localStorage.getItem(STORE_KEY);
+    let hist=raw?JSON.parse(raw):[];
+    hist.push(record);
+    if(hist.length>10)hist=hist.slice(-10);
+    localStorage.setItem(STORE_KEY,JSON.stringify(hist));
+  }catch(e){}
+}
+function loadSaved(){
+  try{
+    const raw=localStorage.getItem(STORE_KEY);
+    if(!raw)return null;
+    const hist=JSON.parse(raw);
+    if(!hist.length)return null;
+    return hist[hist.length-1];
+  }catch(e){return null;}
+}
+function loadHistory(){
+  try{const raw=localStorage.getItem(STORE_KEY);return raw?JSON.parse(raw):[];}catch(e){return[];}
+}
+function lowestTwoChakras(){
+  const last=loadSaved();
+  if(!last||!last.scores)return null;
+  const arr=CHAKRA_ORDER.map(c=>({c:c,p:last.scores[c]}));
+  arr.sort((a,b)=>a.p-b.p);
+  return [arr[0].c,arr[1].c];
+}
+function initQuiz(){
+  renderQuiz();
+  const last=loadSaved();
+  if(last){
+    const note=document.createElement('p');note.className='prev-note';
+    const d=new Date(last.date);
+    note.textContent='You last checked in on '+d.toLocaleDateString(undefined,{month:'long',day:'numeric'})+'. Take it again to see what\u2019s shifted.';
+    document.getElementById('quizHint').insertAdjacentElement('afterend',note);
+    // make Your Results tab available with the last saved map
+    const menuBtn=document.getElementById('resultsMenuBtn');
+    menuBtn.style.display='flex';
+    const mOpt=document.getElementById('mobileResultsOpt');if(mOpt)mOpt.disabled=false;
+    const prevHist=loadHistory();
+    const prior=prevHist.length>1?prevHist[prevHist.length-2]:null;
+    showResults(last.scores,prior);
+  }
+}
+initQuiz();
+
+/* ── DAILY PULSE ── */
+/* daily struggle question per chakra; asks about the 2 lowest from last weekly */
+const DAILY_CHAKRA_Q={
+  root:"Today my body feels tense and braced, like I'm waiting for something to go wrong.",
+  sacral:"Today feels flat. Not much is lighting me up or feeling good.",
+  solar:"Today I'm second-guessing myself and doubting my own calls.",
+  heart:"Today I'm finding it hard to be kind to myself.",
+  throat:"Today I'm holding back things I actually want to say.",
+  thirdeye:"Today I feel foggy, like I can't quite see clearly.",
+  crown:"Today I feel disconnected, like I'm doing it all on my own."
+};
+const DAILY_KEY='ew_daily_pulse_v2';
+let dailyAnswers={};       // keyed by chakra slug -> 0..3 (block)
+let dailyChakras=[];       // the two chakra slugs being asked today
+
+function todayStamp(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+function loadDaily(){try{const raw=localStorage.getItem(DAILY_KEY);return raw?JSON.parse(raw):{log:[]};}catch(e){return{log:[]};}}
+function computeStreak(log){
+  if(!log||!log.length)return 0;
+  const days=new Set(log.map(e=>e.day));
+  let streak=0;const d=new Date();
+  for(;;){
+    const stamp=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    if(days.has(stamp)){streak++;d.setDate(d.getDate()-1);}
+    else break;
+  }
+  if(streak===0){
+    const y=new Date();y.setDate(y.getDate()-1);
+    const ystamp=y.getFullYear()+'-'+(y.getMonth()+1)+'-'+y.getDate();
+    if(days.has(ystamp)){
+      let s=0;const dd=y;
+      for(;;){const st=dd.getFullYear()+'-'+(dd.getMonth()+1)+'-'+dd.getDate();if(days.has(st)){s++;dd.setDate(dd.getDate()-1);}else break;}
+      return s;
+    }
+  }
+  return streak;
+}
+function makeDailySlider(slug){
+  const slider=document.createElement('input');
+  slider.type='range';slider.className='q-slide';slider.min='0';slider.max='3';slider.step='0.01';slider.value='1.5';
+  const labels=document.createElement('div');labels.className='q-slide-labels';
+  const l=document.createElement('span');l.className='q-slide-end';l.textContent='Not me today';
+  const r=document.createElement('span');r.className='q-slide-end';r.textContent='Oof, that\u2019s me';
+  labels.appendChild(l);labels.appendChild(r);
+  const feel=document.createElement('div');feel.className='q-slide-feel';
+  const fs=document.createElement('span');fs.textContent='Drag to how much this is you';feel.appendChild(fs);
+  slider.oninput=function(){
+    const v=parseFloat(slider.value);dailyAnswers[slug]=v;
+    slider.classList.add('touched');feel.classList.add('set');fs.textContent=feelWord(v);
+    const allDone=dailyChakras.every(c=>dailyAnswers[c]!==undefined&&dailyAnswers[c]!==null);
+    if(allDone)document.getElementById('dailySubmit').disabled=false;
+  };
+  return {slider,labels,feel};
+}
+function renderDaily(){
+  const data=loadDaily();
+  const streak=computeStreak(data.log);
+  if(streak>0){document.getElementById('streakBadge').style.display='flex';document.getElementById('streakCount').textContent=streak;}
+
+  const lows=lowestTwoChakras();
+  // no weekly yet -> locked state
+  if(!lows){showDailyLocked();return;}
+
+  // already logged today -> show today's saved result
+  const todayEntry=data.log.find(e=>e.day===todayStamp());
+  if(todayEntry){
+    dailyChakras=Object.keys(todayEntry.scores||{});
+    dailyAnswers=Object.assign({},todayEntry.scores);
+    if(dailyChakras.length){showDailyResult(streak);return;}
+  }
+
+  dailyChakras=lows;dailyAnswers={};
+  document.getElementById('dailyTitle').textContent='A quick tune-in';
+  const wrap=document.getElementById('dailyQuestions');wrap.innerHTML='';
+
+  const intro=document.createElement('p');intro.className='daily-sub';
+  intro.textContent='These are the two centers you\u2019re working on right now. How true does each feel today?';
+  wrap.appendChild(intro);
+
+  lows.forEach(slug=>{
+    const m=CHAKRA_META[slug];
+    const q=document.createElement('div');q.className='daily-q';
+    const tag=document.createElement('span');tag.className='daily-q-chakra';
+    const dot=document.createElement('span');dot.className='daily-q-dot';dot.style.background=m.dot;dot.style.color=m.dot;
+    tag.appendChild(dot);tag.appendChild(document.createTextNode(m.eng+' \u00b7 '+m.sanskrit));
+    const t=document.createElement('div');t.className='daily-q-text';t.textContent=DAILY_CHAKRA_Q[slug];
+    const s=makeDailySlider(slug);
+    q.appendChild(tag);q.appendChild(t);q.appendChild(s.slider);q.appendChild(s.labels);q.appendChild(s.feel);
+    wrap.appendChild(q);
+  });
+
+  document.getElementById('dailyActions').style.display='block';
+  document.getElementById('dailyDone').style.display='none';
+  document.getElementById('dailySubmit').disabled=true;
+}
+function showDailyLocked(){
+  document.getElementById('dailyTitle').textContent='Unlock your daily pulse';
+  document.getElementById('dailyActions').style.display='none';
+  const wrap=document.getElementById('dailyQuestions');wrap.innerHTML='';
+  const done=document.getElementById('dailyDone');done.style.display='block';done.innerHTML='';
+  const mark=document.createElement('span');mark.className='dd-mark';mark.style.color='var(--pink)';mark.textContent='\u2727';
+  const line=document.createElement('div');line.className='dd-line';line.textContent='Do your weekly check first.';
+  const sub=document.createElement('div');sub.className='dd-sub';
+  sub.textContent='Once you\u2019ve mapped all seven centers, your daily pulse tunes in on the two that need you most.';
+  const btnWrap=document.createElement('div');btnWrap.style.marginTop='18px';
+  const btn=document.createElement('button');btn.className='daily-submit';btn.textContent='Take The Weekly Check';
+  btn.onclick=function(){document.getElementById('dailyCard').scrollIntoView({behavior:'smooth',block:'end'});const q=document.getElementById('quizQuestions');if(q)q.scrollIntoView({behavior:'smooth',block:'start'});};
+  btnWrap.appendChild(btn);
+  done.appendChild(mark);done.appendChild(line);done.appendChild(sub);done.appendChild(btnWrap);
+}
+function saveDaily(){
+  const data=loadDaily();
+  const entry={day:todayStamp(),ts:Date.now(),scores:{}};
+  dailyChakras.forEach(c=>{entry.scores[c]=dailyAnswers[c];});
+  data.log.push(entry);
+  if(data.log.length>90)data.log=data.log.slice(-90);
+  try{localStorage.setItem(DAILY_KEY,JSON.stringify(data));}catch(e){}
+  const streak=computeStreak(data.log);
+  document.getElementById('streakBadge').style.display='flex';
+  document.getElementById('streakCount').textContent=streak;
+  showDailyResult(streak);
+}
+function showDailyResult(streak){
+  document.getElementById('dailyActions').style.display='none';
+  document.getElementById('dailyTitle').textContent='Where you\u2019re at today';
+  const wrap=document.getElementById('dailyQuestions');wrap.innerHTML='';
+  const done=document.getElementById('dailyDone');done.style.display='none';
+
+  const intro=document.createElement('p');intro.className='daily-sub';
+  intro.textContent='Today\u2019s read on your two centers. The higher the bar, the more open it\u2019s feeling right now.';
+  wrap.appendChild(intro);
+
+  dailyChakras.forEach(slug=>{
+    const m=CHAKRA_META[slug];
+    const openPct=Math.round((1-(dailyAnswers[slug]/3))*100);
+    const row=document.createElement('div');row.className='res-bar-row';row.style.marginBottom='18px';
+    row.onclick=function(){const b=document.querySelector('.chakra-btn[onclick*="\''+slug+'\'"]');if(b)b.click();};
+    const top=document.createElement('div');top.className='res-bar-top';
+    const nameWrap=document.createElement('div');nameWrap.className='res-bar-name';
+    const dot=document.createElement('span');dot.className='res-bar-dot';dot.style.background=m.dot;dot.style.color=m.dot;
+    const sk=document.createElement('span');sk.className='res-bar-sanskrit';sk.textContent=m.sanskrit;
+    const en=document.createElement('span');en.className='res-bar-eng';en.textContent=m.eng;
+    nameWrap.appendChild(dot);nameWrap.appendChild(sk);nameWrap.appendChild(en);
+    const pctEl=document.createElement('span');pctEl.className='res-bar-pct';pctEl.style.color=m.dot;pctEl.textContent=openPct+'%';
+    top.appendChild(nameWrap);top.appendChild(pctEl);
+    const track=document.createElement('div');track.className='res-bar-track';
+    const fill=document.createElement('div');fill.className='res-bar-fill';fill.style.background=m.dot;
+    track.appendChild(fill);
+    const read=document.createElement('div');read.className='res-bar-read';
+    read.appendChild(document.createTextNode(dailyReadFor(openPct)+' '));
+    const cta=document.createElement('span');cta.className='res-bar-cta';cta.textContent='Open '+m.eng+' \u2192';
+    read.appendChild(cta);
+    row.appendChild(top);row.appendChild(track);row.appendChild(read);
+    wrap.appendChild(row);
+    setTimeout(()=>{fill.style.width=openPct+'%';},80);
+  });
+
+  const streakLine=document.createElement('p');streakLine.className='daily-sub';streakLine.style.marginTop='20px';
+  streakLine.textContent=streak>1?('You\u2019re on a '+streak+'-day streak. This is how the shift happens, little and often. Come back tomorrow.'):'That\u2019s your first pulse logged. Come back tomorrow and start building your streak.';
+  wrap.appendChild(streakLine);
+
+  const redo=document.createElement('div');redo.style.marginTop='6px';
+  const redoBtn=document.createElement('button');redoBtn.className='daily-redo';
+  redoBtn.textContent='Feeling different? Start today over';
+  redoBtn.onclick=function(){resetDailyToday();};
+  redo.appendChild(redoBtn);
+  wrap.appendChild(redo);
+}
+function resetDailyToday(){
+  const data=loadDaily();
+  data.log=data.log.filter(e=>e.day!==todayStamp());
+  try{localStorage.setItem(DAILY_KEY,JSON.stringify(data));}catch(e){}
+  const streak=computeStreak(data.log);
+  if(streak>0){document.getElementById('streakBadge').style.display='flex';document.getElementById('streakCount').textContent=streak;}
+  else{document.getElementById('streakBadge').style.display='none';}
+  renderDaily();
+}
+function dailyReadFor(p){
+  if(p>=75)return"Really open today. Notice what\u2019s different.";
+  if(p>=50)return"Steadier today. You\u2019re moving in the right direction.";
+  if(p>=25)return"Still tender today. Be gentle and do the practice.";
+  return"Heavy today. This is exactly when the tapping helps most.";
+}
+renderDaily();
+
 /* ── TTS ENGINE ── */
 const VIZ_SCRIPTS = {
-  root_viz: `Find a comfortable seat. Put both feet flat on the floor. Close your eyes. Take a slow breath in through your nose, and let it out through your mouth. Again. In. And out, slower this time. Bring your attention down out of your busy head, down through your chest, your belly, all the way to where your body meets the ground. Feel the weight of yourself. Feel the chair holding you, the floor holding the chair, the earth holding all of it. You don't have to hold yourself up right now. Something bigger is doing that. Now imagine, from the soles of your feet, roots beginning to grow. Slow, thick roots, the color of deep red earth. They move down through the floor, through the foundation, into the soil beneath. Deeper. Past the roots of trees, past stone, down into the warm dark center of the earth. And there, they anchor. Feel how solid that is. You are connected to something that has been here for billions of years and isn't going anywhere. Now breathe up through those roots. Draw the steadiness of the earth up into your feet, your legs, into your belly. With every breath, more steadiness. More ground. Say to yourself, silently: right now, in this moment, I have enough. Everything I need for today is already here. The fear that there won't be enough, that's an old story your body learned to keep you safe. You can thank it. And you can let your body feel what's actually true right now. You're breathing. You're held. You have enough. Stay here for a few breaths. Let your nervous system memorize this. This settledness is your natural floor. It's the ground you get to build everything else on. When you're ready, wiggle your toes. Feel your feet again. Take one more deep breath, and open your eyes, bringing this steadiness with you.`
+  root_viz: `Find a comfortable seat. Put both feet flat on the floor. Close your eyes. Take a slow breath in through your nose, and let it out through your mouth. Again. In. And out, slower this time. Bring your attention down out of your busy head, down through your chest, your belly, all the way to where your body meets the ground. Feel the weight of yourself. Feel the chair holding you, the floor holding the chair, the earth holding all of it. You don't have to hold yourself up right now. Something bigger is doing that. Now imagine, from the soles of your feet, roots beginning to grow. Slow, thick roots, the color of deep red earth. They move down through the floor, through the foundation, into the soil beneath. Deeper. Past the roots of trees, past stone, down into the warm dark center of the earth. And there, they anchor. Feel how solid that is. You are connected to something that has been here for billions of years and isn't going anywhere. Now breathe up through those roots. Draw the steadiness of the earth up into your feet, your legs, into your belly. With every breath, more steadiness. More ground. Say to yourself, silently: right now, in this moment, I have enough. Everything I need for today is already here. The fear that there won't be enough, that's an old story your body learned to keep you safe. You can thank it. And you can let your body feel what's actually true right now. You're breathing. You're held. You have enough. Stay here for a few breaths. Let your nervous system memorize this. This settledness is your natural floor. It's the ground you get to build everything else on. When you're ready, wiggle your toes. Feel your feet again. Take one more deep breath, and open your eyes, bringing this steadiness with you.`,
+  sacral_viz: `Settle somewhere comfortable, somewhere you can let your body be soft. Close your eyes. Take a slow breath in, and sigh it out through your mouth. Let your shoulders drop. Let your jaw unclench. Now bring your attention low, below your navel, into your low belly and your hips. This is the water of your body, the place where desire and creativity live. Imagine a warm pool of orange light there, right below your navel. Soft, glowing, the color of a sunset. With each breath it grows a little warmer, a little brighter. Let it spread through your hips, your low belly, down into your thighs. Feel how it loosens everything it touches. So much of you has been tight. Holding. Doing the things you should do. Creating because you have to, not because you want to. Let this warm water reach all of that and soften it. Now, gently, ask yourself a question, and don't force an answer. Just listen. What do I actually want? Not what I should want. Not what would look good. What would feel good? Let whatever comes float up through the warm water. Maybe it's small. Maybe it surprises you. However quiet it is, let it be real. You spent so long believing that wanting things made you selfish. That pleasure had to be earned. That rest was something you got only after you'd done enough. None of that is true. Your desire is not a problem to manage. It's a compass. It's the exact thing that makes your work come alive, the warmth people feel and can't quite name. Feel the orange light glowing, steady and warm. Say to yourself, silently: I'm allowed to want. I create because it feels good. Pleasure is my fuel. Let that settle into your hips, into your belly, into the part of you that makes things. Your spark was never gone. It was just waiting for you to let it back in. Stay here a moment longer, resting in the warm water. When you're ready, let your hips move a little, however they want to. Take a deep breath. And open your eyes, bringing that warmth and that wanting with you.`
 };
 
 const ttsState = {};
@@ -605,6 +2447,247 @@ function startBreath(){
   }
   runPhase();
 }
+
+/* ── CHAKRA ACTIVATION (spinning light + seed sound) ── */
+const activeStates={};
+const STRETCHED_SEED={LAM:'Laaaaammmm',VAM:'Vaaaaammmm',RAM:'Raaaaammmm',YAM:'Yaaaaammmm',HAM:'Haaaaammmm',OM:'Ooooommmm',AH:'Aaaaahhhh'};
+function startActivation(key,seed,spot){
+  const st=activeStates[key]||(activeStates[key]={running:false,timers:[]});
+  const wrap=document.getElementById('wrap-'+key);
+  const disc=document.getElementById('disc-'+key);
+  const ring=document.getElementById('ring-'+key);
+  const core=document.getElementById('core-'+key);
+  const chant=document.getElementById('chant-'+key);
+  const countEl=document.getElementById('count-'+key);
+  const btn=document.getElementById('actbtn-'+key);
+  const stretched=STRETCHED_SEED[seed]||seed;
+  const focusSpot=spot||'your body';
+
+  function clearTimers(){st.timers.forEach(t=>clearTimeout(t));st.timers=[];}
+  function reset(){
+    st.running=false;clearTimers();
+    disc.classList.remove('spinning');ring.classList.remove('spinning');
+    wrap.style.transition='transform .6s ease';wrap.style.transform='scale(1)';
+  }
+  function stop(){
+    reset();chant.textContent='';countEl.textContent='Sit tall, eyes soft or closed. Press begin.';btn.textContent='Begin Activation';
+  }
+  function later(fn,ms){const t=setTimeout(fn,ms);st.timers.push(t);}
+
+  if(st.running){stop();return;}
+
+  st.running=true;btn.textContent='Stop';
+  disc.classList.add('spinning');ring.classList.add('spinning');
+
+  const TOTAL=7;             // rounds
+  const INHALE=4;            // seconds, counted 4-3-2-1
+  const EXHALE=6000;         // ms, long chant
+  const START_SCALE=0.82;    // begins a little small
+  const GROW=0.05;           // grows each round
+  let round=0;
+
+  // FOCUS INTRO: settle attention before the breath begins
+  countEl.textContent='Settle in';
+  chant.textContent='Focus on '+focusSpot;
+  later(()=>{if(st.running)chant.textContent='See an energy circle spinning there';},3200);
+  later(()=>{if(st.running)runRound();},6400);
+
+  function runRound(){
+    if(!st.running)return;
+    round++;
+    if(round>TOTAL){
+      st.running=false;clearTimers();
+      disc.classList.remove('spinning');ring.classList.remove('spinning');
+      countEl.textContent='Round '+TOTAL+' of '+TOTAL+' \u00b7 complete \u2713';
+      chant.textContent='Your '+seed+' light is spinning bright';
+      btn.textContent='Begin Again';return;
+    }
+    const scale=START_SCALE+(round-1)*GROW;
+    countEl.textContent='Round '+round+' of '+TOTAL;
+
+    // INHALE: count 4,3,2,1 while the wheel grows to this round's size
+    wrap.style.transition='transform '+INHALE+'s ease-in-out';
+    wrap.style.transform='scale('+scale+')';
+    let c=INHALE;
+    chant.textContent='Breathe in \u00b7 '+c;
+    function tick(){
+      if(!st.running)return;
+      c--;
+      if(c>0){chant.textContent='Breathe in \u00b7 '+c;later(tick,1000);}
+      else{
+        // EXHALE: long stretched seed sound, wheel holds its bigger size
+        chant.textContent=(round===1)?('Say it slowly \u00b7 '+stretched):stretched;
+        later(runRound,EXHALE);
+      }
+    }
+    later(tick,1000);
+  }
+}
+
+/* ── DAILY CHAKRA CARD ── */
+/* colour pairs + pale per chakra for the card face */
+const CARD_COLORS={
+  root:{c:'#C0392B',c2:'#8E2A20',pale:'#fbeae8'},
+  sacral:{c:'#E67E22',c2:'#c25e10',pale:'#fcefe2'},
+  solar:{c:'#D4AC0D',c2:'#a8860a',pale:'#fbf6dd'},
+  heart:{c:'#27AE60',c2:'#1c8048',pale:'#e6f6ec'},
+  throat:{c:'#3498DB',c2:'#2471a3',pale:'#e7f2fb'},
+  thirdeye:{c:'#5B4B8A',c2:'#3f3563',pale:'#eeebf4'},
+  crown:{c:'#8E44AD',c2:'#6c3384',pale:'#f3e9f7'}
+};
+/* 4 cards per chakra: title, message, deeper meaning, action, why-pulled */
+const CARD_DECK=[
+  // ROOT — safety, security, home, having enough, peace in the body
+  {c:'root',slug:'root-1',title:'You Are Held',message:"The ground beneath you is not going anywhere. So much of your worry is your body bracing for a fall that isn't coming. Right now, in this moment, you are safe and you are held.",meaning:"The root is your foundation. When it wobbles, everything above it feels shaky too. This card is a reminder that safety is your natural state, and you can return to it any time by coming back into your body.",action:"Stand barefoot for one minute and feel the floor take your whole weight.",why:"This came to you today because some part of you has been bracing. It's asking you to soften, and to trust that the ground is still there."},
+  {c:'root',slug:'root-2',title:'Enough, Right Now',message:"Not enough is an old story, not today's truth. Look around. In this moment you already have what you need. Let your shoulders drop an inch and feel it.",meaning:"Scarcity lives in the future and the past. Enoughness only lives in the present. When you drop into now, the fear of lack loosens its grip, and what you already have comes into view.",action:"Name three things you already have that you once wished for.",why:"You pulled this because you've been measuring what's missing. Today is an invitation to notice the abundance already here."},
+  {c:'root',slug:'root-3',title:'Steady With Money',message:"Money can come and it can go, and you stay steady through both. Your worth was never the number in the account. Steadiness is something you choose from the inside out.",meaning:"When your sense of safety depends on your bank balance, every dip becomes a threat. Rooting your security in yourself instead of the number is what lets money flow without fear.",action:"Look at your finances once, calmly, then close it and go do something that feels good.",why:"This card found you because money has been holding some of your peace hostage. It's time to take that peace back."},
+  {c:'root',slug:'root-4',title:'You Belong Here',message:"You don't have to earn your place. You belong, simply because you're here. Let yourself take up the space you're standing in without apology.",meaning:"The root governs belonging. When it's wounded, we feel like outsiders always auditioning to stay. Healing it means knowing your place is not conditional on performance.",action:"Put a hand on your chest and say, out loud, 'I belong here.'",why:"You drew this because a part of you has felt on the outside lately. Today it's reminding you that you were always meant to be here."},
+  // SACRAL — joy, pleasure, creativity, desire, play
+  {c:'sacral',slug:'sacral-1',title:'Follow the Spark',message:"Something is going to light you up today, even a little. That flicker isn't a distraction from your real life. It is your real life, pointing you home.",meaning:"The sacral center speaks in desire and delight. Following what lights you up isn't frivolous. It's how you find the path that's actually yours, the one strategy can't map.",action:"Do one thing today purely because it sounds fun.",why:"This came to you because you've been running on obligation. Joy is trying to get your attention again."},
+  {c:'sacral',slug:'sacral-2',title:'Pleasure Is Allowed',message:"You've been treating joy like a reward you have to earn first. It was never meant to be rationed. Pleasure is your birthright, and you're allowed it now, not later.",meaning:"Many of us learned that pleasure must be deserved through suffering or productivity. The sacral chakra heals when you let yourself enjoy life freely, guilt set down.",action:"Take ten minutes of pure pleasure today with zero productivity attached.",why:"You pulled this because you've been putting your own joy last. Today it moves back up the list."},
+  {c:'sacral',slug:'sacral-3',title:'Create for the Joy',message:"Not everything has to be useful. Make something today just because it would feel good to make it. That's where your aliveness actually lives.",meaning:"Creativity dries up when everything must have a purpose. The sacral center comes alive through play and making for its own sake, and that aliveness spills into everything else.",action:"Create one small thing today with no goal beyond the joy of it.",why:"This card found you because you've gone a little grey. It's inviting the color back in."},
+  {c:'sacral',slug:'sacral-4',title:'What Do You Want',message:"You've asked what you should do so many times you forgot to ask what you want. Today the only question is that. Let the answer surprise you.",meaning:"Desire is your inner compass. When you silence it to be good or responsible, you lose the thread of your own life. Reconnecting to what you want is how you find your way back.",action:"Write down five things you want. Don't edit. Don't justify a single one.",why:"You drew this because your own wanting has gone quiet. It's time to let it speak again."},
+  // SOLAR PLEXUS — confidence, self-trust, personal power, courage
+  {c:'solar',slug:'solar-1',title:'Back Yourself',message:"You already know the answer. You've just been waiting for a permission slip that was never going to arrive in the mail. Today, you write it yourself.",meaning:"The solar plexus is your seat of confidence and will. It grows every time you trust your own judgment instead of outsourcing it. Backing yourself is a muscle, and today you use it.",action:"Make one decision you've been circling, and don't reopen it.",why:"This came to you because you've been seeking approval you don't actually need. The authority was always yours."},
+  {c:'solar',slug:'solar-2',title:'Your Confidence Is Yours',message:"Confidence isn't something you're born with or without. It's built one kept promise at a time. Every time you back yourself, the fire grows a little brighter.",meaning:"We treat confidence like a personality trait, but it's really evidence you've collected that you can trust yourself. Small acts of courage compound into a steady inner flame.",action:"Do one small thing today that scares you slightly, and notice you survived.",why:"You pulled this because you've been waiting to feel ready. Confidence comes after the action, not before."},
+  {c:'solar',slug:'solar-3',title:'Own Your Worth',message:"Your value doesn't need a discount, an apology, or a paragraph of justification. State what you're worth and let it stand in the room without flinching.",meaning:"The solar plexus struggles when we shrink to stay comfortable. Owning your worth, in money and in life, is how you stop leaking your power to everyone around you.",action:"Say your worth out loud once, with a full stop after it.",why:"This card found you because you've been making yourself smaller. Today it's asking you to take up your full size."},
+  {c:'solar',slug:'solar-4',title:'You Are the One',message:"Stop waiting to be chosen. You are the one you've been waiting for. The power to change your life has been in your hands the whole time.",meaning:"When the solar plexus is strong, you stop giving your agency away and step into being the author of your own story. Nobody is coming to do it for you, and that's the good news.",action:"Take one bold action today that a confident version of you would take.",why:"You drew this because you've been hoping someone else would lead. Today you remember it's you."},
+  // HEART — love, worthiness, receiving, self-compassion, connection
+  {c:'heart',slug:'heart-1',title:'Let It In',message:"You are so good at giving and so quick to deflect. Today, when something good comes your way, don't bat it away. Let it land, and simply say thank you.",meaning:"The heart governs receiving as much as giving. Many of us can pour endlessly but freeze when love, help, or money flows toward us. Healing means opening the door both ways.",action:"Accept one compliment or offer of help today with only a thank you.",why:"This came to you because you've been giving from empty. It's time to let yourself receive."},
+  {c:'heart',slug:'heart-2',title:'Be Gentle With You',message:"You'd never speak to a friend the way you speak to yourself. Today, turn that kindness inward. You are doing so much better than the voice in your head admits.",meaning:"The heart chakra includes the relationship you have with yourself. Self-compassion isn't soft or indulgent. It's the ground everything else grows from, and it changes how you meet the world.",action:"Say one kind thing to yourself out loud, the way a dear friend would.",why:"You pulled this because you've been hard on yourself. Today asks for tenderness instead."},
+  {c:'heart',slug:'heart-3',title:'You Are Worthy',message:"The quiet doubt about whether you're enough, whether you deserve the love, the money, the good, that's not truth. That's an old wound talking. You are worthy, fully, already.",meaning:"So much struggle comes from a hidden belief that we must earn our worth. The heart heals when you know your worthiness is inherent, not something you perform your way into.",action:"Write down three ways you are already worthy, exactly as you are.",why:"This card found you because worthiness has been the thing in your way. Today it's settled: you are."},
+  {c:'heart',slug:'heart-4',title:'Open to Love',message:"Love wants to reach you, in a hundred small forms today. A message, a kindness, a warm moment. Your only job is to stay open enough to feel it.",meaning:"When the heart guards itself against hurt, it also blocks the love trying to get in. Softening the guard, even a little, lets connection and warmth flow again.",action:"Let yourself fully feel one moment of connection today, without rushing past it.",why:"You drew this because your heart has been a little closed for safety. Today it's safe to open."},
+  // THROAT — voice, truth, expression, authenticity
+  {c:'throat',slug:'throat-1',title:'Say the Real Thing',message:"You've been softening yourself until there's nothing left to disagree with. Your truth is meant to have edges. The right people are waiting to hear the real you.",meaning:"The throat chakra is your authentic voice. When you blur yourself to be palatable, you disappear. Speaking your truth is how the right people, and the right life, find you.",action:"Say or share one thing today exactly as you mean it, unsoftened.",why:"This came to you because you've been holding your tongue. Today your voice wants out."},
+  {c:'throat',slug:'throat-2',title:'Speak Your Desire',message:"The thing you want but haven't said out loud, it stays impossible while it stays silent. Name it. Speaking a desire is the first step to living it.",meaning:"The throat gives form to what the heart and sacral want. What we can name, we can move toward. Voicing a desire, even just to yourself, begins to make it real.",action:"Say one thing you want out loud, even if only you can hear it.",why:"You pulled this because a want has been trapped behind your teeth. Today it's asking to be spoken."},
+  {c:'throat',slug:'throat-3',title:'Your Voice Matters',message:"Being liked by everyone and being truly heard are different things. You don't have to be for everyone. Speak what's true and let it call in your people.",meaning:"Silencing yourself to keep the peace costs you your presence. The throat heals when you value being real over being universally approved of, and your people find you because of it.",action:"Share an honest view today, even if not everyone will agree.",why:"This card found you because you've been shrinking your voice. Today it's meant to be heard."},
+  {c:'throat',slug:'throat-4',title:'Ask For It',message:"The ask you've been avoiding is smaller than the weight of carrying it unasked. Say it plainly. You're allowed to want things and to ask for them.",meaning:"So many needs go unmet simply because they're never voiced. The throat chakra strengthens when you let yourself ask directly, without shrinking or over-explaining.",action:"Make one clear ask today that you've been putting off.",why:"You drew this because something needs asking. Today you have the voice for it."},
+  // THIRD EYE — intuition, clarity, vision, inner knowing
+  {c:'thirdeye',slug:'thirdeye-1',title:'You Already Know',message:"You keep collecting opinions when the answer is already in you. Stop asking everyone else. The first quiet response, the one before the doubt, is the true one.",meaning:"The third eye is your inner knowing. When it's clouded, we drown it out with advice and research. Clarity returns the moment you get quiet enough to hear yourself.",action:"Ask yourself the question you've been outsourcing, and trust the first answer.",why:"This came to you because the answer was never out there. It's been in you all along."},
+  {c:'thirdeye',slug:'thirdeye-2',title:'Trust the Nudge',message:"That hunch you felt and talked yourself out of, it was right, and part of you knew. Your intuition is quicker and wiser than your worried mind. Follow it today.",meaning:"Intuition speaks softly and rarely repeats itself. The third eye heals when you honor those nudges instead of overriding them with logic. Every time you trust it, it grows louder.",action:"Follow one gut nudge today without needing to justify it.",why:"You pulled this because you've been second-guessing what you already sensed. Today, trust it."},
+  {c:'thirdeye',slug:'thirdeye-3',title:'Clarity Is Coming',message:"The fog you've been in isn't permanent, and it isn't a sign you're lost. Get quiet and it lifts. You can see farther than you're letting yourself believe.",meaning:"Confusion is often just noise drowning out knowing. The third eye clears when you make space and stillness, and suddenly the path you couldn't see comes into focus.",action:"Sit in silence for three minutes and let one clear thing rise.",why:"This card found you in the fog. It's promising the clarity is closer than it feels."},
+  {c:'thirdeye',slug:'thirdeye-4',title:'See It Already Done',message:"You can picture where you're going more clearly than you let yourself admit. Vision comes before the how. Let yourself see it finished, and feel it real.",meaning:"The third eye holds your capacity to imagine and envision. Seeing a desire as already complete isn't wishful thinking. It's how you align yourself with bringing it into being.",action:"Close your eyes and picture one dream as already real. Feel it for a full minute.",why:"You drew this because you've been stuck in the how. Today, let yourself see the what."},
+  // CROWN — trust, surrender, peace, connection to something bigger
+  {c:'crown',slug:'crown-1',title:'Loosen Your Grip',message:"You've been white-knuckling an outcome that wants to unfold on its own. Do your part, then open your hands. Trust is far more magnetic than force.",meaning:"The crown is your connection to something larger. When we grip, we're saying we have to control it all alone. Surrender is trusting that we don't, and letting life meet us halfway.",action:"Pick one thing you're gripping and consciously release it today.",why:"This came to you because you've been holding on too tight. Today, let it breathe."},
+  {c:'crown',slug:'crown-2',title:'You Are Supported',message:"You've been carrying it all as if it's yours alone to hold. It isn't. Something bigger is holding you too. Let yourself lean back into that support.",meaning:"The crown chakra reminds us we're part of something vast and benevolent. Feeling held by it, whatever you call it, takes the crushing weight off your shoulders alone.",action:"On one long exhale, say 'I am held,' and let yourself believe it.",why:"You pulled this because you've felt alone in it all. Today, you're reminded you're not."},
+  {c:'crown',slug:'crown-3',title:'Peace Is Available',message:"Peace isn't waiting on the other side of your to-do list. It's available right now, underneath the noise, the moment you stop and drop into it.",meaning:"We postpone peace until everything is handled, but everything is never handled. The crown teaches that peace is a place inside you, reachable now, not a destination you earn.",action:"Pause today, breathe slowly, and find the quiet that's always underneath.",why:"This card found you because you've been chasing calm instead of choosing it. Today, choose it."},
+  {c:'crown',slug:'crown-4',title:'Let It Come',message:"You keep forcing what's meant to flow. The most magnetic version of you holds her dreams with an open hand. Do the work, then let life come to meet you.",meaning:"The crown is where striving finally rests. When you trust, you stop pushing the river and start letting it carry you. What's yours arrives more easily than you think.",action:"Take one aligned action today, then release the timeline entirely.",why:"You drew this because you've been forcing. Today is a reminder to let it come to you."}
+];
+const CARD_KEY='ew_daily_card_v2';
+
+function loadCardState(){
+  try{const raw=localStorage.getItem(CARD_KEY);return raw?JSON.parse(raw):{seen:[],today:null,day:null};}catch(e){return{seen:[],today:null,day:null};}
+}
+function saveCardState(s){try{localStorage.setItem(CARD_KEY,JSON.stringify(s));}catch(e){}}
+function cardToday(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+
+function pickCardIndex(seen){
+  // draw from cards not yet seen this cycle; reset when all seen
+  let pool=[];
+  for(let i=0;i<CARD_DECK.length;i++){if(seen.indexOf(i)===-1)pool.push(i);}
+  if(pool.length===0){seen.length=0;for(let i=0;i<CARD_DECK.length;i++)pool.push(i);}
+  return pool[Math.floor(Math.random()*pool.length)];
+}
+function pullCard(slot){
+  const s=loadCardState();
+  // if already pulled today, just show it (unless she asked to pull another)
+  if(!window._forceDraw&&s.day===cardToday()&&s.today!==null&&s.today!==undefined){renderCard(s.today,true);return;}
+  window._forceDraw=false;
+  const idx=pickCardIndex(s.seen);
+  s.seen.push(idx);
+  if(s.seen.length>CARD_DECK.length)s.seen=s.seen.slice(-CARD_DECK.length);
+  s.today=idx;s.day=cardToday();
+  saveCardState(s);
+  renderCard(idx,false);
+}
+function pullAnother(){
+  // return to the three-card spread so she picks again, and force a fresh draw
+  window._forceDraw=true;
+  const drawn=document.getElementById('cardDrawn');
+  if(drawn){drawn.style.display='none';drawn.innerHTML='';}
+  const spread=document.getElementById('cardSpread');
+  if(spread)spread.style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderCard(idx,already){
+  const card=CARD_DECK[idx];
+  const meta=CHAKRA_META[card.c];
+  const col=CARD_COLORS[card.c];
+  const spread=document.getElementById('cardSpread');
+  if(spread)spread.style.display='none';
+  const box=document.getElementById('cardDrawn');
+  box.style.display='block';
+  box.style.setProperty('--cardc',col.c);
+  box.style.setProperty('--cardc2',col.c2);
+  box.style.setProperty('--cardpale',col.pale);
+  box.innerHTML='';
+
+  const face=document.createElement('div');face.className='card-face';
+
+  // full portrait card image (your ChatGPT design). Graceful fallback if not uploaded yet.
+  const imgWrap=document.createElement('div');imgWrap.className='card-portrait';
+  const img=document.createElement('img');img.className='card-portrait-img';img.alt=card.title;
+  img.src='cards/'+card.slug+'.png';
+  img.onerror=function(){this.style.display='none';imgWrap.classList.add('no-img');};
+  const fb=document.createElement('div');fb.className='card-portrait-fallback';
+  const fbTitle=document.createElement('div');fbTitle.className='card-portrait-fallback-title';fbTitle.textContent=card.title;
+  const fbName=document.createElement('div');fbName.className='card-portrait-fallback-name';fbName.textContent=meta.eng+' \u00b7 '+meta.sanskrit;
+  fb.appendChild(fbTitle);fb.appendChild(fbName);
+  imgWrap.appendChild(img);imgWrap.appendChild(fb);
+  face.appendChild(imgWrap);
+
+  const body=document.createElement('div');body.className='card-face-body';
+
+  // higher-self line
+  const chose=document.createElement('div');chose.className='card-chose';
+  const choseTop=document.createElement('span');choseTop.className='card-chose-top';choseTop.textContent='Your highest self chose';
+  const choseName=document.createElement('div');choseName.className='card-chose-name';choseName.textContent='The '+meta.eng;
+  const choseSub=document.createElement('div');choseSub.className='card-chose-sub';choseSub.textContent=meta.sanskrit+' \u00b7 to work with today';
+  chose.appendChild(choseTop);chose.appendChild(choseName);chose.appendChild(choseSub);
+  body.appendChild(chose);
+
+  const msg=document.createElement('div');msg.className='card-message';msg.textContent=card.message;
+  body.appendChild(msg);
+
+  // deeper meaning
+  const meanSec=document.createElement('div');meanSec.className='card-section';
+  const meanL=document.createElement('span');meanL.className='card-section-label';meanL.textContent='The deeper meaning';
+  const meanT=document.createElement('div');meanT.className='card-section-text';meanT.textContent=card.meaning;
+  meanSec.appendChild(meanL);meanSec.appendChild(meanT);
+  body.appendChild(meanSec);
+
+  // why this came to you
+  const whySec=document.createElement('div');whySec.className='card-section';
+  const whyL=document.createElement('span');whyL.className='card-section-label';whyL.textContent='Why you pulled this';
+  const whyT=document.createElement('div');whyT.className='card-section-text';whyT.textContent=card.why;
+  whySec.appendChild(whyL);whySec.appendChild(whyT);
+  body.appendChild(whySec);
+
+  // tiny action
+  const act=document.createElement('div');act.className='card-action';
+  const actL=document.createElement('span');actL.className='card-action-label';actL.textContent='Your tiny action today';
+  const actT=document.createElement('div');actT.className='card-action-text';actT.textContent=card.action;
+  act.appendChild(actL);act.appendChild(actT);
+  body.appendChild(act);
+
+  const foot=document.createElement('div');foot.className='card-foot';
+  const open=document.createElement('span');open.className='card-open-chakra';open.textContent='Go deeper in '+meta.eng+' \u2192';
+  open.onclick=function(){const b=document.querySelector('.chakra-btn[onclick*="\''+card.c+'\'"]');if(b)b.click();};
+  const againBtn=document.createElement('button');againBtn.className='card-again-btn';againBtn.textContent='Pull Another Card';
+  againBtn.onclick=function(){pullAnother();};
+  const again=document.createElement('div');again.className='card-again';
+  again.textContent=already?'This is your card for today. Pull again any time you need a fresh message.':'Your card for today. Pull again any time you need a fresh message.';
+  foot.appendChild(open);foot.appendChild(againBtn);foot.appendChild(again);
+  body.appendChild(foot);
+
+  face.appendChild(body);
+  box.appendChild(face);
+}
+function initCard(){
+  const s=loadCardState();
+  if(s.day===cardToday()&&s.today!==null&&s.today!==undefined){renderCard(s.today,true);}
+}
+initCard();
 </script>
 </body>
 </html>
