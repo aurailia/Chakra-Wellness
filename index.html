@@ -29,10 +29,10 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
   background-size:cover;background-position:center;background-repeat:no-repeat;
   background-attachment:fixed;
 }
-/* very light wash so the image reads but isn't harsh; sides stay vivid */
+/* white wash so the background reads soft and muted, not too colored */
 #bgVeil{
   position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.35);
 }
 #sparkleCanvas{position:fixed;inset:0;pointer-events:none;z-index:0;width:100vw;height:100vh;}
 
@@ -491,13 +491,13 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
           <option value="results" id="mobileResultsOpt" disabled>Your Results</option>
         </optgroup>
         <optgroup label="The Seven Centers">
-          <option value="root">Root · Muladhara</option>
-          <option value="sacral">Sacral · Svadhisthana</option>
-          <option value="solar">Solar Plexus · Manipura</option>
-          <option value="heart">Heart · Anahata</option>
-          <option value="throat">Throat · Vishuddha</option>
-          <option value="thirdeye">Third Eye · Ajna</option>
           <option value="crown">Crown · Sahasrara</option>
+          <option value="thirdeye">Third Eye · Ajna</option>
+          <option value="throat">Throat · Vishuddha</option>
+          <option value="heart">Heart · Anahata</option>
+          <option value="solar">Solar Plexus · Manipura</option>
+          <option value="sacral">Sacral · Svadhisthana</option>
+          <option value="root">Root · Muladhara</option>
         </optgroup>
       </select>
     </div>
@@ -518,33 +518,33 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
     </nav>
     <span class="menu-label">The Seven Centers</span>
     <nav class="sidebar-nav">
-      <button class="chakra-btn" style="--dot:#C0392B" onclick="showChakra('root',this)">
+      <button class="chakra-btn" style="--dot:#8E44AD" onclick="showChakra('crown',this)">
         <span class="chakra-dot"></span>
-        <span class="chakra-btn-text"><span class="chakra-sanskrit">Muladhara</span><span class="chakra-eng">Root · Security</span></span>
-      </button>
-      <button class="chakra-btn" style="--dot:#E67E22" onclick="showChakra('sacral',this)">
-        <span class="chakra-dot"></span>
-        <span class="chakra-btn-text"><span class="chakra-sanskrit">Svadhisthana</span><span class="chakra-eng">Sacral · Creativity</span></span>
-      </button>
-      <button class="chakra-btn" style="--dot:#F1C40F" onclick="showChakra('solar',this)">
-        <span class="chakra-dot"></span>
-        <span class="chakra-btn-text"><span class="chakra-sanskrit">Manipura</span><span class="chakra-eng">Solar · Power</span></span>
-      </button>
-      <button class="chakra-btn" style="--dot:#27AE60" onclick="showChakra('heart',this)">
-        <span class="chakra-dot"></span>
-        <span class="chakra-btn-text"><span class="chakra-sanskrit">Anahata</span><span class="chakra-eng">Heart · Worth</span></span>
-      </button>
-      <button class="chakra-btn" style="--dot:#3498DB" onclick="showChakra('throat',this)">
-        <span class="chakra-dot"></span>
-        <span class="chakra-btn-text"><span class="chakra-sanskrit">Vishuddha</span><span class="chakra-eng">Throat · Voice</span></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Sahasrara</span><span class="chakra-eng">Crown · Trust</span></span>
       </button>
       <button class="chakra-btn" style="--dot:#5B4B8A" onclick="showChakra('thirdeye',this)">
         <span class="chakra-dot"></span>
         <span class="chakra-btn-text"><span class="chakra-sanskrit">Ajna</span><span class="chakra-eng">Third Eye · Vision</span></span>
       </button>
-      <button class="chakra-btn" style="--dot:#8E44AD" onclick="showChakra('crown',this)">
+      <button class="chakra-btn" style="--dot:#3498DB" onclick="showChakra('throat',this)">
         <span class="chakra-dot"></span>
-        <span class="chakra-btn-text"><span class="chakra-sanskrit">Sahasrara</span><span class="chakra-eng">Crown · Trust</span></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Vishuddha</span><span class="chakra-eng">Throat · Voice</span></span>
+      </button>
+      <button class="chakra-btn" style="--dot:#27AE60" onclick="showChakra('heart',this)">
+        <span class="chakra-dot"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Anahata</span><span class="chakra-eng">Heart · Worth</span></span>
+      </button>
+      <button class="chakra-btn" style="--dot:#F1C40F" onclick="showChakra('solar',this)">
+        <span class="chakra-dot"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Manipura</span><span class="chakra-eng">Solar · Power</span></span>
+      </button>
+      <button class="chakra-btn" style="--dot:#E67E22" onclick="showChakra('sacral',this)">
+        <span class="chakra-dot"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Svadhisthana</span><span class="chakra-eng">Sacral · Creativity</span></span>
+      </button>
+      <button class="chakra-btn" style="--dot:#C0392B" onclick="showChakra('root',this)">
+        <span class="chakra-dot"></span>
+        <span class="chakra-btn-text"><span class="chakra-sanskrit">Muladhara</span><span class="chakra-eng">Root · Security</span></span>
       </button>
     </nav>
     <div class="sidebar-foot">
@@ -1860,7 +1860,7 @@ const CHAKRA_META={
   thirdeye:{sanskrit:'Ajna',eng:'Third Eye',dot:'#5B4B8A'},
   crown:{sanskrit:'Sahasrara',eng:'Crown',dot:'#8E44AD'}
 };
-const CHAKRA_ORDER=['root','sacral','solar','heart','throat','thirdeye','crown'];
+const CHAKRA_ORDER=['crown','thirdeye','throat','heart','solar','sacral','root'];
 /* Pool of fun, day-to-day statements per chakra. Each week we pick one per */
 /* chakra at random, then shuffle the order so they don't march in sequence. */
 /* Dragging RIGHT = "yes this is me" = more blocked. Scoring inverts this. */
