@@ -27,14 +27,12 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
   position:fixed;inset:0;z-index:-2;
   background-image:url('background.jpg');
   background-size:cover;background-position:center;background-repeat:no-repeat;
-  background-attachment:fixed;
 }
 /* white wash so the background reads soft and muted, not too colored */
 #bgVeil{
   position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:rgba(255,255,255,0.35);
 }
-#sparkleCanvas{position:fixed;inset:0;pointer-events:none;z-index:0;width:100vw;height:100vh;}
 
 /* ── LAYOUT SHELL ── */
 /* the content panel sits on a soft white backing so the sides show the image */
@@ -477,7 +475,6 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 <body>
 <div id="bgImage"></div>
 <div id="bgVeil"></div>
-<canvas id="sparkleCanvas"></canvas>
 
 <div class="shell">
 
@@ -1832,18 +1829,6 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 </div>
 
 <script>
-/* ── SPARKLES (pink + teal) ── */
-const canvas=document.getElementById('sparkleCanvas');
-const ctx=canvas.getContext('2d');
-let W,H,sparks=[];
-function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
-function mkSpark(){return{x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.6+0.7,op:Math.random()*0.4+0.08,vy:-(Math.random()*0.22+0.05),vx:(Math.random()-.5)*0.15,phase:Math.random()*Math.PI*2,freq:Math.random()*0.016+0.005,pink:Math.random()>.42};}
-function initSparks(){sparks=[];const n=Math.floor(W*H/8500);for(let i=0;i<n;i++)sparks.push(mkSpark());}
-function drawDiamond(x,y,r,color,op){ctx.save();ctx.globalAlpha=op;ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(x,y-r);ctx.lineTo(x+r*.5,y);ctx.lineTo(x,y+r);ctx.lineTo(x-r*.5,y);ctx.closePath();ctx.fill();ctx.restore();}
-function loop(){ctx.clearRect(0,0,W,H);sparks.forEach(s=>{s.phase+=s.freq;s.y+=s.vy;s.x+=s.vx;const op=s.op*(0.5+0.5*Math.sin(s.phase));drawDiamond(s.x,s.y,s.r,s.pink?'#E86A9C':'#2A9D8F',op);if(s.y<-10){s.y=H+10;s.x=Math.random()*W;}});requestAnimationFrame(loop);}
-window.addEventListener('resize',()=>{resize();initSparks();});
-resize();initSparks();loop();
-
 /* ── CHAKRA TABS ── */
 function showChakra(name,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
