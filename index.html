@@ -359,8 +359,9 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
 .quiz-progress-track{height:5px;background:rgba(232,106,156,0.15);border-radius:3px;overflow:hidden;margin-bottom:8px;}
 .quiz-progress-bar{height:100%;width:0%;background:linear-gradient(to right,var(--teal),var(--pink));border-radius:3px;transition:width .35s ease;}
 .quiz-progress-text{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:500;}
-.q-item{padding:24px 0;border-bottom:1px solid rgba(232,106,156,0.12);}
-.q-text{font-size:17px;color:var(--navy);line-height:1.55;margin-bottom:20px;font-weight:400;}
+#quizQuestions{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.q-item{padding:24px 24px 26px;border:1px solid rgba(232,106,156,0.16);border-radius:14px;background:rgba(255,255,255,0.5);}
+.q-text{font-size:16px;color:var(--navy);line-height:1.55;margin-bottom:20px;font-weight:400;min-height:2.7em;}
 .q-num{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--pink);font-size:16px;margin-right:9px;}
 /* slider */
 .q-slide-wrap{padding:2px 4px;}
@@ -459,6 +460,7 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
   .panel-hd.has-figure{flex-direction:column;gap:20px;}
   .panel-figure{width:190px;align-self:center;}
   .panel-figure img{max-height:270px;}
+  #quizQuestions{grid-template-columns:1fr;}
   .card-portrait{flex:none;width:200px;align-self:center;margin:22px auto 0;border-radius:12px;overflow:hidden;}
   .card-face-body{padding:24px 22px 28px;}
 }
@@ -599,19 +601,19 @@ body{background:var(--white);color:var(--text);font-family:'Jost',sans-serif;fon
             <h2>Check in with <em>yourself</em></h2>
           </div>
         </div>
-        <p class="panel-lead">Seven honest statements, one for each center. Drag each slider to how much it sounds like you lately. The ones that make you go "oof, that's me" are showing you where your energy wants attention. Come back to this whenever you want to see where you're at, about once a week is plenty.</p>
+        <p class="panel-lead">Fourteen honest statements, two for each center. Drag each slider to how much it sounds like you lately. The ones that make you go "oof, that's me" are showing you where your energy wants attention. Come back to this whenever you want to see where you're at, about once a week is plenty.</p>
       </div>
 
       <!-- QUIZ -->
       <div id="quizWrap">
         <div id="quizProgress" class="quiz-progress">
           <div class="quiz-progress-track"><div class="quiz-progress-bar" id="quizBar"></div></div>
-          <span class="quiz-progress-text" id="quizCount">0 of 7 answered</span>
+          <span class="quiz-progress-text" id="quizCount">0 of 14 answered</span>
         </div>
         <div id="quizQuestions"></div>
         <div class="quiz-actions">
           <button class="quiz-submit" id="quizSubmit" onclick="scoreQuiz()" disabled>See My Results</button>
-          <p class="quiz-hint" id="quizHint">Move all 7 sliders to see your results.</p>
+          <p class="quiz-hint" id="quizHint">Move all 14 sliders to see your results.</p>
         </div>
       </div>
     </section>
@@ -1904,53 +1906,32 @@ const CHAKRA_ORDER=['crown','thirdeye','throat','heart','solar','sacral','root']
 /* Dragging RIGHT = "yes this is me" = more blocked. Scoring inverts this. */
 const QUESTION_POOL={
   root:[
-    "Lately I've been bracing for something to go wrong, even when things are fine.",
-    "My body's been running on low-key panic, like my shoulders forgot how to drop.",
-    "I keep checking my bank balance like it's going to bite me.",
-    "I've been holding on tight and pushing through the week instead of feeling steady.",
-    "Part of me is convinced the ground could drop out at any second."
+    "I check my bank balance more out of worry than strategy, and it sets the tone for my whole day.",
+    "Even when the money's fine, part of me is braced for it to all fall apart."
   ],
   sacral:[
-    "I feel a bit grey lately, like someone turned the color down on things I used to love.",
-    "Fun has quietly become one more item on the to-do list.",
-    "I can't remember the last time I did something just because it felt good.",
-    "I've been running on should instead of want, and it shows.",
-    "Rest makes me twitchy, like I haven't earned the right to sit down."
+    "I can't remember the last time I built something in my business just because it excited me.",
+    "Most of my work lately runs on 'I should,' and you can feel the spark has gone out of it."
   ],
-  solar: [
-    "I've been second-guessing myself so much I barely trust my own calls.",
-    "I keep waiting for someone to tell me it's okay before I move.",
-    "I said yes when I meant no, again, and I'm annoyed about it.",
-    "My confidence has been doing that flickery thing where it won't stay lit.",
-    "I've been shrinking in rooms where I used to take up space."
+  solar:[
+    "I second-guess my business decisions and wait for someone else to tell me they're right.",
+    "I discount my prices or soften them the second I say the number out loud."
   ],
   heart:[
-    "I've been hard on myself lately, harsh in a way I'd never be with a friend.",
-    "Someone tried to help me and I deflected it like a reflex.",
-    "I've been giving from an empty cup and calling it generosity.",
-    "Compliments have been bouncing straight off me this week.",
-    "I keep putting everyone else's needs ahead of my own and feeling it."
+    "I give my clients everything but go quiet or deflect when good things come back to me.",
+    "Quietly, I'm not sure I'm actually worthy of the income and success I say I want."
   ],
   throat:[
-    "I've been swallowing what I actually want to say and replaying it later.",
-    "I softened my opinion so much this week it basically disappeared.",
-    "I said what they wanted to hear instead of what was true for me.",
-    "There's something I need to say and I keep finding reasons not to.",
-    "I've been shrinking my voice to keep the peace."
+    "I water down my message so it won't ruffle anyone, and it ends up sounding like everyone else.",
+    "There's an offer, a boundary, or an ask I keep avoiding instead of just saying it."
   ],
   thirdeye:[
-    "I've felt foggy lately, like I can't quite see the next step.",
-    "I got a clear nudge and then talked myself right out of it.",
-    "I've been drowning out my gut with everyone else's opinions.",
-    "My head's been so noisy I can't hear what I actually think.",
-    "I keep asking other people what to do when I already know."
+    "I buy another course or ask ten people when I already know what my next move is.",
+    "I get a clear gut nudge about my business and then talk myself right out of it."
   ],
   crown:[
-    "I've been gripping the outcome instead of trusting it'll work out.",
-    "I feel like I'm doing all of this alone lately, no bigger hand on my back.",
-    "I've been so in my head there's no room for anything to flow in.",
-    "Faith has felt pretty far away this week.",
-    "I keep trying to force things that clearly want to unfold on their own."
+    "I'm gripping and forcing my growth instead of trusting any of it will work out.",
+    "I'm carrying the whole business alone, like it all falls apart the moment I stop pushing."
   ]
 };
 const FEEL_WORDS=['Not really me','A little','Yeah, often','That\u2019s me'];
@@ -1960,16 +1941,15 @@ function feelWord(val){
   if(val<2.25)return FEEL_WORDS[2];
   return FEEL_WORDS[3];
 }
-const STORE_KEY='ew_chakra_check_v2';
-/* build a fresh randomized set: one question per chakra, shuffled order */
+const STORE_KEY='ew_chakra_check_v3';
+/* build the full set: both questions per chakra, grouped so each chakra's pair sits together */
 function buildQuestions(){
-  const picked=CHAKRA_ORDER.map(c=>{
+  const set=[];
+  CHAKRA_ORDER.forEach(c=>{
     const pool=QUESTION_POOL[c];
-    return {c:c,t:pool[Math.floor(Math.random()*pool.length)]};
+    pool.forEach(t=>set.push({c:c,t:t}));
   });
-  // Fisher-Yates shuffle so they're not in chakra order
-  for(let i=picked.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const tmp=picked[i];picked[i]=picked[j];picked[j]=tmp;}
-  return picked;
+  return set;
 }
 let QUESTIONS=buildQuestions();
 let answers=new Array(QUESTIONS.length).fill(null);
